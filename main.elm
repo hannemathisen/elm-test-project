@@ -20,11 +20,13 @@ main =
 
 type Msg
   = ImageLoaded (Result Error Canvas)
+  | MouseMove Point
 
 
 type Model
   = GotCanvas Canvas (List DrawOp)
   | Loading
+  | Draw Canvas (List DrawOp)
 
 
 loadImage : Cmd Msg
@@ -48,6 +50,32 @@ update msg model =
           , loadImage
           )
 
+    MouseMove point ->
+      case model of
+        Loading ->
+          ( Loading
+          , loadImage
+          )
+        GotCanvas canvas drawOps ->
+          ( Draw canvas (draw point canvas drawOps)
+          , Cmd.none
+          )
+        Draw canvas drawOps ->
+          ( Draw canvas (draw point canvas drawOps)
+          , Cmd.none
+          )
+
+
+draw : Point -> Canvas -> List DrawOp -> List DrawOp
+draw point canvas drawOps =
+  List.append
+    drawOps
+      [ LineWidth 1.0
+      , StrokeStyle (Color.rgb 255 0 0)
+      , LineTo point
+      , Stroke
+      ]
+
 
 view : Model -> Html Msg
 view model =
@@ -64,7 +92,17 @@ presentIfReady model =
     GotCanvas canvas drawOps ->
       canvas
         |> drawCanvas drawOps
-        |> Canvas.toHtml []
+        |> Canvas.toHtml
+          [ Events.onMouseMove MouseMove
+
+          ]
+    Draw canvas drawOps ->
+      canvas
+        |> drawCanvas drawOps
+        |> Canvas.toHtml
+          [ Events.onMouseMove MouseMove
+
+          ]
 
 
 drawCanvas : List DrawOp -> Canvas -> Canvas

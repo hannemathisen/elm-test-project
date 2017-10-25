@@ -4,7 +4,8 @@
     "repository": "https://github.com/hannemathisen/elm-test-project.git",
     "license": "BSD3",
     "source-directories": [
-        "."
+        ".",
+        "src"
     ],
     "native-modules": true,
     "exposed-modules": [],
