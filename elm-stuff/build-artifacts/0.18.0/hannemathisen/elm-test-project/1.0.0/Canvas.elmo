@@ -1,0 +1,153 @@
+var _hannemathisen$elm_test_project$Canvas$toDataUrl = _hannemathisen$elm_test_project$Native_Canvas.toDataURL;
+var _hannemathisen$elm_test_project$Canvas$setSize = _hannemathisen$elm_test_project$Native_Canvas.setSize;
+var _hannemathisen$elm_test_project$Canvas$getSize = _hannemathisen$elm_test_project$Native_Canvas.getSize;
+var _hannemathisen$elm_test_project$Canvas$getImageData = _hannemathisen$elm_test_project$Native_Canvas.getImageData;
+var _hannemathisen$elm_test_project$Canvas$loadImage = _hannemathisen$elm_test_project$Native_Canvas.loadImage;
+var _hannemathisen$elm_test_project$Canvas$batch = _hannemathisen$elm_test_project$Native_Canvas.batch;
+var _hannemathisen$elm_test_project$Canvas$toHtml = _hannemathisen$elm_test_project$Native_Canvas.toHtml;
+var _hannemathisen$elm_test_project$Canvas$initialize = _hannemathisen$elm_test_project$Native_Canvas.initialize;
+var _hannemathisen$elm_test_project$Canvas$Size = F2(
+	function (a, b) {
+		return {width: a, height: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$Canvas = {ctor: 'Canvas'};
+var _hannemathisen$elm_test_project$Canvas$Error = {ctor: 'Error'};
+var _hannemathisen$elm_test_project$Canvas$DrawImage = F2(
+	function (a, b) {
+		return {ctor: 'DrawImage', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$ClosePath = {ctor: 'ClosePath'};
+var _hannemathisen$elm_test_project$Canvas$Clip = {ctor: 'Clip'};
+var _hannemathisen$elm_test_project$Canvas$ClearRect = F2(
+	function (a, b) {
+		return {ctor: 'ClearRect', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$PutImageData = F3(
+	function (a, b, c) {
+		return {ctor: 'PutImageData', _0: a, _1: b, _2: c};
+	});
+var _hannemathisen$elm_test_project$Canvas$QuadraticCurveTo = F2(
+	function (a, b) {
+		return {ctor: 'QuadraticCurveTo', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$BezierCurveTo = F3(
+	function (a, b, c) {
+		return {ctor: 'BezierCurveTo', _0: a, _1: b, _2: c};
+	});
+var _hannemathisen$elm_test_project$Canvas$BeginPath = {ctor: 'BeginPath'};
+var _hannemathisen$elm_test_project$Canvas$FillStyle = function (a) {
+	return {ctor: 'FillStyle', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$TextBaseline = function (a) {
+	return {ctor: 'TextBaseline', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$TextAlign = function (a) {
+	return {ctor: 'TextAlign', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$StrokeStyle = function (a) {
+	return {ctor: 'StrokeStyle', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$StrokeRect = F2(
+	function (a, b) {
+		return {ctor: 'StrokeRect', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$Translate = function (a) {
+	return {ctor: 'Translate', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$Transform = F6(
+	function (a, b, c, d, e, f) {
+		return {ctor: 'Transform', _0: a, _1: b, _2: c, _3: d, _4: e, _5: f};
+	});
+var _hannemathisen$elm_test_project$Canvas$SetTransform = F6(
+	function (a, b, c, d, e, f) {
+		return {ctor: 'SetTransform', _0: a, _1: b, _2: c, _3: d, _4: e, _5: f};
+	});
+var _hannemathisen$elm_test_project$Canvas$SetLineDash = function (a) {
+	return {ctor: 'SetLineDash', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$Scale = F2(
+	function (a, b) {
+		return {ctor: 'Scale', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$Rotate = function (a) {
+	return {ctor: 'Rotate', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$Rect = F2(
+	function (a, b) {
+		return {ctor: 'Rect', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$FillRect = F2(
+	function (a, b) {
+		return {ctor: 'FillRect', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$Fill = {ctor: 'Fill'};
+var _hannemathisen$elm_test_project$Canvas$Stroke = {ctor: 'Stroke'};
+var _hannemathisen$elm_test_project$Canvas$ShadowOffsetY = function (a) {
+	return {ctor: 'ShadowOffsetY', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$ShadowOffsetX = function (a) {
+	return {ctor: 'ShadowOffsetX', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$ShadowColor = function (a) {
+	return {ctor: 'ShadowColor', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$ShadowBlur = function (a) {
+	return {ctor: 'ShadowBlur', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$MoveTo = function (a) {
+	return {ctor: 'MoveTo', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$LineTo = function (a) {
+	return {ctor: 'LineTo', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$LineJoin = function (a) {
+	return {ctor: 'LineJoin', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$MiterLimit = function (a) {
+	return {ctor: 'MiterLimit', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$LineWidth = function (a) {
+	return {ctor: 'LineWidth', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$LineDashOffset = function (a) {
+	return {ctor: 'LineDashOffset', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$LineCap = function (a) {
+	return {ctor: 'LineCap', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$GlobalCompositionOp = function (a) {
+	return {ctor: 'GlobalCompositionOp', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$GlobalAlpha = function (a) {
+	return {ctor: 'GlobalAlpha', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$FillText = F2(
+	function (a, b) {
+		return {ctor: 'FillText', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$StrokeText = F2(
+	function (a, b) {
+		return {ctor: 'StrokeText', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$ArcTo = F3(
+	function (a, b, c) {
+		return {ctor: 'ArcTo', _0: a, _1: b, _2: c};
+	});
+var _hannemathisen$elm_test_project$Canvas$Arc = F4(
+	function (a, b, c, d) {
+		return {ctor: 'Arc', _0: a, _1: b, _2: c, _3: d};
+	});
+var _hannemathisen$elm_test_project$Canvas$Font = function (a) {
+	return {ctor: 'Font', _0: a};
+};
+var _hannemathisen$elm_test_project$Canvas$CropScaled = F4(
+	function (a, b, c, d) {
+		return {ctor: 'CropScaled', _0: a, _1: b, _2: c, _3: d};
+	});
+var _hannemathisen$elm_test_project$Canvas$Scaled = F2(
+	function (a, b) {
+		return {ctor: 'Scaled', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Canvas$At = function (a) {
+	return {ctor: 'At', _0: a};
+};
