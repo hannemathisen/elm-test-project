@@ -61,6 +61,12 @@ var _hannemathisen$elm_test_project$Main$draw = F3(
 var _hannemathisen$elm_test_project$Main$MouseMove = function (a) {
 	return {ctor: 'MouseMove', _0: a};
 };
+var _hannemathisen$elm_test_project$Main$MouseUp = function (a) {
+	return {ctor: 'MouseUp', _0: a};
+};
+var _hannemathisen$elm_test_project$Main$MouseDown = function (a) {
+	return {ctor: 'MouseDown', _0: a};
+};
 var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 	var _p1 = model;
 	switch (_p1.ctor) {
@@ -70,7 +76,7 @@ var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('loading...'),
+					_0: _elm_lang$html$Html$text('Loading...'),
 					_1: {ctor: '[]'}
 				});
 		case 'GotCanvas':
@@ -78,8 +84,16 @@ var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 				_hannemathisen$elm_test_project$Canvas$toHtml,
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Main$MouseMove),
-					_1: {ctor: '[]'}
+					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Main$MouseDown),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Main$MouseUp),
+						_1: {
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Main$MouseMove),
+							_1: {ctor: '[]'}
+						}
+					}
 				},
 				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
 		default:
@@ -87,8 +101,16 @@ var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 				_hannemathisen$elm_test_project$Canvas$toHtml,
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Main$MouseMove),
-					_1: {ctor: '[]'}
+					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Main$MouseDown),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Main$MouseUp),
+						_1: {
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Main$MouseMove),
+							_1: {ctor: '[]'}
+						}
+					}
 				},
 				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
 	}
@@ -122,47 +144,96 @@ var _hannemathisen$elm_test_project$Main$GotCanvas = F2(
 var _hannemathisen$elm_test_project$Main$update = F2(
 	function (msg, model) {
 		var _p2 = msg;
-		if (_p2.ctor === 'ImageLoaded') {
-			var _p3 = _elm_lang$core$Result$toMaybe(_p2._0);
-			if (_p3.ctor === 'Just') {
-				return {
-					ctor: '_Tuple2',
-					_0: A2(
-						_hannemathisen$elm_test_project$Main$GotCanvas,
-						_p3._0,
-						{ctor: '[]'}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
-			} else {
-				return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
-			}
-		} else {
-			var _p7 = _p2._0;
-			var _p4 = model;
-			switch (_p4.ctor) {
-				case 'Loading':
+		switch (_p2.ctor) {
+			case 'ImageLoaded':
+				var _p3 = _elm_lang$core$Result$toMaybe(_p2._0);
+				if (_p3.ctor === 'Just') {
+					return {
+						ctor: '_Tuple2',
+						_0: A2(
+							_hannemathisen$elm_test_project$Main$GotCanvas,
+							_p3._0,
+							{ctor: '[]'}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
 					return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
-				case 'GotCanvas':
-					var _p5 = _p4._0;
-					return {
-						ctor: '_Tuple2',
-						_0: A2(
-							_hannemathisen$elm_test_project$Main$Draw,
-							_p5,
-							A3(_hannemathisen$elm_test_project$Main$draw, _p7, _p5, _p4._1)),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-				default:
-					var _p6 = _p4._0;
-					return {
-						ctor: '_Tuple2',
-						_0: A2(
-							_hannemathisen$elm_test_project$Main$Draw,
-							_p6,
-							A3(_hannemathisen$elm_test_project$Main$draw, _p7, _p6, _p4._1)),
-						_1: _elm_lang$core$Platform_Cmd$none
-					};
-			}
+				}
+			case 'MouseDown':
+				var _p7 = _p2._0;
+				var _p4 = model;
+				switch (_p4.ctor) {
+					case 'Loading':
+						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+					case 'GotCanvas':
+						var _p5 = _p4._0;
+						var newDrawOps = A2(
+							_elm_lang$core$List$append,
+							_p4._1,
+							{
+								ctor: '::',
+								_0: _hannemathisen$elm_test_project$Canvas$MoveTo(_p7),
+								_1: {ctor: '[]'}
+							});
+						return {
+							ctor: '_Tuple2',
+							_0: A2(
+								_hannemathisen$elm_test_project$Main$Draw,
+								_p5,
+								A3(_hannemathisen$elm_test_project$Main$draw, _p7, _p5, newDrawOps)),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					default:
+						var _p6 = _p4._0;
+						return {
+							ctor: '_Tuple2',
+							_0: A2(
+								_hannemathisen$elm_test_project$Main$Draw,
+								_p6,
+								A3(_hannemathisen$elm_test_project$Main$draw, _p7, _p6, _p4._1)),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+				}
+			case 'MouseUp':
+				var _p8 = model;
+				switch (_p8.ctor) {
+					case 'Loading':
+						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+					case 'GotCanvas':
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_hannemathisen$elm_test_project$Main$GotCanvas, _p8._0, _p8._1),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					default:
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_hannemathisen$elm_test_project$Main$GotCanvas, _p8._0, _p8._1),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+				}
+			default:
+				var _p9 = model;
+				switch (_p9.ctor) {
+					case 'Loading':
+						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+					case 'GotCanvas':
+						return {
+							ctor: '_Tuple2',
+							_0: A2(_hannemathisen$elm_test_project$Main$GotCanvas, _p9._0, _p9._1),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					default:
+						var _p10 = _p9._0;
+						return {
+							ctor: '_Tuple2',
+							_0: A2(
+								_hannemathisen$elm_test_project$Main$Draw,
+								_p10,
+								A3(_hannemathisen$elm_test_project$Main$draw, _p2._0, _p10, _p9._1)),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+				}
 		}
 	});
 var _hannemathisen$elm_test_project$Main$main = _elm_lang$html$Html$program(

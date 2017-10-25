@@ -20,6 +20,8 @@ main =
 
 type Msg
   = ImageLoaded (Result Error Canvas)
+  | MouseDown Point
+  | MouseUp Point
   | MouseMove Point
 
 
@@ -50,6 +52,42 @@ update msg model =
           , loadImage
           )
 
+    MouseDown point ->
+      case model of
+        Loading ->
+          ( Loading
+          , loadImage
+          )
+        GotCanvas canvas drawOps ->
+          let
+            newDrawOps =
+              List.append
+                drawOps
+                  [ MoveTo point]
+          in
+            ( Draw canvas (draw point canvas newDrawOps)
+            , Cmd.none
+            )
+        Draw canvas drawOps ->
+          ( Draw canvas (draw point canvas drawOps)
+          , Cmd.none
+          )
+
+    MouseUp point ->
+      case model of
+        Loading ->
+          ( Loading
+          , loadImage
+          )
+        GotCanvas canvas drawOps ->
+          ( GotCanvas canvas (drawOps)
+          , Cmd.none
+          )
+        Draw canvas drawOps ->
+          ( GotCanvas canvas (drawOps)
+          , Cmd.none
+          )
+
     MouseMove point ->
       case model of
         Loading ->
@@ -57,7 +95,7 @@ update msg model =
           , loadImage
           )
         GotCanvas canvas drawOps ->
-          ( Draw canvas (draw point canvas drawOps)
+          ( GotCanvas canvas (drawOps)
           , Cmd.none
           )
         Draw canvas drawOps ->
@@ -88,20 +126,24 @@ presentIfReady : Model -> Html Msg
 presentIfReady model =
   case model of
     Loading ->
-      p [] [ text "loading..." ]
+      p [] [ text "Loading..." ]
+
     GotCanvas canvas drawOps ->
       canvas
         |> drawCanvas drawOps
         |> Canvas.toHtml
-          [ Events.onMouseMove MouseMove
-
+          [ Events.onMouseDown MouseDown
+          , Events.onMouseUp MouseUp
+          , Events.onMouseMove MouseMove
           ]
+
     Draw canvas drawOps ->
       canvas
         |> drawCanvas drawOps
         |> Canvas.toHtml
-          [ Events.onMouseMove MouseMove
-
+          [ Events.onMouseDown MouseDown
+          , Events.onMouseUp MouseUp
+          , Events.onMouseMove MouseMove
           ]
 
 
