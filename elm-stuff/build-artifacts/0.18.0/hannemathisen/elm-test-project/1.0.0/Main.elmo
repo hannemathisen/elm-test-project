@@ -19,7 +19,7 @@ var _hannemathisen$elm_test_project$Main$drawCanvas = F2(
 								_hannemathisen$elm_test_project$Canvas$Rect,
 								_hannemathisen$elm_test_project$Canvas_Point$fromInts(
 									{ctor: '_Tuple2', _0: 0, _1: 0}),
-								A2(_hannemathisen$elm_test_project$Canvas$Size, 200, 200)),
+								A2(_hannemathisen$elm_test_project$Canvas$Size, 800, 600)),
 							_1: {
 								ctor: '::',
 								_0: _hannemathisen$elm_test_project$Canvas$Stroke,
@@ -76,7 +76,7 @@ var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _elm_lang$html$Html$text('Loading...'),
+					_0: _elm_lang$html$Html$text('Loading image...'),
 					_1: {ctor: '[]'}
 				});
 		case 'GotCanvas':
@@ -131,7 +131,7 @@ var _hannemathisen$elm_test_project$Main$ImageLoaded = function (a) {
 var _hannemathisen$elm_test_project$Main$loadImage = A2(
 	_elm_lang$core$Task$attempt,
 	_hannemathisen$elm_test_project$Main$ImageLoaded,
-	_hannemathisen$elm_test_project$Canvas$loadImage('./cat.jpg'));
+	_hannemathisen$elm_test_project$Canvas$loadImage('/static/white.png'));
 var _hannemathisen$elm_test_project$Main$Draw = F2(
 	function (a, b) {
 		return {ctor: 'Draw', _0: a, _1: b};

@@ -35,7 +35,7 @@ loadImage : Cmd Msg
 loadImage =
   Task.attempt
     ImageLoaded
-    (Canvas.loadImage "./cat.jpg")
+    (Canvas.loadImage "/static/white.png")
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -126,7 +126,7 @@ presentIfReady : Model -> Html Msg
 presentIfReady model =
   case model of
     Loading ->
-      p [] [ text "Loading..." ]
+      p [] [ text "Loading image..." ]
 
     GotCanvas canvas drawOps ->
       canvas
@@ -160,7 +160,7 @@ drawCanvas drawOps canvas =
               [ BeginPath
               , StrokeStyle (Color.rgb 255 0 0)
               , LineWidth 2.0
-              , Rect (Point.fromInts ( 0, 0 )) (Size 200 200)
+              , Rect (Point.fromInts ( 0, 0 )) (Size 800 600)
               , Stroke
               ]
   in
