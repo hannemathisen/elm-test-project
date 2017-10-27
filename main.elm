@@ -167,12 +167,12 @@ erase point canvas drawOps =
 
     ( x, y ) = Point.toInts point
 
-    xPoints = List.range ( x-5 ) ( x+5 )
+    xPoints = List.range ( x-3 ) ( x+3 )
       |> List.map toFloat
-    yPoints = List.range ( y-5 ) ( y+5 )
-     |> List.map toFloat
+    yPoints = List.range ( y-3 ) ( y+3 )
+      |> List.map toFloat
 
-    points = mapPoints2 xPoints yPoints
+    points = mapYPoints xPoints yPoints
   in
     removePoints drawOps points
 
@@ -186,6 +186,7 @@ removePoints drawOps points =
         point = Point.fromFloats (x)
       in
         List.Extra.replaceIf (\x -> x == LineTo point) (MoveTo point) drawOps
+
     (x::xs) ->
       let
         point = Point.fromFloats (x)
@@ -198,12 +199,13 @@ removePoints drawOps points =
 
 
 
-mapPoints : List Float -> List Float -> List( Float, Float )
-mapPoints xList yList =
+mapXPoints : List Float -> List Float -> List( Float, Float )
+mapXPoints xList yList =
   case xList of
     [] -> Debug.crash "Empty list"
     [x] ->
       List.map2 (,) [x] yList
+
     (x::xs) ->
       let
         mappedList =
@@ -211,23 +213,24 @@ mapPoints xList yList =
       in
         List.append
           mappedList
-            (mapPoints xs yList )
+            (mapXPoints xs yList )
 
 
-mapPoints2 : List Float ->  List Float -> List (Float, Float)
-mapPoints2 xList yList =
+mapYPoints : List Float ->  List Float -> List (Float, Float)
+mapYPoints xList yList =
   case yList of
     [] -> Debug.crash "Empty list"
     [y] ->
-      mapPoints xList [y]
+      mapXPoints xList [y]
+
     (y::ys) ->
       let
         mappedList =
-          mapPoints xList [y]
+          mapXPoints xList [y]
       in
         List.append
           mappedList
-            (mapPoints2 xList ys )
+            (mapYPoints xList ys )
 
 
 view : Model -> Html Msg

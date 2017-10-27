@@ -34,15 +34,15 @@ var _hannemathisen$elm_test_project$Main$drawCanvas = F2(
 		var height = _p0.height;
 		return A2(_hannemathisen$elm_test_project$Canvas$batch, drawOpsWithBorder, canvas);
 	});
-var _hannemathisen$elm_test_project$Main$mapPoints = F2(
+var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 	function (xList, yList) {
 		var _p1 = xList;
 		if (_p1.ctor === '[]') {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 203, column: 3},
-					end: {line: 214, column: 34}
+					start: {line: 204, column: 3},
+					end: {line: 216, column: 35}
 				},
 				_p1)('Empty list');
 		} else {
@@ -75,25 +75,25 @@ var _hannemathisen$elm_test_project$Main$mapPoints = F2(
 				return A2(
 					_elm_lang$core$List$append,
 					mappedList,
-					A2(_hannemathisen$elm_test_project$Main$mapPoints, _p1._1, yList));
+					A2(_hannemathisen$elm_test_project$Main$mapXPoints, _p1._1, yList));
 			}
 		}
 	});
-var _hannemathisen$elm_test_project$Main$mapPoints2 = F2(
+var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 	function (xList, yList) {
 		var _p3 = yList;
 		if (_p3.ctor === '[]') {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 219, column: 3},
-					end: {line: 230, column: 35}
+					start: {line: 221, column: 3},
+					end: {line: 233, column: 35}
 				},
 				_p3)('Empty list');
 		} else {
 			if (_p3._1.ctor === '[]') {
 				return A2(
-					_hannemathisen$elm_test_project$Main$mapPoints,
+					_hannemathisen$elm_test_project$Main$mapXPoints,
 					xList,
 					{
 						ctor: '::',
@@ -102,7 +102,7 @@ var _hannemathisen$elm_test_project$Main$mapPoints2 = F2(
 					});
 			} else {
 				var mappedList = A2(
-					_hannemathisen$elm_test_project$Main$mapPoints,
+					_hannemathisen$elm_test_project$Main$mapXPoints,
 					xList,
 					{
 						ctor: '::',
@@ -112,7 +112,7 @@ var _hannemathisen$elm_test_project$Main$mapPoints2 = F2(
 				return A2(
 					_elm_lang$core$List$append,
 					mappedList,
-					A2(_hannemathisen$elm_test_project$Main$mapPoints2, xList, _p3._1));
+					A2(_hannemathisen$elm_test_project$Main$mapYPoints, xList, _p3._1));
 			}
 		}
 	});
@@ -126,7 +126,7 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 					'Main',
 					{
 						start: {line: 182, column: 3},
-						end: {line: 197, column: 37}
+						end: {line: 198, column: 37}
 					},
 					_p5)('Empty list');
 			} else {
@@ -169,12 +169,12 @@ var _hannemathisen$elm_test_project$Main$erase = F3(
 		var xPoints = A2(
 			_elm_lang$core$List$map,
 			_elm_lang$core$Basics$toFloat,
-			A2(_elm_lang$core$List$range, x - 5, x + 5));
+			A2(_elm_lang$core$List$range, x - 3, x + 3));
 		var yPoints = A2(
 			_elm_lang$core$List$map,
 			_elm_lang$core$Basics$toFloat,
-			A2(_elm_lang$core$List$range, y - 5, y + 5));
-		var points = A2(_hannemathisen$elm_test_project$Main$mapPoints2, xPoints, yPoints);
+			A2(_elm_lang$core$List$range, y - 3, y + 3));
+		var points = A2(_hannemathisen$elm_test_project$Main$mapYPoints, xPoints, yPoints);
 		return A2(_hannemathisen$elm_test_project$Main$removePoints, drawOps, points);
 	});
 var _hannemathisen$elm_test_project$Main$draw = F3(
