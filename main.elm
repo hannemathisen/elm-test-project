@@ -5,6 +5,7 @@ import Canvas exposing (Size, Error, DrawOp(..), DrawImageParams(..), Canvas)
 import Canvas.Point exposing (Point)
 import Canvas.Point as Point
 import Canvas.Events as Events
+import List.Extra exposing (..)
 import Color exposing (Color)
 import Task
 
@@ -23,19 +24,22 @@ type Msg
   | MouseDown Point
   | MouseUp Point
   | MouseMove Point
+  | EraseClicked Point
 
 
 type Model
-  = GotCanvas Canvas (List DrawOp)
-  | Loading
+  = Loading
+  | DrawMode Canvas (List DrawOp)
   | Draw Canvas (List DrawOp)
+  | EraseMode Canvas (List DrawOp)
+  | Erase Canvas (List DrawOp)
 
 
 loadImage : Cmd Msg
 loadImage =
   Task.attempt
     ImageLoaded
-    (Canvas.loadImage "/static/white.png")
+    (Canvas.loadImage "static/white.png")
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -44,7 +48,7 @@ update msg model =
     ImageLoaded result ->
       case Result.toMaybe result of
         Just canvas ->
-          ( GotCanvas canvas  []
+          ( DrawMode canvas []
           , Cmd.none
           )
         Nothing ->
@@ -54,38 +58,51 @@ update msg model =
 
     MouseDown point ->
       case model of
-        Loading ->
-          ( Loading
-          , loadImage
-          )
-        GotCanvas canvas drawOps ->
+        DrawMode canvas drawOps ->
           let
             newDrawOps =
               List.append
                 drawOps
-                  [ MoveTo point]
+                  [ MoveTo point
+                  , LineWidth 3.0
+                  , StrokeStyle (Color.rgb 255 0 0)
+                  ]
           in
-            ( Draw canvas (draw point canvas newDrawOps)
+            ( Draw canvas newDrawOps
             , Cmd.none
             )
-        Draw canvas drawOps ->
-          ( Draw canvas (draw point canvas drawOps)
+
+        EraseMode canvas drawOps ->
+          -- let
+          --   newDrawOps =
+          --     List.append
+          --       drawOps
+          --         [ MoveTo point
+          --         , LineWidth 1.0
+          --         , StrokeStyle (Color.rgb 255 0 0)
+          --         ]
+          -- in
+          ( Erase canvas drawOps
           , Cmd.none
+          )
+        _ ->
+          ( Loading
+          , loadImage
           )
 
     MouseUp point ->
       case model of
-        Loading ->
+        Draw canvas drawOps ->
+          ( DrawMode canvas drawOps
+          , Cmd.none
+          )
+        Erase canvas drawOps ->
+          ( EraseMode canvas drawOps
+          , Cmd.none
+          )
+        _ ->
           ( Loading
           , loadImage
-          )
-        GotCanvas canvas drawOps ->
-          ( GotCanvas canvas (drawOps)
-          , Cmd.none
-          )
-        Draw canvas drawOps ->
-          ( GotCanvas canvas (drawOps)
-          , Cmd.none
           )
 
     MouseMove point ->
@@ -94,12 +111,43 @@ update msg model =
           ( Loading
           , loadImage
           )
-        GotCanvas canvas drawOps ->
-          ( GotCanvas canvas (drawOps)
+        DrawMode canvas drawOps ->
+          ( DrawMode canvas drawOps
           , Cmd.none
           )
         Draw canvas drawOps ->
           ( Draw canvas (draw point canvas drawOps)
+          , Cmd.none
+          )
+        EraseMode canvas drawOps ->
+          ( EraseMode canvas drawOps
+          , Cmd.none
+          )
+        Erase canvas drawOps ->
+          ( Erase canvas (erase point canvas drawOps)
+          , Cmd.none
+          )
+
+    EraseClicked point ->
+      case model of
+        Loading ->
+          ( Loading
+          , loadImage
+          )
+        DrawMode canvas drawOps ->
+          ( EraseMode canvas drawOps
+          , Cmd.none
+          )
+        Draw canvas drawOps ->
+          ( EraseMode canvas drawOps
+          , Cmd.none
+          )
+        EraseMode canvas drawOps ->
+          ( DrawMode canvas drawOps
+          , Cmd.none
+          )
+        Erase canvas drawOps ->
+          ( DrawMode canvas drawOps
           , Cmd.none
           )
 
@@ -108,18 +156,101 @@ draw : Point -> Canvas -> List DrawOp -> List DrawOp
 draw point canvas drawOps =
   List.append
     drawOps
-      [ LineWidth 1.0
-      , StrokeStyle (Color.rgb 255 0 0)
-      , LineTo point
+      [ LineTo point
       , Stroke
       ]
 
 
+erase : Point -> Canvas -> List DrawOp -> List DrawOp
+erase point canvas drawOps =
+  let
+
+    ( x, y ) = Point.toInts point
+
+    xPoints = List.range ( x-5 ) ( x+5 )
+      |> List.map toFloat
+    yPoints = List.range ( y-5 ) ( y+5 )
+     |> List.map toFloat
+
+    points = mapPoints2 xPoints yPoints
+  in
+    removePoints drawOps points
+
+
+removePoints : List DrawOp -> List (Float, Float) -> List DrawOp
+removePoints drawOps points =
+  case points of
+    [] -> Debug.crash "Empty list"
+    [x] ->
+      let
+        point = Point.fromFloats (x)
+      in
+        List.Extra.replaceIf (\x -> x == LineTo point) (MoveTo point) drawOps
+    (x::xs) ->
+      let
+        point = Point.fromFloats (x)
+      in
+        let
+          newDrawOps =
+            List.Extra.replaceIf (\x -> x == LineTo point) (MoveTo point) drawOps
+        in
+          removePoints newDrawOps xs
+
+
+
+mapPoints : List Float -> List Float -> List( Float, Float )
+mapPoints xList yList =
+  case xList of
+    [] -> Debug.crash "Empty list"
+    [x] ->
+      List.map2 (,) [x] yList
+    (x::xs) ->
+      let
+        mappedList =
+          List.map2 (,) [x] yList
+      in
+        List.append
+          mappedList
+            (mapPoints xs yList )
+
+
+mapPoints2 : List Float ->  List Float -> List (Float, Float)
+mapPoints2 xList yList =
+  case yList of
+    [] -> Debug.crash "Empty list"
+    [y] ->
+      mapPoints xList [y]
+    (y::ys) ->
+      let
+        mappedList =
+          mapPoints xList [y]
+      in
+        List.append
+          mappedList
+            (mapPoints2 xList ys )
+
+
 view : Model -> Html Msg
 view model =
-  div
-    []
-    [ presentIfReady model ]
+  case model of
+    EraseMode canvas drawOps ->
+      div
+        []
+        [ presentIfReady model
+         , button [ Events.onClick EraseClicked ] [ text "Erase is on"]
+        ]
+    Erase canvas drawOps ->
+      div
+        []
+        [ presentIfReady model
+         , button [ Events.onClick EraseClicked ] [ text "Erase is on"]
+        ]
+    _ ->
+      div
+        []
+        [ presentIfReady model
+         , button [ Events.onClick EraseClicked ] [ text "Erase is off"]
+        ]
 
 
 presentIfReady : Model -> Html Msg
@@ -128,21 +259,31 @@ presentIfReady model =
     Loading ->
       p [] [ text "Loading image..." ]
 
-    GotCanvas canvas drawOps ->
+    DrawMode canvas drawOps ->
       canvas
         |> drawCanvas drawOps
         |> Canvas.toHtml
-          [ Events.onMouseDown MouseDown
-          , Events.onMouseUp MouseUp
-          , Events.onMouseMove MouseMove
-          ]
+          [ Events.onMouseDown MouseDown ]
 
     Draw canvas drawOps ->
       canvas
         |> drawCanvas drawOps
         |> Canvas.toHtml
-          [ Events.onMouseDown MouseDown
-          , Events.onMouseUp MouseUp
+          [ Events.onMouseUp MouseUp
+          , Events.onMouseMove MouseMove
+          ]
+
+    EraseMode canvas drawOps ->
+      canvas
+        |> drawCanvas drawOps
+        |> Canvas.toHtml
+          [ Events.onMouseDown MouseDown ]
+
+    Erase canvas drawOps ->
+      canvas
+        |> drawCanvas drawOps
+        |> Canvas.toHtml
+          [ Events.onMouseUp MouseUp
           , Events.onMouseMove MouseMove
           ]
 
