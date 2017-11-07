@@ -73,18 +73,10 @@ update msg model =
             )
 
         EraseMode canvas drawOps ->
-          -- let
-          --   newDrawOps =
-          --     List.append
-          --       drawOps
-          --         [ MoveTo point
-          --         , LineWidth 1.0
-          --         , StrokeStyle (Color.rgb 255 0 0)
-          --         ]
-          -- in
           ( Erase canvas drawOps
           , Cmd.none
           )
+
         _ ->
           ( Loading
           , loadImage
@@ -96,10 +88,12 @@ update msg model =
           ( DrawMode canvas drawOps
           , Cmd.none
           )
+
         Erase canvas drawOps ->
           ( EraseMode canvas drawOps
           , Cmd.none
           )
+
         _ ->
           ( Loading
           , loadImage
@@ -111,18 +105,22 @@ update msg model =
           ( Loading
           , loadImage
           )
+
         DrawMode canvas drawOps ->
           ( DrawMode canvas drawOps
           , Cmd.none
           )
+
         Draw canvas drawOps ->
           ( Draw canvas (draw point canvas drawOps)
           , Cmd.none
           )
+
         EraseMode canvas drawOps ->
           ( EraseMode canvas drawOps
           , Cmd.none
           )
+
         Erase canvas drawOps ->
           ( Erase canvas (erase point canvas drawOps)
           , Cmd.none
@@ -134,18 +132,22 @@ update msg model =
           ( Loading
           , loadImage
           )
+
         DrawMode canvas drawOps ->
           ( EraseMode canvas drawOps
           , Cmd.none
           )
+
         Draw canvas drawOps ->
           ( EraseMode canvas drawOps
           , Cmd.none
           )
+
         EraseMode canvas drawOps ->
           ( DrawMode canvas drawOps
           , Cmd.none
           )
+          
         Erase canvas drawOps ->
           ( DrawMode canvas drawOps
           , Cmd.none

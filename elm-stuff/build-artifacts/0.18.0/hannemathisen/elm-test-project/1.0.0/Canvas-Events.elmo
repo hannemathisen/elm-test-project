@@ -1,6 +1,25 @@
-var _hannemathisen$elm_test_project$Canvas_Events$field_ = function (key) {
-	return A2(_elm_lang$core$Json_Decode$field, key, _elm_lang$core$Json_Decode$float);
-};
+var _hannemathisen$elm_test_project$Canvas_Events$traceDecoder = F2(
+	function (message, decoder) {
+		return A2(
+			_elm_lang$core$Json_Decode$andThen,
+			function (value) {
+				var _p0 = A2(_elm_lang$core$Json_Decode$decodeValue, decoder, value);
+				if (_p0.ctor === 'Ok') {
+					return _elm_lang$core$Json_Decode$succeed(
+						A2(
+							_elm_lang$core$Debug$log,
+							A2(_elm_lang$core$Basics_ops['++'], 'Success: ', message),
+							_p0._0));
+				} else {
+					return _elm_lang$core$Json_Decode$fail(
+						A2(
+							_elm_lang$core$Debug$log,
+							A2(_elm_lang$core$Basics_ops['++'], 'Fail: ', message),
+							_p0._0));
+				}
+			},
+			_elm_lang$core$Json_Decode$value);
+	});
 var _hannemathisen$elm_test_project$Canvas_Events$toTuple = F2(
 	function (x, y) {
 		return A3(
@@ -9,46 +28,579 @@ var _hannemathisen$elm_test_project$Canvas_Events$toTuple = F2(
 				function (v0, v1) {
 					return {ctor: '_Tuple2', _0: v0, _1: v1};
 				}),
-			_hannemathisen$elm_test_project$Canvas_Events$field_(x),
-			_hannemathisen$elm_test_project$Canvas_Events$field_(y));
+			A2(_elm_lang$core$Json_Decode$at, x, _elm_lang$core$Json_Decode$float),
+			A2(_elm_lang$core$Json_Decode$at, y, _elm_lang$core$Json_Decode$float));
 	});
-var _hannemathisen$elm_test_project$Canvas_Events$positionDecoder = A3(
-	_elm_lang$core$Json_Decode$map2,
-	F2(
-		function (v0, v1) {
-			return {ctor: '_Tuple2', _0: v0, _1: v1};
+var _hannemathisen$elm_test_project$Canvas_Events$touchListDecoder = A2(
+	_elm_lang$core$Json_Decode$map,
+	function (_p1) {
+		return A2(
+			_elm_lang$core$List$map,
+			function (_p2) {
+				var _p3 = _p2;
+				return {
+					client: {x: _p3._1._0, y: _p3._1._1},
+					page: {x: _p3._2._0, y: _p3._2._1}
+				};
+			},
+			A2(
+				_elm_lang$core$List$filterMap,
+				_elm_lang$core$Basics$identity,
+				_elm_lang$core$Dict$values(_p1)));
+	},
+	_elm_lang$core$Json_Decode$dict(
+		_elm_lang$core$Json_Decode$maybe(
+			A4(
+				_elm_lang$core$Json_Decode$map3,
+				F3(
+					function (v0, v1, v2) {
+						return {ctor: '_Tuple3', _0: v0, _1: v1, _2: v2};
+					}),
+				A2(_elm_lang$core$Json_Decode$field, 'identifier', _elm_lang$core$Json_Decode$int),
+				A2(
+					_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+					{
+						ctor: '::',
+						_0: 'clientX',
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: 'clientY',
+						_1: {ctor: '[]'}
+					}),
+				A2(
+					_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+					{
+						ctor: '::',
+						_0: 'pageX',
+						_1: {ctor: '[]'}
+					},
+					{
+						ctor: '::',
+						_0: 'pageY',
+						_1: {ctor: '[]'}
+					})))));
+var _hannemathisen$elm_test_project$Canvas_Events$multiTouchEventPositionDecoder = A7(
+	_elm_lang$core$Json_Decode$map6,
+	F6(
+		function (v0, v1, v2, v3, v4, v5) {
+			return {ctor: '_Tuple6', _0: v0, _1: v1, _2: v2, _3: v3, _4: v4, _5: v5};
 		}),
-	A2(_hannemathisen$elm_test_project$Canvas_Events$toTuple, 'clientX', 'clientY'),
 	A2(
 		_elm_lang$core$Json_Decode$at,
 		{
 			ctor: '::',
-			_0: 'target',
+			_0: 'touches',
 			_1: {ctor: '[]'}
 		},
-		A2(_hannemathisen$elm_test_project$Canvas_Events$toTuple, 'offsetLeft', 'offsetTop')));
-var _hannemathisen$elm_test_project$Canvas_Events$positionInCanvas = function (_p0) {
-	var _p1 = _p0;
-	var _p2 = _p1._1;
-	var ox = _p2._0;
-	var oy = _p2._1;
-	var _p3 = _p1._0;
-	var cx = _p3._0;
-	var cy = _p3._1;
+		_hannemathisen$elm_test_project$Canvas_Events$touchListDecoder),
+	A2(
+		_elm_lang$core$Json_Decode$at,
+		{
+			ctor: '::',
+			_0: 'targetTouches',
+			_1: {ctor: '[]'}
+		},
+		_hannemathisen$elm_test_project$Canvas_Events$touchListDecoder),
+	A2(
+		_elm_lang$core$Json_Decode$at,
+		{
+			ctor: '::',
+			_0: 'changedTouches',
+			_1: {ctor: '[]'}
+		},
+		_hannemathisen$elm_test_project$Canvas_Events$touchListDecoder),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'target',
+			_1: {
+				ctor: '::',
+				_0: 'offsetLeft',
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'target',
+			_1: {
+				ctor: '::',
+				_0: 'offsetTop',
+				_1: {ctor: '[]'}
+			}
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'body',
+					_1: {
+						ctor: '::',
+						_0: 'scrollLeft',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'body',
+					_1: {
+						ctor: '::',
+						_0: 'scrollTop',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'documentElement',
+					_1: {
+						ctor: '::',
+						_0: 'scrollLeft',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'documentElement',
+					_1: {
+						ctor: '::',
+						_0: 'scrollTop',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}));
+var _hannemathisen$elm_test_project$Canvas_Events$singleTouchEventPositionDecoder = A5(
+	_elm_lang$core$Json_Decode$map4,
+	F4(
+		function (v0, v1, v2, v3) {
+			return {ctor: '_Tuple4', _0: v0, _1: v1, _2: v2, _3: v3};
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'changedTouches',
+			_1: {
+				ctor: '::',
+				_0: '0',
+				_1: {
+					ctor: '::',
+					_0: 'clientX',
+					_1: {ctor: '[]'}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'changedTouches',
+			_1: {
+				ctor: '::',
+				_0: '0',
+				_1: {
+					ctor: '::',
+					_0: 'clientY',
+					_1: {ctor: '[]'}
+				}
+			}
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'target',
+			_1: {
+				ctor: '::',
+				_0: 'offsetLeft',
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'target',
+			_1: {
+				ctor: '::',
+				_0: 'offsetTop',
+				_1: {ctor: '[]'}
+			}
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'body',
+					_1: {
+						ctor: '::',
+						_0: 'scrollLeft',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'body',
+					_1: {
+						ctor: '::',
+						_0: 'scrollTop',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'documentElement',
+					_1: {
+						ctor: '::',
+						_0: 'scrollLeft',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'documentElement',
+					_1: {
+						ctor: '::',
+						_0: 'scrollTop',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}));
+var _hannemathisen$elm_test_project$Canvas_Events$mouseEventPositionDecoder = A5(
+	_elm_lang$core$Json_Decode$map4,
+	F4(
+		function (v0, v1, v2, v3) {
+			return {ctor: '_Tuple4', _0: v0, _1: v1, _2: v2, _3: v3};
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'clientX',
+			_1: {ctor: '[]'}
+		},
+		{
+			ctor: '::',
+			_0: 'clientY',
+			_1: {ctor: '[]'}
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'target',
+			_1: {
+				ctor: '::',
+				_0: 'offsetLeft',
+				_1: {ctor: '[]'}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'target',
+			_1: {
+				ctor: '::',
+				_0: 'offsetTop',
+				_1: {ctor: '[]'}
+			}
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'body',
+					_1: {
+						ctor: '::',
+						_0: 'scrollLeft',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'body',
+					_1: {
+						ctor: '::',
+						_0: 'scrollTop',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}),
+	A2(
+		_hannemathisen$elm_test_project$Canvas_Events$toTuple,
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'documentElement',
+					_1: {
+						ctor: '::',
+						_0: 'scrollLeft',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		{
+			ctor: '::',
+			_0: 'view',
+			_1: {
+				ctor: '::',
+				_0: 'document',
+				_1: {
+					ctor: '::',
+					_0: 'documentElement',
+					_1: {
+						ctor: '::',
+						_0: 'scrollTop',
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}));
+var _hannemathisen$elm_test_project$Canvas_Events$positionInCanvas = function (_p4) {
+	var _p5 = _p4;
+	var _p6 = _p5._3;
+	var dx = _p6._0;
+	var dy = _p6._1;
+	var _p7 = _p5._2;
+	var bx = _p7._0;
+	var by = _p7._1;
+	var _p8 = _p5._1;
+	var ox = _p8._0;
+	var oy = _p8._1;
+	var _p9 = _p5._0;
+	var cx = _p9._0;
+	var cy = _p9._1;
 	return _hannemathisen$elm_test_project$Canvas_Point$fromFloats(
-		{ctor: '_Tuple2', _0: cx - ox, _1: cy - oy});
+		{ctor: '_Tuple2', _0: ((cx + bx) + dx) - ox, _1: ((cy + by) + dy) - oy});
 };
+var _hannemathisen$elm_test_project$Canvas_Events$positionsInCanvas = function (_p10) {
+	var _p11 = _p10;
+	return A2(
+		_elm_lang$core$List$map,
+		function (touch) {
+			return _hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(
+				{
+					ctor: '_Tuple4',
+					_0: {ctor: '_Tuple2', _0: touch.client.x, _1: touch.client.y},
+					_1: _p11._1,
+					_2: _p11._2,
+					_3: _p11._3
+				});
+		},
+		_p11._0);
+};
+var _hannemathisen$elm_test_project$Canvas_Events$herpderp = function (_p12) {
+	var _p13 = _p12;
+	var positions = _hannemathisen$elm_test_project$Canvas_Events$positionsInCanvas(
+		{ctor: '_Tuple4', _0: _p13._2, _1: _p13._3, _2: _p13._4, _3: _p13._5});
+	return {targetTouches: _p13._1, points: positions};
+};
+var _hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove = F2(
+	function (options, message) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			'touchmove',
+			options,
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				function (_p14) {
+					return message(
+						_hannemathisen$elm_test_project$Canvas_Events$herpderp(_p14));
+				},
+				_hannemathisen$elm_test_project$Canvas_Events$multiTouchEventPositionDecoder));
+	});
+var _hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel = F2(
+	function (options, message) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			'touchcancel',
+			options,
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				function (_p15) {
+					return message(
+						_hannemathisen$elm_test_project$Canvas_Events$herpderp(_p15));
+				},
+				_hannemathisen$elm_test_project$Canvas_Events$multiTouchEventPositionDecoder));
+	});
+var _hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd = F2(
+	function (options, message) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			'touchend',
+			options,
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				function (_p16) {
+					return message(
+						_hannemathisen$elm_test_project$Canvas_Events$herpderp(_p16));
+				},
+				_hannemathisen$elm_test_project$Canvas_Events$multiTouchEventPositionDecoder));
+	});
+var _hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart = F2(
+	function (options, message) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			'touchstart',
+			options,
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				function (_p17) {
+					return message(
+						_hannemathisen$elm_test_project$Canvas_Events$herpderp(_p17));
+				},
+				_hannemathisen$elm_test_project$Canvas_Events$multiTouchEventPositionDecoder));
+	});
+var _hannemathisen$elm_test_project$Canvas_Events$onSingleTouchMove = F2(
+	function (options, message) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			'touchmove',
+			options,
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				function (_p18) {
+					return message(
+						_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p18));
+				},
+				_hannemathisen$elm_test_project$Canvas_Events$singleTouchEventPositionDecoder));
+	});
+var _hannemathisen$elm_test_project$Canvas_Events$onSingleTouchCancel = F2(
+	function (options, message) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			'touchcancel',
+			options,
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				function (_p19) {
+					return message(
+						_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p19));
+				},
+				_hannemathisen$elm_test_project$Canvas_Events$singleTouchEventPositionDecoder));
+	});
+var _hannemathisen$elm_test_project$Canvas_Events$onSingleTouchEnd = F2(
+	function (options, message) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			'touchend',
+			options,
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				function (_p20) {
+					return message(
+						_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p20));
+				},
+				_hannemathisen$elm_test_project$Canvas_Events$singleTouchEventPositionDecoder));
+	});
+var _hannemathisen$elm_test_project$Canvas_Events$onSingleTouchStart = F2(
+	function (options, message) {
+		return A3(
+			_elm_lang$html$Html_Events$onWithOptions,
+			'touchstart',
+			options,
+			A2(
+				_elm_lang$core$Json_Decode$map,
+				function (_p21) {
+					return message(
+						_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p21));
+				},
+				A2(_hannemathisen$elm_test_project$Canvas_Events$traceDecoder, 'onSingleTouchStart', _hannemathisen$elm_test_project$Canvas_Events$singleTouchEventPositionDecoder)));
+	});
 var _hannemathisen$elm_test_project$Canvas_Events$onDoubleClick = function (message) {
 	return A2(
 		_elm_lang$html$Html_Events$on,
 		'dblclick',
 		A2(
 			_elm_lang$core$Json_Decode$map,
-			function (_p4) {
+			function (_p22) {
 				return message(
-					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p4));
+					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p22));
 			},
-			_hannemathisen$elm_test_project$Canvas_Events$positionDecoder));
+			_hannemathisen$elm_test_project$Canvas_Events$mouseEventPositionDecoder));
 };
 var _hannemathisen$elm_test_project$Canvas_Events$onClick = function (message) {
 	return A2(
@@ -56,11 +608,11 @@ var _hannemathisen$elm_test_project$Canvas_Events$onClick = function (message) {
 		'click',
 		A2(
 			_elm_lang$core$Json_Decode$map,
-			function (_p5) {
+			function (_p23) {
 				return message(
-					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p5));
+					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p23));
 			},
-			_hannemathisen$elm_test_project$Canvas_Events$positionDecoder));
+			_hannemathisen$elm_test_project$Canvas_Events$mouseEventPositionDecoder));
 };
 var _hannemathisen$elm_test_project$Canvas_Events$onMouseMove = function (message) {
 	return A2(
@@ -68,11 +620,11 @@ var _hannemathisen$elm_test_project$Canvas_Events$onMouseMove = function (messag
 		'mousemove',
 		A2(
 			_elm_lang$core$Json_Decode$map,
-			function (_p6) {
+			function (_p24) {
 				return message(
-					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p6));
+					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p24));
 			},
-			_hannemathisen$elm_test_project$Canvas_Events$positionDecoder));
+			_hannemathisen$elm_test_project$Canvas_Events$mouseEventPositionDecoder));
 };
 var _hannemathisen$elm_test_project$Canvas_Events$onMouseUp = function (message) {
 	return A2(
@@ -80,11 +632,11 @@ var _hannemathisen$elm_test_project$Canvas_Events$onMouseUp = function (message)
 		'mouseup',
 		A2(
 			_elm_lang$core$Json_Decode$map,
-			function (_p7) {
+			function (_p25) {
 				return message(
-					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p7));
+					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p25));
 			},
-			_hannemathisen$elm_test_project$Canvas_Events$positionDecoder));
+			_hannemathisen$elm_test_project$Canvas_Events$mouseEventPositionDecoder));
 };
 var _hannemathisen$elm_test_project$Canvas_Events$onMouseDown = function (message) {
 	return A2(
@@ -92,9 +644,21 @@ var _hannemathisen$elm_test_project$Canvas_Events$onMouseDown = function (messag
 		'mousedown',
 		A2(
 			_elm_lang$core$Json_Decode$map,
-			function (_p8) {
+			function (_p26) {
 				return message(
-					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p8));
+					_hannemathisen$elm_test_project$Canvas_Events$positionInCanvas(_p26));
 			},
-			_hannemathisen$elm_test_project$Canvas_Events$positionDecoder));
+			_hannemathisen$elm_test_project$Canvas_Events$mouseEventPositionDecoder));
 };
+var _hannemathisen$elm_test_project$Canvas_Events$PageCoord = F2(
+	function (a, b) {
+		return {x: a, y: b};
+	});
+var _hannemathisen$elm_test_project$Canvas_Events$ClientCoord = F2(
+	function (a, b) {
+		return {x: a, y: b};
+	});
+var _hannemathisen$elm_test_project$Canvas_Events$Touch = F2(
+	function (a, b) {
+		return {page: a, client: b};
+	});

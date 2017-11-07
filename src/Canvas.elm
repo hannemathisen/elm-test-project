@@ -10,28 +10,25 @@ module Canvas
         , batch
         , loadImage
         , getImageData
+        , getPopulatedPoints
         , getSize
+        , getClientSize
+        , getBoundingClientRect
         , setSize
         , toDataUrl
         )
 
 {-| The canvas html element is a very simple way to render 2D graphics. Check out these examples, and get an explanation of the canvas element [here](https://github.com/elm-community/canvas). Furthermore, If you havent heard of [Elm-Graphics](http://package.elm-lang.org/packages/evancz/elm-graphics/latest), I recommend checking that out first, because its probably what you need. Elm-Canvas is for when you need unusually direct and low level access to the canvas element.
-
 # Main Types
 @docs Canvas, Size, DrawOp, DrawImageParams
-
 # Basics
 @docs initialize, toHtml, batch
-
 # Loading Images
 @docs loadImage, Error
-
 # Image Data
 @docs getImageData, toDataUrl
-
 # Sizing
 @docs getSize, setSize
-
 -}
 
 import Html exposing (Html, Attribute)
@@ -39,6 +36,7 @@ import Task exposing (Task)
 import Color exposing (Color)
 import Canvas.Point exposing (Point)
 import Native.Canvas
+import Array
 
 
 {-| A `Canvas` contains image data, and can be rendered as html with `toHtml`. It is the primary type of this package.
@@ -114,7 +112,6 @@ type DrawImageParams
 
 
 {-| `initialize` takes `Size`, and returns a `Canvas` of that size. A freshly initialized `Canvas` is entirely transparent, meaning if you used `getImageData` to get its image data, it would be a `List Int` entirely of 0s.
-
     squareCanvas : Int -> Canvas
     squareCanvas length =
         initialize (Size length length)
@@ -125,7 +122,6 @@ initialize =
 
 
 {-| To turn a `Canvas` into `Html msg`, run it through `toHtml`. The first parameter of `toHtml` is a list of attributes just like the html nodes in `elm-lang/html`.
-
     pixelatedRender : Canvas -> Html Msg
     pixelatedRender canvas =
         canvas |> toHtml [ class "pixelated" ]
@@ -136,7 +132,6 @@ toHtml =
 
 
 {-| This is our primary way of drawing onto canvases. Give `batch` a list of `DrawOp` and you can apply those `DrawOp` to a canvas.
-
     drawLine : Point -> Point -> Canvas -> Canvas
     drawLine p0 p1 =
         Canvas.batch
@@ -153,11 +148,9 @@ batch =
 
 
 {-| Load up an image as a `Canvas` from a url.
-
     loadSteelix : Cmd Msg
     loadSteelix =
         Task.attempt ImageLoaded (loadImage "./steelix.png")
-
     update : Msg -> Model -> (Model, Cmd Msg)
     update message model =
         case message of
@@ -165,7 +158,6 @@ batch =
                 case Result.toMaybe result of
                     Just canvas ->
                         -- ..
-
                     Nothing ->
                         -- ..
         -- ..
@@ -176,9 +168,7 @@ loadImage =
 
 
 {-| `Canvas` have data. Its data comes in the form `List Int`, all of which are between 0 and 255. They represent the RGBA values of every pixel in the image, where the first four `Int` are the color values of the first pixel, the next four `Int` the second pixels, etc. The length of the image data is always a multiple of four, since each pixel is represented by four `Int`.
-
     -- twoByTwoCanvas =
-
     --         |
     --   Black | Red
     --         |
@@ -186,7 +176,6 @@ loadImage =
     --         |
     --   Black | White
     --         |
-
     getImageData twoBytwoCanvas == fromList
         [ 0, 0, 0, 255,      255, 0, 0, 255
         , 0, 0, 0, 255,      255, 255, 255, 255
@@ -197,11 +186,30 @@ getImageData =
     Native.Canvas.getImageData
 
 
+getPopulatedPoints : Point -> Size -> Canvas -> List Point
+getPopulatedPoints =
+    Native.Canvas.getPopulatedPoints
+
+
 {-| Get the `Size` of a `Canvas`.
 -}
 getSize : Canvas -> Size
 getSize =
     Native.Canvas.getSize
+
+
+{-| Get the Client `Size` of a `Canvas`.
+-}
+getClientSize : Canvas -> Size
+getClientSize =
+    Native.Canvas.getClientSize
+
+
+{-| Get the getBoundingClientRect of a `Canvas`.
+-}
+getBoundingClientRect : Canvas -> { top : Float, left : Float, right : Float, bottom : Float }
+getBoundingClientRect =
+    Native.Canvas.getBoundingClientRect
 
 
 {-| Set the `Size` of a `Canvas`

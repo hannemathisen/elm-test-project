@@ -41,8 +41,8 @@ var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 204, column: 3},
-					end: {line: 216, column: 35}
+					start: {line: 206, column: 3},
+					end: {line: 218, column: 35}
 				},
 				_p1)('Empty list');
 		} else {
@@ -86,8 +86,8 @@ var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 221, column: 3},
-					end: {line: 233, column: 35}
+					start: {line: 223, column: 3},
+					end: {line: 235, column: 35}
 				},
 				_p3)('Empty list');
 		} else {
@@ -125,8 +125,8 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Main',
 					{
-						start: {line: 182, column: 3},
-						end: {line: 198, column: 37}
+						start: {line: 184, column: 3},
+						end: {line: 200, column: 37}
 					},
 					_p5)('Empty list');
 			} else {

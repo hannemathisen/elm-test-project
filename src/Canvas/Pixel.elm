@@ -10,12 +10,10 @@ module Canvas.Pixel
         )
 
 {-| The basic methods of the canvas element do not lend themselves well to pixel perfect canvas drawing. This module exposes a number of functions which make doing so easy. By pixel perfect, we mean, drawing with no anti-aliased edges.
-
 # Basics
 @docs put, get
-
 # Point Calculation
-@docs line, rectangle, bezier
+@docs line, rectangle, bezier, circle, ellipse
 -}
 
 import Canvas exposing (Canvas, Size, DrawOp(..))
@@ -26,12 +24,10 @@ import Array exposing (Array)
 
 
 {-| Give `put` a `Color`, and a `Point`, and you have a `DrawOp` which will set that exact pixel to that exact color.
-
     putRedPixel : Point -> Canvas -> Canvas
     putRedPixel point =
         Canvas.batch
             [ Pixel.put Color.red point ]
-
 -}
 put : Color -> Point -> DrawOp
 put color point =
@@ -73,7 +69,6 @@ toColorHelp index colorValues =
 
 
 {-| Also as fundamental to `put`, `get` will give you the color value of a specific pixel in a `Canvas`.
-
     isBlueAt : Point -> Canvas -> Bool
     isBlueAt point canvas =
         (Pixel.get point canvas) == Color.blue
@@ -88,7 +83,6 @@ get point canvas =
 
 
 {-| To get a list of `Point` along the edge of a rectangle, use `Pixel.rectangle`.
-
     drawRectangle : Color -> Size -> Point -> Canvas -> Canvas
     drawRectangle color size point =
         Pixel.rectangle size point
@@ -124,7 +118,6 @@ rectangle { width, height } point =
 
 
 {-| To get a list of `Point` along the edge of a circle of diameter `Int`, use `Pixel.circle`.
-
     drawCircle : Color -> Int -> Point -> Canvas -> Canvas
     drawCircle color diameter point =
         Pixel.circle diameter point
@@ -137,7 +130,6 @@ circle diameter =
 
 
 {-| To get a list of `Point` along the edge of a ellipse of dimensions `Size`, use `Pixel.ellipse`.
-
     circle : Int -> Point -> List Point
     circle diameter point =
         ellipse (Size diameter diameter) point
@@ -226,13 +218,11 @@ addPoints cx cy x y points =
 
 
 {-| To make a curved line, try this function called `bezier`, named after [the bezier curve](https://en.wikipedia.org/wiki/B%C3%A9zier_curve). It works by approximation, drawing many small straight lines along a curved path. Its first parameter, an `Int`, is the resolution of the curve (resolution=1 will be just a straight line, and higher values will compute a more perfect curve). The remaining parameters are `Point`. The first and last `Point` refer to the starting and ending points of the curve. The middle two are control points, which are where the curve will curve towards from each end point.
-
     drawArc : Color -> Point -> Point -> Int -> Canvas -> Canvas
     drawArc color starting ending height =
         let
             ( sx, sy ) =
                 Point.toInts starting
-
             ( ex, ey ) =
                 Point.toInts ending
         in
@@ -244,7 +234,6 @@ addPoints cx cy x y points =
                 ending
                 |> List.map (Pixel.put color)
                 |> Canvas.batch
-
 -}
 bezier : Int -> Point -> Point -> Point -> Point -> List Point
 bezier resolution p0 p1 p2 p3 =
@@ -311,14 +300,11 @@ calcBezier seg i =
 
 
 {- Brensenham Line Algorithm
-
    f stands for finish
    s stands for step
    d stands for delta (change)
-
    Basically, along a line, when the difference between
    x and x + i exceeds dx, increment by sx.
-
 -}
 
 
@@ -333,7 +319,6 @@ type alias LineStatics =
 
 
 {-| Given a starting and ending `Point`, this function will give you every `Point` along that line. It uses the bresenham line algorithm.
-
     drawLine : Color -> Point -> Point -> Canvas -> Canvas
     drawLine color starting ending =
         Pixel.line starting ending
