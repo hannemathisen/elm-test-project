@@ -1,5 +1,6 @@
 module Main exposing (..)
 
+import Types exposing (..)
 import Html exposing (..)
 import Canvas exposing (Size, Error, DrawOp(..), DrawImageParams(..), Canvas)
 import Canvas.Point exposing (Point)
@@ -19,27 +20,11 @@ main =
     }
 
 
-type Msg
-  = ImageLoaded (Result Error Canvas)
-  | MouseDown Point
-  | MouseUp Point
-  | MouseMove Point
-  | EraseClicked Point
-
-
-type Model
-  = Loading
-  | DrawMode Canvas (List DrawOp)
-  | Draw Canvas (List DrawOp)
-  | EraseMode Canvas (List DrawOp)
-  | Erase Canvas (List DrawOp)
-
-
 loadImage : Cmd Msg
 loadImage =
   Task.attempt
     ImageLoaded
-    (Canvas.loadImage "static/white.png")
+    (Canvas.loadImage "white.png")
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -147,7 +132,7 @@ update msg model =
           ( DrawMode canvas drawOps
           , Cmd.none
           )
-          
+
         Erase canvas drawOps ->
           ( DrawMode canvas drawOps
           , Cmd.none

@@ -1,0 +1,32 @@
+var _hannemathisen$elm_test_project$Types$EraseClicked = function (a) {
+	return {ctor: 'EraseClicked', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$MouseMove = function (a) {
+	return {ctor: 'MouseMove', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$MouseUp = function (a) {
+	return {ctor: 'MouseUp', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$MouseDown = function (a) {
+	return {ctor: 'MouseDown', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$ImageLoaded = function (a) {
+	return {ctor: 'ImageLoaded', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$Erase = F2(
+	function (a, b) {
+		return {ctor: 'Erase', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Types$EraseMode = F2(
+	function (a, b) {
+		return {ctor: 'EraseMode', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Types$Draw = F2(
+	function (a, b) {
+		return {ctor: 'Draw', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Types$DrawMode = F2(
+	function (a, b) {
+		return {ctor: 'DrawMode', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Types$Loading = {ctor: 'Loading'};
