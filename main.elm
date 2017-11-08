@@ -2,6 +2,7 @@ module Main exposing (..)
 
 import Types exposing (..)
 import Html exposing (..)
+import Html.Attributes exposing (..)
 import Canvas exposing (Size, Error, DrawOp(..), DrawImageParams(..), Canvas)
 import Canvas.Point exposing (Point)
 import Canvas.Point as Point
@@ -226,20 +227,20 @@ view model =
     EraseMode canvas drawOps ->
       div
         []
-        [ presentIfReady model
-         , button [ Events.onClick EraseClicked ] [ text "Erase is on"]
+        [ div [] [ presentIfReady model ]
+        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
         ]
     Erase canvas drawOps ->
       div
         []
-        [ presentIfReady model
-         , button [ Events.onClick EraseClicked ] [ text "Erase is on"]
+        [ div [] [ presentIfReady model ]
+        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
         ]
     _ ->
       div
-        []
-        [ presentIfReady model
-         , button [ Events.onClick EraseClicked ] [ text "Erase is off"]
+        [ ]
+        [ div [] [ presentIfReady model ]
+        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is off"] ]
         ]
 
 
@@ -267,13 +268,16 @@ presentIfReady model =
       canvas
         |> drawCanvas drawOps
         |> Canvas.toHtml
-          [ Events.onMouseDown MouseDown ]
+          [ class "eraser"
+          , Events.onMouseDown MouseDown
+          ]
 
     Erase canvas drawOps ->
       canvas
         |> drawCanvas drawOps
         |> Canvas.toHtml
-          [ Events.onMouseUp MouseUp
+          [ class "eraser"
+          , Events.onMouseUp MouseUp
           , Events.onMouseMove MouseMove
           ]
 

@@ -73,8 +73,12 @@ var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 				_hannemathisen$elm_test_project$Canvas$toHtml,
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
-					_1: {ctor: '[]'}
+					_0: _elm_lang$html$Html_Attributes$class('eraser'),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
+						_1: {ctor: '[]'}
+					}
 				},
 				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
 		default:
@@ -82,11 +86,15 @@ var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 				_hannemathisen$elm_test_project$Canvas$toHtml,
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Types$MouseUp),
+					_0: _elm_lang$html$Html_Attributes$class('eraser'),
 					_1: {
 						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Types$MouseMove),
-						_1: {ctor: '[]'}
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Types$MouseUp),
+						_1: {
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Types$MouseMove),
+							_1: {ctor: '[]'}
+						}
 					}
 				},
 				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
@@ -101,19 +109,37 @@ var _hannemathisen$elm_test_project$Main$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+							_1: {ctor: '[]'}
+						}),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$button,
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Erase is on'),
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Erase is on'),
+										_1: {ctor: '[]'}
+									}),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
@@ -125,19 +151,37 @@ var _hannemathisen$elm_test_project$Main$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+							_1: {ctor: '[]'}
+						}),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$button,
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Erase is on'),
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Erase is on'),
+										_1: {ctor: '[]'}
+									}),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
@@ -149,19 +193,37 @@ var _hannemathisen$elm_test_project$Main$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+							_1: {ctor: '[]'}
+						}),
 					_1: {
 						ctor: '::',
 						_0: A2(
-							_elm_lang$html$Html$button,
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
 							{
 								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Erase is off'),
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Erase is off'),
+										_1: {ctor: '[]'}
+									}),
 								_1: {ctor: '[]'}
 							}),
 						_1: {ctor: '[]'}
@@ -176,8 +238,8 @@ var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 191, column: 3},
-					end: {line: 203, column: 35}
+					start: {line: 192, column: 3},
+					end: {line: 204, column: 35}
 				},
 				_p3)('Empty list');
 		} else {
@@ -221,8 +283,8 @@ var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 208, column: 3},
-					end: {line: 220, column: 35}
+					start: {line: 209, column: 3},
+					end: {line: 221, column: 35}
 				},
 				_p5)('Empty list');
 		} else {
@@ -260,8 +322,8 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Main',
 					{
-						start: {line: 169, column: 3},
-						end: {line: 185, column: 37}
+						start: {line: 170, column: 3},
+						end: {line: 186, column: 37}
 					},
 					_p7)('Empty list');
 			} else {

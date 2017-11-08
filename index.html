@@ -1,6 +1,14 @@
 <!DOCTYPE HTML>
-<html><head><meta charset="UTF-8"><title>Main</title><style>html,head,body { padding:0; margin:0; }
-body { font-family: calibri, helvetica, arial, sans-serif; }</style><script type="text/javascript">
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Draw</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- /*<style>
+    html,head,body { padding:5; margin:5; }
+    body { font-family: calibri, helvetica, arial, sans-serif; }
+  </style>*/ -->
+  <script type="text/javascript">
 (function() {
 'use strict';
 
@@ -8259,6 +8267,355 @@ var _elm_lang$html$Html$details = _elm_lang$html$Html$node('details');
 var _elm_lang$html$Html$summary = _elm_lang$html$Html$node('summary');
 var _elm_lang$html$Html$menuitem = _elm_lang$html$Html$node('menuitem');
 var _elm_lang$html$Html$menu = _elm_lang$html$Html$node('menu');
+var _elm_lang$html$Html_Attributes$map = _elm_lang$virtual_dom$VirtualDom$mapProperty;
+var _elm_lang$html$Html_Attributes$attribute = _elm_lang$virtual_dom$VirtualDom$attribute;
+var _elm_lang$html$Html_Attributes$contextmenu = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'contextmenu', value);
+};
+var _elm_lang$html$Html_Attributes$draggable = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'draggable', value);
+};
+var _elm_lang$html$Html_Attributes$itemprop = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'itemprop', value);
+};
+var _elm_lang$html$Html_Attributes$tabindex = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'tabIndex',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$charset = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'charset', value);
+};
+var _elm_lang$html$Html_Attributes$height = function (value) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'height',
+		_elm_lang$core$Basics$toString(value));
+};
+var _elm_lang$html$Html_Attributes$width = function (value) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'width',
+		_elm_lang$core$Basics$toString(value));
+};
+var _elm_lang$html$Html_Attributes$formaction = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'formAction', value);
+};
+var _elm_lang$html$Html_Attributes$list = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'list', value);
+};
+var _elm_lang$html$Html_Attributes$minlength = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'minLength',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$maxlength = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'maxlength',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$size = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'size',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$form = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'form', value);
+};
+var _elm_lang$html$Html_Attributes$cols = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'cols',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$rows = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'rows',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$challenge = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'challenge', value);
+};
+var _elm_lang$html$Html_Attributes$media = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'media', value);
+};
+var _elm_lang$html$Html_Attributes$rel = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'rel', value);
+};
+var _elm_lang$html$Html_Attributes$datetime = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'datetime', value);
+};
+var _elm_lang$html$Html_Attributes$pubdate = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'pubdate', value);
+};
+var _elm_lang$html$Html_Attributes$colspan = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'colspan',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$rowspan = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$attribute,
+		'rowspan',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$manifest = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$attribute, 'manifest', value);
+};
+var _elm_lang$html$Html_Attributes$property = _elm_lang$virtual_dom$VirtualDom$property;
+var _elm_lang$html$Html_Attributes$stringProperty = F2(
+	function (name, string) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$string(string));
+	});
+var _elm_lang$html$Html_Attributes$class = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'className', name);
+};
+var _elm_lang$html$Html_Attributes$id = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'id', name);
+};
+var _elm_lang$html$Html_Attributes$title = function (name) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'title', name);
+};
+var _elm_lang$html$Html_Attributes$accesskey = function ($char) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'accessKey',
+		_elm_lang$core$String$fromChar($char));
+};
+var _elm_lang$html$Html_Attributes$dir = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'dir', value);
+};
+var _elm_lang$html$Html_Attributes$dropzone = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'dropzone', value);
+};
+var _elm_lang$html$Html_Attributes$lang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'lang', value);
+};
+var _elm_lang$html$Html_Attributes$content = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'content', value);
+};
+var _elm_lang$html$Html_Attributes$httpEquiv = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'httpEquiv', value);
+};
+var _elm_lang$html$Html_Attributes$language = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'language', value);
+};
+var _elm_lang$html$Html_Attributes$src = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'src', value);
+};
+var _elm_lang$html$Html_Attributes$alt = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'alt', value);
+};
+var _elm_lang$html$Html_Attributes$preload = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'preload', value);
+};
+var _elm_lang$html$Html_Attributes$poster = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'poster', value);
+};
+var _elm_lang$html$Html_Attributes$kind = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'kind', value);
+};
+var _elm_lang$html$Html_Attributes$srclang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'srclang', value);
+};
+var _elm_lang$html$Html_Attributes$sandbox = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'sandbox', value);
+};
+var _elm_lang$html$Html_Attributes$srcdoc = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'srcdoc', value);
+};
+var _elm_lang$html$Html_Attributes$type_ = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'type', value);
+};
+var _elm_lang$html$Html_Attributes$value = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'value', value);
+};
+var _elm_lang$html$Html_Attributes$defaultValue = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'defaultValue', value);
+};
+var _elm_lang$html$Html_Attributes$placeholder = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'placeholder', value);
+};
+var _elm_lang$html$Html_Attributes$accept = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'accept', value);
+};
+var _elm_lang$html$Html_Attributes$acceptCharset = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'acceptCharset', value);
+};
+var _elm_lang$html$Html_Attributes$action = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'action', value);
+};
+var _elm_lang$html$Html_Attributes$autocomplete = function (bool) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'autocomplete',
+		bool ? 'on' : 'off');
+};
+var _elm_lang$html$Html_Attributes$enctype = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'enctype', value);
+};
+var _elm_lang$html$Html_Attributes$method = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'method', value);
+};
+var _elm_lang$html$Html_Attributes$name = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'name', value);
+};
+var _elm_lang$html$Html_Attributes$pattern = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'pattern', value);
+};
+var _elm_lang$html$Html_Attributes$for = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'htmlFor', value);
+};
+var _elm_lang$html$Html_Attributes$max = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'max', value);
+};
+var _elm_lang$html$Html_Attributes$min = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'min', value);
+};
+var _elm_lang$html$Html_Attributes$step = function (n) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'step', n);
+};
+var _elm_lang$html$Html_Attributes$wrap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'wrap', value);
+};
+var _elm_lang$html$Html_Attributes$usemap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'useMap', value);
+};
+var _elm_lang$html$Html_Attributes$shape = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'shape', value);
+};
+var _elm_lang$html$Html_Attributes$coords = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'coords', value);
+};
+var _elm_lang$html$Html_Attributes$keytype = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'keytype', value);
+};
+var _elm_lang$html$Html_Attributes$align = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'align', value);
+};
+var _elm_lang$html$Html_Attributes$cite = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'cite', value);
+};
+var _elm_lang$html$Html_Attributes$href = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'href', value);
+};
+var _elm_lang$html$Html_Attributes$target = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'target', value);
+};
+var _elm_lang$html$Html_Attributes$downloadAs = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'download', value);
+};
+var _elm_lang$html$Html_Attributes$hreflang = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'hreflang', value);
+};
+var _elm_lang$html$Html_Attributes$ping = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'ping', value);
+};
+var _elm_lang$html$Html_Attributes$start = function (n) {
+	return A2(
+		_elm_lang$html$Html_Attributes$stringProperty,
+		'start',
+		_elm_lang$core$Basics$toString(n));
+};
+var _elm_lang$html$Html_Attributes$headers = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'headers', value);
+};
+var _elm_lang$html$Html_Attributes$scope = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$stringProperty, 'scope', value);
+};
+var _elm_lang$html$Html_Attributes$boolProperty = F2(
+	function (name, bool) {
+		return A2(
+			_elm_lang$html$Html_Attributes$property,
+			name,
+			_elm_lang$core$Json_Encode$bool(bool));
+	});
+var _elm_lang$html$Html_Attributes$hidden = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'hidden', bool);
+};
+var _elm_lang$html$Html_Attributes$contenteditable = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'contentEditable', bool);
+};
+var _elm_lang$html$Html_Attributes$spellcheck = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'spellcheck', bool);
+};
+var _elm_lang$html$Html_Attributes$async = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'async', bool);
+};
+var _elm_lang$html$Html_Attributes$defer = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'defer', bool);
+};
+var _elm_lang$html$Html_Attributes$scoped = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'scoped', bool);
+};
+var _elm_lang$html$Html_Attributes$autoplay = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'autoplay', bool);
+};
+var _elm_lang$html$Html_Attributes$controls = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'controls', bool);
+};
+var _elm_lang$html$Html_Attributes$loop = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'loop', bool);
+};
+var _elm_lang$html$Html_Attributes$default = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'default', bool);
+};
+var _elm_lang$html$Html_Attributes$seamless = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'seamless', bool);
+};
+var _elm_lang$html$Html_Attributes$checked = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'checked', bool);
+};
+var _elm_lang$html$Html_Attributes$selected = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'selected', bool);
+};
+var _elm_lang$html$Html_Attributes$autofocus = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'autofocus', bool);
+};
+var _elm_lang$html$Html_Attributes$disabled = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'disabled', bool);
+};
+var _elm_lang$html$Html_Attributes$multiple = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'multiple', bool);
+};
+var _elm_lang$html$Html_Attributes$novalidate = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'noValidate', bool);
+};
+var _elm_lang$html$Html_Attributes$readonly = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'readOnly', bool);
+};
+var _elm_lang$html$Html_Attributes$required = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'required', bool);
+};
+var _elm_lang$html$Html_Attributes$ismap = function (value) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'isMap', value);
+};
+var _elm_lang$html$Html_Attributes$download = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'download', bool);
+};
+var _elm_lang$html$Html_Attributes$reversed = function (bool) {
+	return A2(_elm_lang$html$Html_Attributes$boolProperty, 'reversed', bool);
+};
+var _elm_lang$html$Html_Attributes$classList = function (list) {
+	return _elm_lang$html$Html_Attributes$class(
+		A2(
+			_elm_lang$core$String$join,
+			' ',
+			A2(
+				_elm_lang$core$List$map,
+				_elm_lang$core$Tuple$first,
+				A2(_elm_lang$core$List$filter, _elm_lang$core$Tuple$second, list))));
+};
+var _elm_lang$html$Html_Attributes$style = _elm_lang$virtual_dom$VirtualDom$style;
 var _elm_lang$html$Html_Events$keyCode = A2(_elm_lang$core$Json_Decode$field, 'keyCode', _elm_lang$core$Json_Decode$int);
 var _elm_lang$html$Html_Events$targetChecked = A2(
 	_elm_lang$core$Json_Decode$at,
@@ -11098,6 +11455,38 @@ var _hannemathisen$elm_test_project$List_Extra$init = function () {
 }();
 var _hannemathisen$elm_test_project$List_Extra$last = _hannemathisen$elm_test_project$List_Extra$foldl1(
 	_elm_lang$core$Basics$flip(_elm_lang$core$Basics$always));
+var _hannemathisen$elm_test_project$Types$EraseClicked = function (a) {
+	return {ctor: 'EraseClicked', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$MouseMove = function (a) {
+	return {ctor: 'MouseMove', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$MouseUp = function (a) {
+	return {ctor: 'MouseUp', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$MouseDown = function (a) {
+	return {ctor: 'MouseDown', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$ImageLoaded = function (a) {
+	return {ctor: 'ImageLoaded', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$Erase = F2(
+	function (a, b) {
+		return {ctor: 'Erase', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Types$EraseMode = F2(
+	function (a, b) {
+		return {ctor: 'EraseMode', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Types$Draw = F2(
+	function (a, b) {
+		return {ctor: 'Draw', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Types$DrawMode = F2(
+	function (a, b) {
+		return {ctor: 'DrawMode', _0: a, _1: b};
+	});
+var _hannemathisen$elm_test_project$Types$Loading = {ctor: 'Loading'};
 var _hannemathisen$elm_test_project$Main$drawCanvas = F2(
 	function (drawOps, canvas) {
 		var drawOpsWithBorder = A2(
@@ -11129,21 +11518,221 @@ var _hannemathisen$elm_test_project$Main$drawCanvas = F2(
 					}
 				}
 			});
+		var _p0 = _hannemathisen$elm_test_project$Canvas$getSize(canvas);
+		var width = _p0.width;
+		var height = _p0.height;
 		return A2(_hannemathisen$elm_test_project$Canvas$batch, drawOpsWithBorder, canvas);
 	});
+var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
+	var _p1 = model;
+	switch (_p1.ctor) {
+		case 'Loading':
+			return A2(
+				_elm_lang$html$Html$p,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Loading image...'),
+					_1: {ctor: '[]'}
+				});
+		case 'DrawMode':
+			return A2(
+				_hannemathisen$elm_test_project$Canvas$toHtml,
+				{
+					ctor: '::',
+					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
+					_1: {ctor: '[]'}
+				},
+				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
+		case 'Draw':
+			return A2(
+				_hannemathisen$elm_test_project$Canvas$toHtml,
+				{
+					ctor: '::',
+					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Types$MouseUp),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Types$MouseMove),
+						_1: {ctor: '[]'}
+					}
+				},
+				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
+		case 'EraseMode':
+			return A2(
+				_hannemathisen$elm_test_project$Canvas$toHtml,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('eraser'),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
+						_1: {ctor: '[]'}
+					}
+				},
+				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
+		default:
+			return A2(
+				_hannemathisen$elm_test_project$Canvas$toHtml,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('eraser'),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Types$MouseUp),
+						_1: {
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Types$MouseMove),
+							_1: {ctor: '[]'}
+						}
+					}
+				},
+				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
+	}
+};
+var _hannemathisen$elm_test_project$Main$view = function (model) {
+	var _p2 = model;
+	switch (_p2.ctor) {
+		case 'EraseMode':
+			return A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Erase is on'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				});
+		case 'Erase':
+			return A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Erase is on'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				});
+		default:
+			return A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Erase is off'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				});
+	}
+};
 var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 	function (xList, yList) {
-		var _p0 = xList;
-		if (_p0.ctor === '[]') {
+		var _p3 = xList;
+		if (_p3.ctor === '[]') {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 295, column: 3},
-					end: {line: 307, column: 35}
+					start: {line: 192, column: 3},
+					end: {line: 204, column: 35}
 				},
-				_p0)('Empty list');
+				_p3)('Empty list');
 		} else {
-			if (_p0._1.ctor === '[]') {
+			if (_p3._1.ctor === '[]') {
 				return A3(
 					_elm_lang$core$List$map2,
 					F2(
@@ -11152,7 +11741,7 @@ var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 						}),
 					{
 						ctor: '::',
-						_0: _p0._0,
+						_0: _p3._0,
 						_1: {ctor: '[]'}
 					},
 					yList);
@@ -11165,36 +11754,36 @@ var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 						}),
 					{
 						ctor: '::',
-						_0: _p0._0,
+						_0: _p3._0,
 						_1: {ctor: '[]'}
 					},
 					yList);
 				return A2(
 					_elm_lang$core$List$append,
 					mappedList,
-					A2(_hannemathisen$elm_test_project$Main$mapXPoints, _p0._1, yList));
+					A2(_hannemathisen$elm_test_project$Main$mapXPoints, _p3._1, yList));
 			}
 		}
 	});
 var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 	function (xList, yList) {
-		var _p2 = yList;
-		if (_p2.ctor === '[]') {
+		var _p5 = yList;
+		if (_p5.ctor === '[]') {
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 312, column: 3},
-					end: {line: 324, column: 35}
+					start: {line: 209, column: 3},
+					end: {line: 221, column: 35}
 				},
-				_p2)('Empty list');
+				_p5)('Empty list');
 		} else {
-			if (_p2._1.ctor === '[]') {
+			if (_p5._1.ctor === '[]') {
 				return A2(
 					_hannemathisen$elm_test_project$Main$mapXPoints,
 					xList,
 					{
 						ctor: '::',
-						_0: _p2._0,
+						_0: _p5._0,
 						_1: {ctor: '[]'}
 					});
 			} else {
@@ -11203,13 +11792,13 @@ var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 					xList,
 					{
 						ctor: '::',
-						_0: _p2._0,
+						_0: _p5._0,
 						_1: {ctor: '[]'}
 					});
 				return A2(
 					_elm_lang$core$List$append,
 					mappedList,
-					A2(_hannemathisen$elm_test_project$Main$mapYPoints, xList, _p2._1));
+					A2(_hannemathisen$elm_test_project$Main$mapYPoints, xList, _p5._1));
 			}
 		}
 	});
@@ -11217,18 +11806,18 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 	function (drawOps, points) {
 		removePoints:
 		while (true) {
-			var _p4 = points;
-			if (_p4.ctor === '[]') {
+			var _p7 = points;
+			if (_p7.ctor === '[]') {
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Main',
 					{
-						start: {line: 273, column: 3},
-						end: {line: 289, column: 37}
+						start: {line: 170, column: 3},
+						end: {line: 186, column: 37}
 					},
-					_p4)('Empty list');
+					_p7)('Empty list');
 			} else {
-				if (_p4._1.ctor === '[]') {
-					var point = _hannemathisen$elm_test_project$Canvas_Point$fromFloats(_p4._0);
+				if (_p7._1.ctor === '[]') {
+					var point = _hannemathisen$elm_test_project$Canvas_Point$fromFloats(_p7._0);
 					return A3(
 						_hannemathisen$elm_test_project$List_Extra$replaceIf,
 						function (x) {
@@ -11239,7 +11828,7 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 						_hannemathisen$elm_test_project$Canvas$MoveTo(point),
 						drawOps);
 				} else {
-					var point = _hannemathisen$elm_test_project$Canvas_Point$fromFloats(_p4._0);
+					var point = _hannemathisen$elm_test_project$Canvas_Point$fromFloats(_p7._0);
 					var newDrawOps = A3(
 						_hannemathisen$elm_test_project$List_Extra$replaceIf,
 						function (x) {
@@ -11249,10 +11838,10 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 						},
 						_hannemathisen$elm_test_project$Canvas$MoveTo(point),
 						drawOps);
-					var _v3 = newDrawOps,
-						_v4 = _p4._1;
-					drawOps = _v3;
-					points = _v4;
+					var _v5 = newDrawOps,
+						_v6 = _p7._1;
+					drawOps = _v5;
+					points = _v6;
 					continue removePoints;
 				}
 			}
@@ -11260,9 +11849,9 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 	});
 var _hannemathisen$elm_test_project$Main$erase = F3(
 	function (point, canvas, drawOps) {
-		var _p6 = _hannemathisen$elm_test_project$Canvas_Point$toInts(point);
-		var x = _p6._0;
-		var y = _p6._1;
+		var _p9 = _hannemathisen$elm_test_project$Canvas_Point$toInts(point);
+		var x = _p9._0;
+		var y = _p9._1;
 		var xPoints = A2(
 			_elm_lang$core$List$map,
 			_elm_lang$core$Basics$toFloat,
@@ -11289,233 +11878,38 @@ var _hannemathisen$elm_test_project$Main$draw = F3(
 				}
 			});
 	});
-var _hannemathisen$elm_test_project$Main$EraseClicked = function (a) {
-	return {ctor: 'EraseClicked', _0: a};
-};
-var _hannemathisen$elm_test_project$Main$MouseMove = function (a) {
-	return {ctor: 'MouseMove', _0: a};
-};
-var _hannemathisen$elm_test_project$Main$MouseUp = function (a) {
-	return {ctor: 'MouseUp', _0: a};
-};
-var _hannemathisen$elm_test_project$Main$MouseDown = function (a) {
-	return {ctor: 'MouseDown', _0: a};
-};
-var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
-	var _p7 = model;
-	switch (_p7.ctor) {
-		case 'Loading':
-			return A2(
-				_elm_lang$html$Html$p,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html$text('Image is loading'),
-					_1: {ctor: '[]'}
-				});
-		case 'DrawMode':
-			var touchOptions = {stopPropagation: true, preventDefault: true};
-			return A2(
-				_hannemathisen$elm_test_project$Canvas$toHtml,
-				{
-					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Main$MouseDown),
-					_1: {
-						ctor: '::',
-						_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onSingleTouchStart, touchOptions, _hannemathisen$elm_test_project$Main$MouseDown),
-						_1: {ctor: '[]'}
-					}
-				},
-				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p7._1, _p7._0));
-		case 'Draw':
-			var touchOptions = {stopPropagation: true, preventDefault: true};
-			return A2(
-				_hannemathisen$elm_test_project$Canvas$toHtml,
-				{
-					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Main$MouseUp),
-					_1: {
-						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Main$MouseMove),
-						_1: {
-							ctor: '::',
-							_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onSingleTouchEnd, touchOptions, _hannemathisen$elm_test_project$Main$MouseUp),
-							_1: {
-								ctor: '::',
-								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onSingleTouchMove, touchOptions, _hannemathisen$elm_test_project$Main$MouseMove),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				},
-				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p7._1, _p7._0));
-		case 'EraseMode':
-			var touchOptions = {stopPropagation: true, preventDefault: true};
-			return A2(
-				_hannemathisen$elm_test_project$Canvas$toHtml,
-				{
-					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Main$MouseDown),
-					_1: {
-						ctor: '::',
-						_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onSingleTouchStart, touchOptions, _hannemathisen$elm_test_project$Main$MouseDown),
-						_1: {ctor: '[]'}
-					}
-				},
-				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p7._1, _p7._0));
-		default:
-			var touchOptions = {stopPropagation: false, preventDefault: false};
-			return A2(
-				_hannemathisen$elm_test_project$Canvas$toHtml,
-				{
-					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Main$MouseUp),
-					_1: {
-						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Main$MouseMove),
-						_1: {
-							ctor: '::',
-							_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onSingleTouchEnd, touchOptions, _hannemathisen$elm_test_project$Main$MouseUp),
-							_1: {
-								ctor: '::',
-								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onSingleTouchMove, touchOptions, _hannemathisen$elm_test_project$Main$MouseUp),
-								_1: {ctor: '[]'}
-							}
-						}
-					}
-				},
-				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p7._1, _p7._0));
-	}
-};
-var _hannemathisen$elm_test_project$Main$view = function (model) {
-	var _p8 = model;
-	switch (_p8.ctor) {
-		case 'EraseMode':
-			return A2(
-				_elm_lang$html$Html$div,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Main$EraseClicked),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Erase is on'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				});
-		case 'Erase':
-			return A2(
-				_elm_lang$html$Html$div,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Main$EraseClicked),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Erase is on'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				});
-		default:
-			return A2(
-				_elm_lang$html$Html$div,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Main$EraseClicked),
-								_1: {ctor: '[]'}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Erase is off'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				});
-	}
-};
-var _hannemathisen$elm_test_project$Main$ImageLoaded = function (a) {
-	return {ctor: 'ImageLoaded', _0: a};
-};
 var _hannemathisen$elm_test_project$Main$loadImage = A2(
 	_elm_lang$core$Task$attempt,
-	_hannemathisen$elm_test_project$Main$ImageLoaded,
+	_hannemathisen$elm_test_project$Types$ImageLoaded,
 	_hannemathisen$elm_test_project$Canvas$loadImage('white.png'));
-var _hannemathisen$elm_test_project$Main$Erase = F2(
-	function (a, b) {
-		return {ctor: 'Erase', _0: a, _1: b};
-	});
-var _hannemathisen$elm_test_project$Main$EraseMode = F2(
-	function (a, b) {
-		return {ctor: 'EraseMode', _0: a, _1: b};
-	});
-var _hannemathisen$elm_test_project$Main$Draw = F2(
-	function (a, b) {
-		return {ctor: 'Draw', _0: a, _1: b};
-	});
-var _hannemathisen$elm_test_project$Main$DrawMode = F2(
-	function (a, b) {
-		return {ctor: 'DrawMode', _0: a, _1: b};
-	});
-var _hannemathisen$elm_test_project$Main$Loading = {ctor: 'Loading'};
 var _hannemathisen$elm_test_project$Main$update = F2(
 	function (msg, model) {
-		var _p9 = msg;
-		switch (_p9.ctor) {
+		var _p10 = msg;
+		switch (_p10.ctor) {
 			case 'ImageLoaded':
-				var _p10 = _elm_lang$core$Result$toMaybe(_p9._0);
-				if (_p10.ctor === 'Just') {
+				var _p11 = _elm_lang$core$Result$toMaybe(_p10._0);
+				if (_p11.ctor === 'Just') {
 					return {
 						ctor: '_Tuple2',
 						_0: A2(
-							_hannemathisen$elm_test_project$Main$DrawMode,
-							_p10._0,
+							_hannemathisen$elm_test_project$Types$DrawMode,
+							_p11._0,
 							{ctor: '[]'}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
-					return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+					return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
 				}
 			case 'MouseDown':
-				var _p11 = model;
-				switch (_p11.ctor) {
+				var _p12 = model;
+				switch (_p12.ctor) {
 					case 'DrawMode':
 						var newDrawOps = A2(
 							_elm_lang$core$List$append,
-							_p11._1,
+							_p12._1,
 							{
 								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas$MoveTo(_p9._0),
+								_0: _hannemathisen$elm_test_project$Canvas$MoveTo(_p10._0),
 								_1: {
 									ctor: '::',
 									_0: _hannemathisen$elm_test_project$Canvas$LineWidth(3.0),
@@ -11529,102 +11923,102 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 							});
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$Draw, _p11._0, newDrawOps),
+							_0: A2(_hannemathisen$elm_test_project$Types$Draw, _p12._0, newDrawOps),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'EraseMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$Erase, _p11._0, _p11._1),
+							_0: A2(_hannemathisen$elm_test_project$Types$Erase, _p12._0, _p12._1),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
-						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
 				}
 			case 'MouseUp':
-				var _p12 = model;
-				switch (_p12.ctor) {
+				var _p13 = model;
+				switch (_p13.ctor) {
 					case 'Draw':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$DrawMode, _p12._0, _p12._1),
+							_0: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p13._0, _p13._1),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Erase':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$EraseMode, _p12._0, _p12._1),
+							_0: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p13._0, _p13._1),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
-						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
 				}
 			case 'MouseMove':
-				var _p16 = _p9._0;
-				var _p13 = model;
-				switch (_p13.ctor) {
+				var _p17 = _p10._0;
+				var _p14 = model;
+				switch (_p14.ctor) {
 					case 'Loading':
-						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
 					case 'DrawMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$DrawMode, _p13._0, _p13._1),
+							_0: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p14._0, _p14._1),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Draw':
-						var _p14 = _p13._0;
+						var _p15 = _p14._0;
 						return {
 							ctor: '_Tuple2',
 							_0: A2(
-								_hannemathisen$elm_test_project$Main$Draw,
-								_p14,
-								A3(_hannemathisen$elm_test_project$Main$draw, _p16, _p14, _p13._1)),
+								_hannemathisen$elm_test_project$Types$Draw,
+								_p15,
+								A3(_hannemathisen$elm_test_project$Main$draw, _p17, _p15, _p14._1)),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'EraseMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$EraseMode, _p13._0, _p13._1),
+							_0: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p14._0, _p14._1),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
-						var _p15 = _p13._0;
+						var _p16 = _p14._0;
 						return {
 							ctor: '_Tuple2',
 							_0: A2(
-								_hannemathisen$elm_test_project$Main$Erase,
-								_p15,
-								A3(_hannemathisen$elm_test_project$Main$erase, _p16, _p15, _p13._1)),
+								_hannemathisen$elm_test_project$Types$Erase,
+								_p16,
+								A3(_hannemathisen$elm_test_project$Main$erase, _p17, _p16, _p14._1)),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 				}
 			default:
-				var _p17 = model;
-				switch (_p17.ctor) {
+				var _p18 = model;
+				switch (_p18.ctor) {
 					case 'Loading':
-						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
 					case 'DrawMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$EraseMode, _p17._0, _p17._1),
+							_0: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p18._0, _p18._1),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Draw':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$EraseMode, _p17._0, _p17._1),
+							_0: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p18._0, _p18._1),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'EraseMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$DrawMode, _p17._0, _p17._1),
+							_0: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p18._0, _p18._1),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Main$DrawMode, _p17._0, _p17._1),
+							_0: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p18._0, _p18._1),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 				}
@@ -11632,7 +12026,7 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 	});
 var _hannemathisen$elm_test_project$Main$main = _elm_lang$html$Html$program(
 	{
-		init: {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Main$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage},
+		init: {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage},
 		view: _hannemathisen$elm_test_project$Main$view,
 		update: _hannemathisen$elm_test_project$Main$update,
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
