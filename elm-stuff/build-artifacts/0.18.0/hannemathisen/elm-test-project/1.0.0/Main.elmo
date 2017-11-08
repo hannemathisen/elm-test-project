@@ -52,41 +52,6 @@ var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 				{
 					ctor: '::',
 					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
-					_1: {ctor: '[]'}
-				},
-				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
-		case 'Draw':
-			return A2(
-				_hannemathisen$elm_test_project$Canvas$toHtml,
-				{
-					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Types$MouseUp),
-					_1: {
-						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Types$MouseMove),
-						_1: {ctor: '[]'}
-					}
-				},
-				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
-		case 'EraseMode':
-			return A2(
-				_hannemathisen$elm_test_project$Canvas$toHtml,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('eraser'),
-					_1: {
-						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
-						_1: {ctor: '[]'}
-					}
-				},
-				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
-		default:
-			return A2(
-				_hannemathisen$elm_test_project$Canvas$toHtml,
-				{
-					ctor: '::',
-					_0: _elm_lang$html$Html_Attributes$class('eraser'),
 					_1: {
 						ctor: '::',
 						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Types$MouseUp),
@@ -97,97 +62,43 @@ var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 						}
 					}
 				},
-				A2(_hannemathisen$elm_test_project$Main$drawCanvas, _p1._1, _p1._0));
+				A2(_hannemathisen$elm_test_project$Main$drawCanvas, model.drawData.drawOps, _p1._0));
+		default:
+			return A2(
+				_hannemathisen$elm_test_project$Canvas$toHtml,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('eraser'),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
+						_1: {
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Types$MouseUp),
+							_1: {
+								ctor: '::',
+								_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Types$MouseMove),
+								_1: {ctor: '[]'}
+							}
+						}
+					}
+				},
+				A2(_hannemathisen$elm_test_project$Main$drawCanvas, model.drawData.drawOps, _p1._0));
 	}
 };
 var _hannemathisen$elm_test_project$Main$view = function (model) {
 	var _p2 = model.mode;
 	switch (_p2.ctor) {
-		case 'EraseMode':
+		case 'Loading':
 			return A2(
 				_elm_lang$html$Html$div,
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn'),
-										_1: {
-											ctor: '::',
-											_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Erase is on'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
+					_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+					_1: {ctor: '[]'}
 				});
-		case 'Erase':
-			return A2(
-				_elm_lang$html$Html$div,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
-							_1: {ctor: '[]'}
-						}),
-					_1: {
-						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
-							{
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn'),
-										_1: {
-											ctor: '::',
-											_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Erase is on'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}),
-						_1: {ctor: '[]'}
-					}
-				});
-		default:
+		case 'DrawMode':
 			return A2(
 				_elm_lang$html$Html$div,
 				{ctor: '[]'},
@@ -229,6 +140,48 @@ var _hannemathisen$elm_test_project$Main$view = function (model) {
 						_1: {ctor: '[]'}
 					}
 				});
+		default:
+			return A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _hannemathisen$elm_test_project$Main$presentIfReady(model),
+							_1: {ctor: '[]'}
+						}),
+					_1: {
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Erase is on'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}),
+						_1: {ctor: '[]'}
+					}
+				});
 	}
 };
 var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
@@ -238,8 +191,8 @@ var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 192, column: 3},
-					end: {line: 204, column: 35}
+					start: {line: 322, column: 3},
+					end: {line: 334, column: 35}
 				},
 				_p3)('Empty list');
 		} else {
@@ -283,8 +236,8 @@ var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 209, column: 3},
-					end: {line: 221, column: 35}
+					start: {line: 339, column: 3},
+					end: {line: 351, column: 35}
 				},
 				_p5)('Empty list');
 		} else {
@@ -322,8 +275,8 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Main',
 					{
-						start: {line: 170, column: 3},
-						end: {line: 186, column: 37}
+						start: {line: 300, column: 3},
+						end: {line: 316, column: 37}
 					},
 					_p7)('Empty list');
 			} else {
@@ -358,8 +311,8 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 			}
 		}
 	});
-var _hannemathisen$elm_test_project$Main$erase = F3(
-	function (point, canvas, drawOps) {
+var _hannemathisen$elm_test_project$Main$erase = F2(
+	function (point, drawOps) {
 		var _p9 = _hannemathisen$elm_test_project$Canvas_Point$toInts(point);
 		var x = _p9._0;
 		var y = _p9._1;
@@ -389,153 +342,190 @@ var _hannemathisen$elm_test_project$Main$draw = F3(
 				}
 			});
 	});
+var _hannemathisen$elm_test_project$Main$concatDrawOps = function (drawOps) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		{
+			ctor: '::',
+			_0: _hannemathisen$elm_test_project$Canvas$BeginPath,
+			_1: {
+				ctor: '::',
+				_0: _hannemathisen$elm_test_project$Canvas$LineWidth(3),
+				_1: {
+					ctor: '::',
+					_0: _hannemathisen$elm_test_project$Canvas$StrokeStyle(_elm_lang$core$Color$red),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas$LineCap('round'),
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		},
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			drawOps,
+			{
+				ctor: '::',
+				_0: _hannemathisen$elm_test_project$Canvas$Stroke,
+				_1: {ctor: '[]'}
+			}));
+};
+var _hannemathisen$elm_test_project$Main$pointDataToLineOperations = function (pointData) {
+	var _p10 = pointData.points;
+	if (_p10.ctor === '[]') {
+		return {ctor: '[]'};
+	} else {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			{
+				ctor: '::',
+				_0: _hannemathisen$elm_test_project$Canvas$MoveTo(_p10._0),
+				_1: {ctor: '[]'}
+			},
+			A2(
+				_elm_lang$core$List$map,
+				function (point) {
+					return _hannemathisen$elm_test_project$Canvas$LineTo(point);
+				},
+				_p10._1));
+	}
+};
 var _hannemathisen$elm_test_project$Main$loadImage = A2(
 	_elm_lang$core$Task$attempt,
 	_hannemathisen$elm_test_project$Types$ImageLoaded,
 	_hannemathisen$elm_test_project$Canvas$loadImage('white.png'));
 var _hannemathisen$elm_test_project$Main$update = F2(
 	function (msg, model) {
-		var _p10 = msg;
-		switch (_p10.ctor) {
+		var _p11 = msg;
+		switch (_p11.ctor) {
 			case 'ImageLoaded':
-				var _p11 = _elm_lang$core$Result$toMaybe(_p10._0);
-				if (_p11.ctor === 'Just') {
+				var _p12 = _elm_lang$core$Result$toMaybe(_p11._0);
+				if (_p12.ctor === 'Just') {
 					return {
 						ctor: '_Tuple2',
-						_0: {
-							mode: A2(
-								_hannemathisen$elm_test_project$Types$DrawMode,
-								_p11._0,
-								{ctor: '[]'})
-						},
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{
+								mode: _hannemathisen$elm_test_project$Types$DrawMode(_p12._0)
+							}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
 					return {
 						ctor: '_Tuple2',
-						_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{mode: _hannemathisen$elm_test_project$Types$Loading}),
 						_1: _hannemathisen$elm_test_project$Main$loadImage
 					};
 				}
 			case 'MouseDown':
-				var _p12 = model.mode;
-				switch (_p12.ctor) {
-					case 'DrawMode':
-						var newDrawOps = A2(
-							_elm_lang$core$List$append,
-							_p12._1,
-							{
-								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas$MoveTo(_p10._0),
-								_1: {
-									ctor: '::',
-									_0: _hannemathisen$elm_test_project$Canvas$LineWidth(3.0),
-									_1: {
-										ctor: '::',
-										_0: _hannemathisen$elm_test_project$Canvas$StrokeStyle(
-											A3(_elm_lang$core$Color$rgb, 255, 0, 0)),
-										_1: {ctor: '[]'}
-									}
-								}
-							});
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$Draw, _p12._0, newDrawOps)
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					case 'EraseMode':
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$Erase, _p12._0, _p12._1)
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					default:
-						return {
-							ctor: '_Tuple2',
-							_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
-							_1: _hannemathisen$elm_test_project$Main$loadImage
-						};
+				var _p13 = model.mode;
+				if (_p13.ctor === 'Loading') {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{mode: _hannemathisen$elm_test_project$Types$Loading}),
+						_1: _hannemathisen$elm_test_project$Main$loadImage
+					};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{draw: true}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
 				}
 			case 'MouseUp':
-				var _p13 = model.mode;
-				switch (_p13.ctor) {
-					case 'Draw':
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p13._0, _p13._1)
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					case 'Erase':
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p13._0, _p13._1)
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					default:
-						return {
-							ctor: '_Tuple2',
-							_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
-							_1: _hannemathisen$elm_test_project$Main$loadImage
-						};
-				}
+				var newCurrentPointData = {
+					position: model.drawData.currentPointData.position,
+					points: {ctor: '[]'}
+				};
+				var drawData = model.drawData;
+				var newDrawData = _elm_lang$core$Native_Utils.update(
+					drawData,
+					{
+						allPointData: {ctor: '::', _0: model.drawData.currentPointData, _1: model.drawData.allPointData},
+						currentPointData: newCurrentPointData
+					});
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{draw: false, drawData: newDrawData}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			case 'MouseMove':
-				var _p17 = _p10._0;
+				var _p17 = _p11._0;
 				var _p14 = model.mode;
 				switch (_p14.ctor) {
 					case 'Loading':
 						return {
 							ctor: '_Tuple2',
-							_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{mode: _hannemathisen$elm_test_project$Types$Loading}),
 							_1: _hannemathisen$elm_test_project$Main$loadImage
 						};
 					case 'DrawMode':
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p14._0, _p14._1)
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					case 'Draw':
-						var _p15 = _p14._0;
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(
-									_hannemathisen$elm_test_project$Types$Draw,
-									_p15,
-									A3(_hannemathisen$elm_test_project$Main$draw, _p17, _p15, _p14._1))
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					case 'EraseMode':
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p14._0, _p14._1)
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
+						var _p15 = model.draw;
+						if (_p15 === true) {
+							var pointData = model.drawData.currentPointData;
+							var lineDrawOps = _elm_lang$core$List$concat(
+								A2(
+									_elm_lang$core$List$map,
+									function (pointData) {
+										return _hannemathisen$elm_test_project$Main$pointDataToLineOperations(pointData);
+									},
+									{ctor: '::', _0: pointData, _1: model.drawData.allPointData}));
+							var newDrawOps = _hannemathisen$elm_test_project$Main$concatDrawOps(lineDrawOps);
+							var newPoints = A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.drawData.currentPointData.points,
+								{
+									ctor: '::',
+									_0: _p17,
+									_1: {ctor: '[]'}
+								});
+							var newPointData = _elm_lang$core$Native_Utils.update(
+								pointData,
+								{points: newPoints});
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Native_Utils.update(
+									model,
+									{
+										drawData: {currentPointData: newPointData, drawOps: newDrawOps, allPointData: model.drawData.allPointData}
+									}),
+								_1: _elm_lang$core$Platform_Cmd$none
+							};
+						} else {
+							return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+						}
 					default:
-						var _p16 = _p14._0;
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(
-									_hannemathisen$elm_test_project$Types$Erase,
-									_p16,
-									A3(_hannemathisen$elm_test_project$Main$erase, _p17, _p16, _p14._1))
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
+						var _p16 = model.draw;
+						if (_p16 === true) {
+							var drawData = model.drawData;
+							var newDrawOps = A2(_hannemathisen$elm_test_project$Main$erase, _p17, drawData.drawOps);
+							var newDrawData = _elm_lang$core$Native_Utils.update(
+								drawData,
+								{drawOps: newDrawOps});
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Native_Utils.update(
+									model,
+									{
+										mode: _hannemathisen$elm_test_project$Types$EraseMode(_p14._0),
+										drawData: newDrawData
+									}),
+								_1: _elm_lang$core$Platform_Cmd$none
+							};
+						} else {
+							return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+						}
 				}
 			default:
 				var _p18 = model.mode;
@@ -543,51 +533,41 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 					case 'Loading':
 						return {
 							ctor: '_Tuple2',
-							_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{mode: _hannemathisen$elm_test_project$Types$Loading}),
 							_1: _hannemathisen$elm_test_project$Main$loadImage
 						};
 					case 'DrawMode':
 						return {
 							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p18._0, _p18._1)
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					case 'Draw':
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p18._0, _p18._1)
-							},
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					case 'EraseMode':
-						return {
-							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p18._0, _p18._1)
-							},
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									mode: _hannemathisen$elm_test_project$Types$EraseMode(_p18._0)
+								}),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
 						return {
 							ctor: '_Tuple2',
-							_0: {
-								mode: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p18._0, _p18._1)
-							},
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{
+									mode: _hannemathisen$elm_test_project$Types$DrawMode(_p18._0)
+								}),
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 				}
 		}
 	});
+var _hannemathisen$elm_test_project$Main$init = function () {
+	var model = {mode: _hannemathisen$elm_test_project$Types$Loading, drawData: _hannemathisen$elm_test_project$Types$initDrawData, draw: false};
+	return {ctor: '_Tuple2', _0: model, _1: _hannemathisen$elm_test_project$Main$loadImage};
+}();
 var _hannemathisen$elm_test_project$Main$main = _elm_lang$html$Html$program(
 	{
-		init: {
-			ctor: '_Tuple2',
-			_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
-			_1: _hannemathisen$elm_test_project$Main$loadImage
-		},
+		init: _hannemathisen$elm_test_project$Main$init,
 		view: _hannemathisen$elm_test_project$Main$view,
 		update: _hannemathisen$elm_test_project$Main$update,
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)

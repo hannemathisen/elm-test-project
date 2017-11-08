@@ -1,6 +1,30 @@
-var _hannemathisen$elm_test_project$Types$Model = function (a) {
-	return {mode: a};
+var _hannemathisen$elm_test_project$Types$initDrawData = {
+	currentPointData: {
+		position: {x: 0.0, y: 0.0},
+		points: {ctor: '[]'}
+	},
+	allPointData: {ctor: '[]'},
+	drawOps: {ctor: '[]'}
 };
+var _hannemathisen$elm_test_project$Types$Model = F3(
+	function (a, b, c) {
+		return {mode: a, drawData: b, draw: c};
+	});
+var _hannemathisen$elm_test_project$Types$PointData = F2(
+	function (a, b) {
+		return {position: a, points: b};
+	});
+var _hannemathisen$elm_test_project$Types$DrawData = F3(
+	function (a, b, c) {
+		return {currentPointData: a, allPointData: b, drawOps: c};
+	});
+var _hannemathisen$elm_test_project$Types$EraseMode = function (a) {
+	return {ctor: 'EraseMode', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$DrawMode = function (a) {
+	return {ctor: 'DrawMode', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$Loading = {ctor: 'Loading'};
 var _hannemathisen$elm_test_project$Types$EraseClicked = function (a) {
 	return {ctor: 'EraseClicked', _0: a};
 };
@@ -16,20 +40,3 @@ var _hannemathisen$elm_test_project$Types$MouseDown = function (a) {
 var _hannemathisen$elm_test_project$Types$ImageLoaded = function (a) {
 	return {ctor: 'ImageLoaded', _0: a};
 };
-var _hannemathisen$elm_test_project$Types$Erase = F2(
-	function (a, b) {
-		return {ctor: 'Erase', _0: a, _1: b};
-	});
-var _hannemathisen$elm_test_project$Types$EraseMode = F2(
-	function (a, b) {
-		return {ctor: 'EraseMode', _0: a, _1: b};
-	});
-var _hannemathisen$elm_test_project$Types$Draw = F2(
-	function (a, b) {
-		return {ctor: 'Draw', _0: a, _1: b};
-	});
-var _hannemathisen$elm_test_project$Types$DrawMode = F2(
-	function (a, b) {
-		return {ctor: 'DrawMode', _0: a, _1: b};
-	});
-var _hannemathisen$elm_test_project$Types$Loading = {ctor: 'Loading'};

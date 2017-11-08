@@ -14,11 +14,22 @@ import Task
 
 main =
   Html.program
-    { init = ( { mode = Loading}, loadImage)
+    { init = init
     , view = view
     , update = update
     , subscriptions = always Sub.none
     }
+
+
+init : ( Model, Cmd Msg )
+init =
+  let model =
+    { mode = Loading
+    , drawData = initDrawData
+    , draw = False
+    }
+  in
+    ( model, loadImage )
 
 
 loadImage : Cmd Msg
@@ -34,110 +45,230 @@ update msg model =
     ImageLoaded result ->
       case Result.toMaybe result of
         Just canvas ->
-          ( {mode = (DrawMode canvas []) }
+          ( { model | mode = (DrawMode canvas ) }
           , Cmd.none
           )
         Nothing ->
-          ( { mode = Loading }
+          ( { model | mode = Loading }
           , loadImage
           )
 
     MouseDown point ->
       case model.mode of
-        DrawMode canvas drawOps ->
-          let
-            newDrawOps =
-              List.append
-                drawOps
-                  [ MoveTo point
-                  , LineWidth 3.0
-                  , StrokeStyle (Color.rgb 255 0 0)
-                  ]
-          in
-            ( { mode = (Draw canvas newDrawOps) }
-            , Cmd.none
-            )
-
-        EraseMode canvas drawOps ->
-          ( { mode = (Erase canvas drawOps) }
-          , Cmd.none
-          )
-
-        _ ->
-          ( { mode = Loading }
+        Loading ->
+          ( { model | mode = Loading }
           , loadImage
           )
+
+        -- DrawMode canvas drawOps ->
+        --   ( { model | draw = True }, Cmd.none )
+          -- let
+          --   newDrawOps =
+          --     List.append
+          --       drawOps
+          --         [ MoveTo point
+          --         , LineWidth 3.0
+          --         , StrokeStyle (Color.rgb 255 0 0)
+          --         ]
+          -- in
+          --   ( { mode = (Draw canvas newDrawOps) }
+          --   , Cmd.none
+          --   )
+
+        -- EraseMode canvas drawOps ->
+          -- ( { mode = (Erase canvas drawOps) }
+          -- , Cmd.none
+          -- )
+
+        _ ->
+          ( { model | draw = True }, Cmd.none )
 
     MouseUp point ->
-      case model.mode of
-        Draw canvas drawOps ->
-          ( { mode = (DrawMode canvas drawOps) }
+      let
+          drawData =
+              model.drawData
+
+          newCurrentPointData =
+              { position = model.drawData.currentPointData.position
+              , points = []
+              }
+
+          newDrawData =
+              { drawData
+                  | allPointData = model.drawData.currentPointData :: model.drawData.allPointData
+                  , currentPointData = newCurrentPointData
+              }
+      in
+          ( { model
+              | draw = False
+              , drawData = newDrawData
+            }
           , Cmd.none
           )
-
-        Erase canvas drawOps ->
-          ( { mode = (EraseMode canvas drawOps) }
-          , Cmd.none
-          )
-
-        _ ->
-          ( { mode = Loading }
-          , loadImage
-          )
+      -- case model.mode of
+        -- Loading ->
+        --   ( { model | mode = Loading }
+        --   , loadImage
+        --   )
+        -- -- DrawMode canvas drawOps ->
+        -- --   ( {model | draw = False }, Cmd.none)
+        --   -- ( { mode = (DrawMode canvas drawOps) }
+        --   -- , Cmd.none
+        --   -- )
+        --
+        -- -- EraseMode canvas drawOps ->
+        --   -- ( { mode = (EraseMode canvas drawOps) }
+        --   -- , Cmd.none
+        --   -- )
+        --
+        -- _ ->
+        --
+        --   ( { model | draw = False }, Cmd.none)
 
     MouseMove point ->
       case model.mode of
         Loading ->
-          ( {mode = Loading }
+          ( { model | mode = Loading }
           , loadImage
           )
 
-        DrawMode canvas drawOps ->
-          ( { mode = (DrawMode canvas drawOps) }
-          , Cmd.none
-          )
+        DrawMode canvas ->
+          case model.draw of
+            True ->
+              let
+                newPoints =
+                  model.drawData.currentPointData.points ++ [ point ]
 
-        Draw canvas drawOps ->
-          ( { mode = (Draw canvas (draw point canvas drawOps)) }
-          , Cmd.none
-          )
+                pointData =
+                  model.drawData.currentPointData
 
-        EraseMode canvas drawOps ->
-          ( { mode = (EraseMode canvas drawOps) }
-          , Cmd.none
-          )
+                newPointData =
+                  { pointData | points = newPoints }
 
-        Erase canvas drawOps ->
-          ( { mode = (Erase canvas (erase point canvas drawOps)) }
-          , Cmd.none
-          )
+                lineDrawOps =
+                  List.concat
+                    (List.map (\pointData -> pointDataToLineOperations pointData)
+                      (pointData :: model.drawData.allPointData)
+                    )
+
+                newDrawOps =
+                  concatDrawOps lineDrawOps
+              in
+                ( { model
+                      | drawData =
+                        { currentPointData = newPointData
+                        , drawOps = newDrawOps
+                        , allPointData = model.drawData.allPointData
+                        }
+                  }
+                  , Cmd.none
+                )
+
+              --
+              -- ( { model
+              --     | mode = (DrawMode canvas drawOps)
+              --     -- (draw point canvas drawOps))
+              --   }
+              -- , Cmd.none
+              -- )
+
+            False ->
+              ( model, Cmd.none )
+
+        EraseMode canvas ->
+          case model.draw of
+            True ->
+              let
+                drawData = model.drawData
+
+                newDrawOps = erase point drawData.drawOps
+
+                newDrawData =
+                  { drawData | drawOps = newDrawOps}
+
+              in
+
+                ( { model
+                    | mode = (EraseMode canvas)
+                    , drawData = newDrawData
+                    -- (erase point canvas drawOps))
+                  }
+                , Cmd.none
+                )
+
+            False ->
+              ( model, Cmd.none )
+
+
+          -- ( { mode = (DrawMode canvas drawOps) }
+          -- , Cmd.none
+          -- )
+        --
+        -- Draw canvas drawOps ->
+        --   ( { mode = (Draw canvas (draw point canvas drawOps)) }
+        --   , Cmd.none
+        --   )
+        --
+        -- EraseMode canvas drawOps ->
+        --   ( { mode = (EraseMode canvas drawOps) }
+        --   , Cmd.none
+        --   )
+        --
+        -- Erase canvas drawOps ->
+        --   ( { mode = (Erase canvas (erase point canvas drawOps)) }
+        --   , Cmd.none
+        --   )
 
     EraseClicked point ->
       case model.mode of
         Loading ->
-          ( { mode = Loading }
+          ( { model | mode = Loading }
           , loadImage
           )
 
-        DrawMode canvas drawOps ->
-          ( { mode = (EraseMode canvas drawOps) }
+        DrawMode canvas ->
+          ( { model | mode = (EraseMode canvas) }
+          , Cmd.none
+          )
+        --
+        -- Draw canvas drawOps ->
+        --   ( { model | mode = (EraseMode canvas drawOps) }
+        --   , Cmd.none
+        --   )
+
+        EraseMode canvas ->
+          ( { model | mode = (DrawMode canvas) }
           , Cmd.none
           )
 
-        Draw canvas drawOps ->
-          ( { mode = (EraseMode canvas drawOps) }
-          , Cmd.none
-          )
+        -- Erase canvas drawOps ->
+        --   ( { model | mode = (DrawMode canvas drawOps) }
+        --   , Cmd.none
+        --   )
 
-        EraseMode canvas drawOps ->
-          ( { mode = (DrawMode canvas drawOps) }
-          , Cmd.none
-          )
+pointDataToLineOperations : PointData -> List DrawOp
+pointDataToLineOperations pointData =
+  case pointData.points of
+    [] ->
+      []
 
-        Erase canvas drawOps ->
-          ( { mode = (DrawMode canvas drawOps) }
-          , Cmd.none
-          )
+    x :: xs ->
+      [ MoveTo x ] ++
+        (List.map
+          (\point ->
+            LineTo point) xs
+        )
+
+
+concatDrawOps : List DrawOp -> List DrawOp
+concatDrawOps drawOps =
+  [ BeginPath
+  , LineWidth 3
+  , StrokeStyle Color.red
+  , LineCap "round"
+  ]
+    ++ drawOps
+    ++ [ Stroke ]
 
 
 draw : Point -> Canvas -> List DrawOp -> List DrawOp
@@ -149,10 +280,9 @@ draw point canvas drawOps =
       ]
 
 
-erase : Point -> Canvas -> List DrawOp -> List DrawOp
-erase point canvas drawOps =
+erase : Point -> List DrawOp -> List DrawOp
+erase point drawOps =
   let
-
     ( x, y ) = Point.toInts point
 
     xPoints = List.range ( x-3 ) ( x+3 )
@@ -224,24 +354,28 @@ mapYPoints xList yList =
 view : Model -> Html Msg
 view model =
   case model.mode of
-    EraseMode canvas drawOps ->
+    Loading ->
+      div [] [ presentIfReady model ]
+
+    DrawMode canvas ->
       div
         []
-        [ div [] [ presentIfReady model ]
-        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
-        ]
-    Erase canvas drawOps ->
-      div
-        []
-        [ div [] [ presentIfReady model ]
-        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
-        ]
-    _ ->
-      div
-        [ ]
         [ div [] [ presentIfReady model ]
         , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is off"] ]
         ]
+
+    EraseMode canvas->
+      div
+        []
+        [ div [] [ presentIfReady model ]
+        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
+        ]
+    -- Erase canvas drawOps ->
+    --   div
+    --     []
+    --     [ div [] [ presentIfReady model ]
+    --     , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
+    --
 
 
 presentIfReady : Model -> Html Msg
@@ -250,36 +384,41 @@ presentIfReady model =
     Loading ->
       p [] [ text "Loading image..." ]
 
-    DrawMode canvas drawOps ->
+    DrawMode canvas ->
       canvas
-        |> drawCanvas drawOps
+        |> drawCanvas model.drawData.drawOps
         |> Canvas.toHtml
-          [ Events.onMouseDown MouseDown ]
-
-    Draw canvas drawOps ->
-      canvas
-        |> drawCanvas drawOps
-        |> Canvas.toHtml
-          [ Events.onMouseUp MouseUp
-          , Events.onMouseMove MouseMove
-          ]
-
-    EraseMode canvas drawOps ->
-      canvas
-        |> drawCanvas drawOps
-        |> Canvas.toHtml
-          [ class "eraser"
-          , Events.onMouseDown MouseDown
-          ]
-
-    Erase canvas drawOps ->
-      canvas
-        |> drawCanvas drawOps
-        |> Canvas.toHtml
-          [ class "eraser"
+          [ Events.onMouseDown MouseDown
           , Events.onMouseUp MouseUp
           , Events.onMouseMove MouseMove
           ]
+
+    -- Draw canvas drawOps ->
+    --   canvas
+    --     |> drawCanvas drawOps
+    --     |> Canvas.toHtml
+    --       [ Events.onMouseUp MouseUp
+    --       , Events.onMouseMove MouseMove
+    --       ]
+
+    EraseMode canvas  ->
+      canvas
+        |> drawCanvas model.drawData.drawOps
+        |> Canvas.toHtml
+          [ class "eraser"
+          , Events.onMouseDown MouseDown
+          , Events.onMouseUp MouseUp
+          , Events.onMouseMove MouseMove
+          ]
+
+    -- Erase canvas drawOps ->
+    --   canvas
+    --     |> drawCanvas drawOps
+    --     |> Canvas.toHtml
+    --       [ class "eraser"
+    --       , Events.onMouseUp MouseUp
+    --       , Events.onMouseMove MouseMove
+    --       ]
 
 
 drawCanvas : List DrawOp -> Canvas -> Canvas
