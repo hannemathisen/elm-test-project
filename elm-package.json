@@ -5,6 +5,7 @@
     "license": "BSD3",
     "source-directories": [
         ".",
+        "src",
         "canvas"
     ],
     "native-modules": true,

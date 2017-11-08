@@ -1,12 +1,11 @@
 module Main exposing (..)
 
 import Types exposing (..)
+import View exposing (..)
 import Html exposing (..)
-import Html.Attributes exposing (..)
 import Canvas exposing (Size, Error, DrawOp(..), DrawImageParams(..), Canvas)
 import Canvas.Point exposing (Point)
 import Canvas.Point as Point
-import Canvas.Events as Events
 import List.Extra exposing (..)
 import Color exposing (Color)
 import Task
@@ -263,15 +262,6 @@ concatDrawOps drawOps =
     ++ [ Stroke ]
 
 
-draw : Point -> Canvas -> List DrawOp -> List DrawOp
-draw point canvas drawOps =
-  List.append
-    drawOps
-      [ LineTo point
-      , Stroke
-      ]
-
-
 erase : Point -> List DrawOp -> List DrawOp
 erase point drawOps =
   let
@@ -341,105 +331,3 @@ mapYPoints xList yList =
         List.append
           mappedList
             (mapYPoints xList ys )
-
-
-view : Model -> Html Msg
-view model =
-  case model.mode of
-    Draw ->
-      div
-        []
-        [ div [] [ presentIfReady model ]
-        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is off"] ]
-        ]
-
-    Erase ->
-      div
-        []
-        [ div [] [ presentIfReady model ]
-        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
-        ]
-
-
-presentIfReady : Model -> Html Msg
-presentIfReady model =
-  case model.image of
-    Loading ->
-      p [] [ text "Loading image..." ]
-
-    GotCanvas canvas ->
-      let
-        touchOptions =
-          { stopPropagation = True
-          , preventDefault = True
-          }
-      in
-        case model.draw of
-          True ->
-            case model.mode of
-              Draw ->
-                let
-                  touchOptions =
-                    { stopPropagation = True
-                    , preventDefault = True
-                    }
-                in
-                  canvas
-                    |> drawCanvas model.drawData.drawOps
-                    |> Canvas.toHtml
-                      [ Events.onMouseUp MouseUp
-                      , Events.onMouseMove MouseMove
-                      , Events.onMultiTouchMove touchOptions TouchMove
-                      , Events.onMultiTouchEnd touchOptions TouchUp
-                      , Events.onMultiTouchCancel touchOptions TouchUp
-                      ]
-              Erase ->
-                canvas
-                  |> drawCanvas model.drawData.drawOps
-                  |> Canvas.toHtml
-                    [ class "eraser"
-                    , Events.onMouseUp MouseUp
-                    , Events.onMouseMove MouseMove
-                    ]
-          False ->
-            case model.mode of
-              Draw ->
-                let
-                  touchOptions =
-                    { stopPropagation = True
-                    , preventDefault = True
-                    }
-                in
-                  canvas
-                    |> drawCanvas model.drawData.drawOps
-                    |> Canvas.toHtml
-                      [ Events.onMouseDown MouseDown
-                      , Events.onMultiTouchStart touchOptions TouchDown
-                      ]
-              Erase ->
-                canvas
-                  |> drawCanvas model.drawData.drawOps
-                  |> Canvas.toHtml
-                    [ class "eraser"
-                    , Events.onMouseDown MouseDown
-                    ]
-
-
-drawCanvas : List DrawOp -> Canvas -> Canvas
-drawCanvas drawOps canvas =
-  let
-      { width, height } =
-          Canvas.getSize canvas
-
-      drawOpsWithBorder : List DrawOp
-      drawOpsWithBorder =
-          List.append
-              drawOps
-              [ BeginPath
-              , StrokeStyle (Color.rgb 255 0 0)
-              , LineWidth 2.0
-              , Rect (Point.fromInts ( 0, 0 )) (Size 800 600)
-              , Stroke
-              ]
-  in
-      Canvas.batch drawOpsWithBorder canvas
