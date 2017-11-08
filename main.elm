@@ -14,7 +14,7 @@ import Task
 
 main =
   Html.program
-    { init = ( Loading, loadImage)
+    { init = ( { mode = Loading}, loadImage)
     , view = view
     , update = update
     , subscriptions = always Sub.none
@@ -34,16 +34,16 @@ update msg model =
     ImageLoaded result ->
       case Result.toMaybe result of
         Just canvas ->
-          ( DrawMode canvas []
+          ( {mode = (DrawMode canvas []) }
           , Cmd.none
           )
         Nothing ->
-          ( Loading
+          ( { mode = Loading }
           , loadImage
           )
 
     MouseDown point ->
-      case model of
+      case model.mode of
         DrawMode canvas drawOps ->
           let
             newDrawOps =
@@ -54,88 +54,88 @@ update msg model =
                   , StrokeStyle (Color.rgb 255 0 0)
                   ]
           in
-            ( Draw canvas newDrawOps
+            ( { mode = (Draw canvas newDrawOps) }
             , Cmd.none
             )
 
         EraseMode canvas drawOps ->
-          ( Erase canvas drawOps
+          ( { mode = (Erase canvas drawOps) }
           , Cmd.none
           )
 
         _ ->
-          ( Loading
+          ( { mode = Loading }
           , loadImage
           )
 
     MouseUp point ->
-      case model of
+      case model.mode of
         Draw canvas drawOps ->
-          ( DrawMode canvas drawOps
+          ( { mode = (DrawMode canvas drawOps) }
           , Cmd.none
           )
 
         Erase canvas drawOps ->
-          ( EraseMode canvas drawOps
+          ( { mode = (EraseMode canvas drawOps) }
           , Cmd.none
           )
 
         _ ->
-          ( Loading
+          ( { mode = Loading }
           , loadImage
           )
 
     MouseMove point ->
-      case model of
+      case model.mode of
         Loading ->
-          ( Loading
+          ( {mode = Loading }
           , loadImage
           )
 
         DrawMode canvas drawOps ->
-          ( DrawMode canvas drawOps
+          ( { mode = (DrawMode canvas drawOps) }
           , Cmd.none
           )
 
         Draw canvas drawOps ->
-          ( Draw canvas (draw point canvas drawOps)
+          ( { mode = (Draw canvas (draw point canvas drawOps)) }
           , Cmd.none
           )
 
         EraseMode canvas drawOps ->
-          ( EraseMode canvas drawOps
+          ( { mode = (EraseMode canvas drawOps) }
           , Cmd.none
           )
 
         Erase canvas drawOps ->
-          ( Erase canvas (erase point canvas drawOps)
+          ( { mode = (Erase canvas (erase point canvas drawOps)) }
           , Cmd.none
           )
 
     EraseClicked point ->
-      case model of
+      case model.mode of
         Loading ->
-          ( Loading
+          ( { mode = Loading }
           , loadImage
           )
 
         DrawMode canvas drawOps ->
-          ( EraseMode canvas drawOps
+          ( { mode = (EraseMode canvas drawOps) }
           , Cmd.none
           )
 
         Draw canvas drawOps ->
-          ( EraseMode canvas drawOps
+          ( { mode = (EraseMode canvas drawOps) }
           , Cmd.none
           )
 
         EraseMode canvas drawOps ->
-          ( DrawMode canvas drawOps
+          ( { mode = (DrawMode canvas drawOps) }
           , Cmd.none
           )
 
         Erase canvas drawOps ->
-          ( DrawMode canvas drawOps
+          ( { mode = (DrawMode canvas drawOps) }
           , Cmd.none
           )
 
@@ -223,7 +223,7 @@ mapYPoints xList yList =
 
 view : Model -> Html Msg
 view model =
-  case model of
+  case model.mode of
     EraseMode canvas drawOps ->
       div
         []
@@ -246,7 +246,7 @@ view model =
 
 presentIfReady : Model -> Html Msg
 presentIfReady model =
-  case model of
+  case model.mode of
     Loading ->
       p [] [ text "Loading image..." ]
 

@@ -11,9 +11,12 @@ type Msg
   | EraseClicked Point
 
 
-type Model
+type Mode
   = Loading
   | DrawMode Canvas (List DrawOp)
   | Draw Canvas (List DrawOp)
   | EraseMode Canvas (List DrawOp)
   | Erase Canvas (List DrawOp)
+
+type alias Model =
+  { mode : Mode }

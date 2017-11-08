@@ -35,7 +35,7 @@ var _hannemathisen$elm_test_project$Main$drawCanvas = F2(
 		return A2(_hannemathisen$elm_test_project$Canvas$batch, drawOpsWithBorder, canvas);
 	});
 var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
-	var _p1 = model;
+	var _p1 = model.mode;
 	switch (_p1.ctor) {
 		case 'Loading':
 			return A2(
@@ -101,7 +101,7 @@ var _hannemathisen$elm_test_project$Main$presentIfReady = function (model) {
 	}
 };
 var _hannemathisen$elm_test_project$Main$view = function (model) {
-	var _p2 = model;
+	var _p2 = model.mode;
 	switch (_p2.ctor) {
 		case 'EraseMode':
 			return A2(
@@ -402,17 +402,23 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 				if (_p11.ctor === 'Just') {
 					return {
 						ctor: '_Tuple2',
-						_0: A2(
-							_hannemathisen$elm_test_project$Types$DrawMode,
-							_p11._0,
-							{ctor: '[]'}),
+						_0: {
+							mode: A2(
+								_hannemathisen$elm_test_project$Types$DrawMode,
+								_p11._0,
+								{ctor: '[]'})
+						},
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
-					return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+					return {
+						ctor: '_Tuple2',
+						_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
+						_1: _hannemathisen$elm_test_project$Main$loadImage
+					};
 				}
 			case 'MouseDown':
-				var _p12 = model;
+				var _p12 = model.mode;
 				switch (_p12.ctor) {
 					case 'DrawMode':
 						var newDrawOps = A2(
@@ -434,102 +440,142 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 							});
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$Draw, _p12._0, newDrawOps),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$Draw, _p12._0, newDrawOps)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'EraseMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$Erase, _p12._0, _p12._1),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$Erase, _p12._0, _p12._1)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
-						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+						return {
+							ctor: '_Tuple2',
+							_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
+							_1: _hannemathisen$elm_test_project$Main$loadImage
+						};
 				}
 			case 'MouseUp':
-				var _p13 = model;
+				var _p13 = model.mode;
 				switch (_p13.ctor) {
 					case 'Draw':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p13._0, _p13._1),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p13._0, _p13._1)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Erase':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p13._0, _p13._1),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p13._0, _p13._1)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
-						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+						return {
+							ctor: '_Tuple2',
+							_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
+							_1: _hannemathisen$elm_test_project$Main$loadImage
+						};
 				}
 			case 'MouseMove':
 				var _p17 = _p10._0;
-				var _p14 = model;
+				var _p14 = model.mode;
 				switch (_p14.ctor) {
 					case 'Loading':
-						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+						return {
+							ctor: '_Tuple2',
+							_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
+							_1: _hannemathisen$elm_test_project$Main$loadImage
+						};
 					case 'DrawMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p14._0, _p14._1),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p14._0, _p14._1)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Draw':
 						var _p15 = _p14._0;
 						return {
 							ctor: '_Tuple2',
-							_0: A2(
-								_hannemathisen$elm_test_project$Types$Draw,
-								_p15,
-								A3(_hannemathisen$elm_test_project$Main$draw, _p17, _p15, _p14._1)),
+							_0: {
+								mode: A2(
+									_hannemathisen$elm_test_project$Types$Draw,
+									_p15,
+									A3(_hannemathisen$elm_test_project$Main$draw, _p17, _p15, _p14._1))
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'EraseMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p14._0, _p14._1),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p14._0, _p14._1)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
 						var _p16 = _p14._0;
 						return {
 							ctor: '_Tuple2',
-							_0: A2(
-								_hannemathisen$elm_test_project$Types$Erase,
-								_p16,
-								A3(_hannemathisen$elm_test_project$Main$erase, _p17, _p16, _p14._1)),
+							_0: {
+								mode: A2(
+									_hannemathisen$elm_test_project$Types$Erase,
+									_p16,
+									A3(_hannemathisen$elm_test_project$Main$erase, _p17, _p16, _p14._1))
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 				}
 			default:
-				var _p18 = model;
+				var _p18 = model.mode;
 				switch (_p18.ctor) {
 					case 'Loading':
-						return {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage};
+						return {
+							ctor: '_Tuple2',
+							_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
+							_1: _hannemathisen$elm_test_project$Main$loadImage
+						};
 					case 'DrawMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p18._0, _p18._1),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p18._0, _p18._1)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'Draw':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p18._0, _p18._1),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$EraseMode, _p18._0, _p18._1)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					case 'EraseMode':
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p18._0, _p18._1),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p18._0, _p18._1)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 					default:
 						return {
 							ctor: '_Tuple2',
-							_0: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p18._0, _p18._1),
+							_0: {
+								mode: A2(_hannemathisen$elm_test_project$Types$DrawMode, _p18._0, _p18._1)
+							},
 							_1: _elm_lang$core$Platform_Cmd$none
 						};
 				}
@@ -537,7 +583,11 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 	});
 var _hannemathisen$elm_test_project$Main$main = _elm_lang$html$Html$program(
 	{
-		init: {ctor: '_Tuple2', _0: _hannemathisen$elm_test_project$Types$Loading, _1: _hannemathisen$elm_test_project$Main$loadImage},
+		init: {
+			ctor: '_Tuple2',
+			_0: {mode: _hannemathisen$elm_test_project$Types$Loading},
+			_1: _hannemathisen$elm_test_project$Main$loadImage
+		},
 		view: _hannemathisen$elm_test_project$Main$view,
 		update: _hannemathisen$elm_test_project$Main$update,
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)

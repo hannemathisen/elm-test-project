@@ -1,3 +1,6 @@
+var _hannemathisen$elm_test_project$Types$Model = function (a) {
+	return {mode: a};
+};
 var _hannemathisen$elm_test_project$Types$EraseClicked = function (a) {
 	return {ctor: 'EraseClicked', _0: a};
 };
