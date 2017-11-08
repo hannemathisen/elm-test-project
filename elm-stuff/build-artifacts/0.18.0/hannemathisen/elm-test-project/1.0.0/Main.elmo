@@ -5,8 +5,8 @@ var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 319, column: 3},
-					end: {line: 331, column: 35}
+					start: {line: 320, column: 3},
+					end: {line: 332, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -50,8 +50,8 @@ var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 336, column: 3},
-					end: {line: 348, column: 35}
+					start: {line: 337, column: 3},
+					end: {line: 349, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -89,8 +89,8 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Main',
 					{
-						start: {line: 297, column: 3},
-						end: {line: 313, column: 37}
+						start: {line: 298, column: 3},
+						end: {line: 314, column: 37}
 					},
 					_p4)('Empty list');
 			} else {
@@ -133,11 +133,11 @@ var _hannemathisen$elm_test_project$Main$erase = F2(
 		var xPoints = A2(
 			_elm_lang$core$List$map,
 			_elm_lang$core$Basics$toFloat,
-			A2(_elm_lang$core$List$range, x - 3, x + 3));
+			A2(_elm_lang$core$List$range, x - 10, x + 10));
 		var yPoints = A2(
 			_elm_lang$core$List$map,
 			_elm_lang$core$Basics$toFloat,
-			A2(_elm_lang$core$List$range, y - 3, y + 3));
+			A2(_elm_lang$core$List$range, y - 10, y + 10));
 		var points = A2(_hannemathisen$elm_test_project$Main$mapYPoints, xPoints, yPoints);
 		return A2(_hannemathisen$elm_test_project$Main$removePoints, drawOps, points);
 	});
