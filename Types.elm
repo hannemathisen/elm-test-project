@@ -9,13 +9,13 @@ type alias Model =
   { mode : Mode
   , drawData : DrawData
   , draw : Bool
+  , image : Image
   }
 
 
 type Mode
-  = Loading
-  | DrawMode Canvas
-  | EraseMode Canvas
+  = Draw
+  | Erase
 
 
 type alias PointData =
@@ -51,3 +51,8 @@ type Msg
   | TouchUp { targetTouches : List Touch, points : List Point }
   | TouchMove { targetTouches : List Touch, points : List Point }
   | EraseClicked Point
+
+
+type Image
+  = Loading
+  | GotCanvas Canvas

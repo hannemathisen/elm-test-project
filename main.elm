@@ -24,9 +24,10 @@ main =
 init : ( Model, Cmd Msg )
 init =
   let model =
-    { mode = Loading
+    { mode = Draw
     , drawData = initDrawData
     , draw = False
+    , image = Loading
     }
   in
     ( model, loadImage )
@@ -45,23 +46,19 @@ update msg model =
     ImageLoaded result ->
       case Result.toMaybe result of
         Just canvas ->
-          ( { model | mode = (DrawMode canvas ) }
+          ( { model
+                | mode = Draw
+                , image = GotCanvas canvas
+            }
           , Cmd.none
           )
         Nothing ->
-          ( { model | mode = Loading }
+          ( { model | image = Loading }
           , loadImage
           )
 
     MouseDown point ->
-      case model.mode of
-        Loading ->
-          ( { model | mode = Loading }
-          , loadImage
-          )
-
-        _ ->
-          ( { model | draw = True }, Cmd.none )
+      ( { model | draw = True }, Cmd.none )
 
     MouseUp point ->
       let
@@ -88,12 +85,7 @@ update msg model =
 
     MouseMove point ->
       case model.mode of
-        Loading ->
-          ( { model | mode = Loading }
-          , loadImage
-          )
-
-        DrawMode canvas ->
+        Draw ->
           case model.draw of
             True ->
               let
@@ -128,28 +120,23 @@ update msg model =
             False ->
               ( model, Cmd.none )
 
-        EraseMode canvas ->
-          case model.draw of
-            True ->
-              let
-                drawData = model.drawData
+        Erase ->
+          let
+            drawData = model.drawData
 
-                newDrawOps = erase point drawData.drawOps
+            newDrawOps = erase point drawData.drawOps
 
-                newDrawData =
-                  { drawData | drawOps = newDrawOps}
+            newDrawData =
+              { drawData | drawOps = newDrawOps}
 
-              in
+          in
 
-                ( { model
-                    | mode = (EraseMode canvas)
-                    , drawData = newDrawData
-                  }
-                , Cmd.none
-                )
-
-            False ->
-              ( model, Cmd.none )
+            ( { model
+                | mode = Erase
+                , drawData = newDrawData
+              }
+            , Cmd.none
+            )
 
     TouchDown event ->
       case event.points of
@@ -240,18 +227,13 @@ update msg model =
 
     EraseClicked point ->
       case model.mode of
-        Loading ->
-          ( { model | mode = Loading }
-          , loadImage
-          )
-
-        DrawMode canvas ->
-          ( { model | mode = (EraseMode canvas) }
+        Draw ->
+          ( { model | mode = Erase }
           , Cmd.none
           )
 
-        EraseMode canvas ->
-          ( { model | mode = (DrawMode canvas) }
+        Erase ->
+          ( { model | mode = Draw }
           , Cmd.none
           )
 
@@ -364,64 +346,83 @@ mapYPoints xList yList =
 view : Model -> Html Msg
 view model =
   case model.mode of
-    Loading ->
-      div [] [ presentIfReady model ]
-
-    DrawMode canvas ->
+    Draw ->
       div
         []
         [ div [] [ presentIfReady model ]
         , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is off"] ]
         ]
 
-    EraseMode canvas->
+    Erase ->
       div
         []
         [ div [] [ presentIfReady model ]
         , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
         ]
-    -- Erase canvas drawOps ->
-    --   div
-    --     []
-    --     [ div [] [ presentIfReady model ]
-    --     , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
-    --
 
 
 presentIfReady : Model -> Html Msg
 presentIfReady model =
-  case model.mode of
+  case model.image of
     Loading ->
       p [] [ text "Loading image..." ]
 
-    DrawMode canvas ->
+    GotCanvas canvas ->
       let
         touchOptions =
           { stopPropagation = True
           , preventDefault = True
           }
       in
-        canvas
-          |> drawCanvas model.drawData.drawOps
-          |> Canvas.toHtml
-            [ Events.onMouseDown MouseDown
-            , Events.onMouseUp MouseUp
-            , Events.onMouseMove MouseMove
-            , Events.onMultiTouchStart touchOptions TouchDown
-            , Events.onMultiTouchMove touchOptions TouchMove
-            , Events.onMultiTouchEnd touchOptions TouchUp
-            , Events.onMultiTouchCancel touchOptions TouchUp
-            ]
-
-    EraseMode canvas  ->
-      canvas
-        |> drawCanvas model.drawData.drawOps
-        |> Canvas.toHtml
-          [ class "eraser"
-          , Events.onMouseDown MouseDown
-          , Events.onMouseUp MouseUp
-          , Events.onMouseMove MouseMove
-          ]
+        case model.draw of
+          True ->
+            case model.mode of
+              Draw ->
+                let
+                  touchOptions =
+                    { stopPropagation = True
+                    , preventDefault = True
+                    }
+                in
+                  canvas
+                    |> drawCanvas model.drawData.drawOps
+                    |> Canvas.toHtml
+                      [ Events.onMouseUp MouseUp
+                      , Events.onMouseMove MouseMove
+                      , Events.onMultiTouchMove touchOptions TouchMove
+                      , Events.onMultiTouchEnd touchOptions TouchUp
+                      , Events.onMultiTouchCancel touchOptions TouchUp
+                      ]
+              Erase ->
+                canvas
+                  |> drawCanvas model.drawData.drawOps
+                  |> Canvas.toHtml
+                    [ class "eraser"
+                    , Events.onMouseUp MouseUp
+                    , Events.onMouseMove MouseMove
+                    ]
+          False ->
+            case model.mode of
+              Draw ->
+                let
+                  touchOptions =
+                    { stopPropagation = True
+                    , preventDefault = True
+                    }
+                in
+                  canvas
+                    |> drawCanvas model.drawData.drawOps
+                    |> Canvas.toHtml
+                      [ Events.onMouseDown MouseDown
+                      , Events.onMultiTouchStart touchOptions TouchDown
+                      ]
+              Erase ->
+                canvas
+                  |> drawCanvas model.drawData.drawOps
+                  |> Canvas.toHtml
+                    [ class "eraser"
+                    , Events.onMouseDown MouseDown
+                    ]
 
 
 drawCanvas : List DrawOp -> Canvas -> Canvas
