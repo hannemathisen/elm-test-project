@@ -2,6 +2,7 @@ module Types exposing (..)
 
 import Canvas.Point exposing (Point)
 import Canvas exposing (Error, DrawOp(..), Canvas)
+import Canvas.Events exposing (Touch)
 
 
 type alias Model =
@@ -14,9 +15,7 @@ type alias Model =
 type Mode
   = Loading
   | DrawMode Canvas
-  -- | Draw Canvas
   | EraseMode Canvas
-  -- | Erase Canvas
 
 
 type alias PointData =
@@ -48,4 +47,7 @@ type Msg
   | MouseDown Point
   | MouseUp Point
   | MouseMove Point
+  | TouchDown { targetTouches : List Touch, points : List Point }
+  | TouchUp { targetTouches : List Touch, points : List Point }
+  | TouchMove { targetTouches : List Touch, points : List Point }
   | EraseClicked Point

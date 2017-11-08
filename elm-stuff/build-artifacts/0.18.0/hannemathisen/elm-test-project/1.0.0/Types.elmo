@@ -28,6 +28,15 @@ var _hannemathisen$elm_test_project$Types$Loading = {ctor: 'Loading'};
 var _hannemathisen$elm_test_project$Types$EraseClicked = function (a) {
 	return {ctor: 'EraseClicked', _0: a};
 };
+var _hannemathisen$elm_test_project$Types$TouchMove = function (a) {
+	return {ctor: 'TouchMove', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$TouchUp = function (a) {
+	return {ctor: 'TouchUp', _0: a};
+};
+var _hannemathisen$elm_test_project$Types$TouchDown = function (a) {
+	return {ctor: 'TouchDown', _0: a};
+};
 var _hannemathisen$elm_test_project$Types$MouseMove = function (a) {
 	return {ctor: 'MouseMove', _0: a};
 };

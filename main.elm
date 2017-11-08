@@ -60,26 +60,6 @@ update msg model =
           , loadImage
           )
 
-        -- DrawMode canvas drawOps ->
-        --   ( { model | draw = True }, Cmd.none )
-          -- let
-          --   newDrawOps =
-          --     List.append
-          --       drawOps
-          --         [ MoveTo point
-          --         , LineWidth 3.0
-          --         , StrokeStyle (Color.rgb 255 0 0)
-          --         ]
-          -- in
-          --   ( { mode = (Draw canvas newDrawOps) }
-          --   , Cmd.none
-          --   )
-
-        -- EraseMode canvas drawOps ->
-          -- ( { mode = (Erase canvas drawOps) }
-          -- , Cmd.none
-          -- )
-
         _ ->
           ( { model | draw = True }, Cmd.none )
 
@@ -105,25 +85,6 @@ update msg model =
             }
           , Cmd.none
           )
-      -- case model.mode of
-        -- Loading ->
-        --   ( { model | mode = Loading }
-        --   , loadImage
-        --   )
-        -- -- DrawMode canvas drawOps ->
-        -- --   ( {model | draw = False }, Cmd.none)
-        --   -- ( { mode = (DrawMode canvas drawOps) }
-        --   -- , Cmd.none
-        --   -- )
-        --
-        -- -- EraseMode canvas drawOps ->
-        --   -- ( { mode = (EraseMode canvas drawOps) }
-        --   -- , Cmd.none
-        --   -- )
-        --
-        -- _ ->
-        --
-        --   ( { model | draw = False }, Cmd.none)
 
     MouseMove point ->
       case model.mode of
@@ -164,14 +125,6 @@ update msg model =
                   , Cmd.none
                 )
 
-              --
-              -- ( { model
-              --     | mode = (DrawMode canvas drawOps)
-              --     -- (draw point canvas drawOps))
-              --   }
-              -- , Cmd.none
-              -- )
-
             False ->
               ( model, Cmd.none )
 
@@ -191,7 +144,6 @@ update msg model =
                 ( { model
                     | mode = (EraseMode canvas)
                     , drawData = newDrawData
-                    -- (erase point canvas drawOps))
                   }
                 , Cmd.none
                 )
@@ -199,25 +151,92 @@ update msg model =
             False ->
               ( model, Cmd.none )
 
+    TouchDown event ->
+      case event.points of
+          [] ->
+              ( model, Cmd.none )
 
-          -- ( { mode = (DrawMode canvas drawOps) }
-          -- , Cmd.none
-          -- )
-        --
-        -- Draw canvas drawOps ->
-        --   ( { mode = (Draw canvas (draw point canvas drawOps)) }
-        --   , Cmd.none
-        --   )
-        --
-        -- EraseMode canvas drawOps ->
-        --   ( { mode = (EraseMode canvas drawOps) }
-        --   , Cmd.none
-        --   )
-        --
-        -- Erase canvas drawOps ->
-        --   ( { mode = (Erase canvas (erase point canvas drawOps)) }
-        --   , Cmd.none
-        --   )
+          point :: tl ->
+              let
+                  drawData =
+                      model.drawData
+
+                  newCurrentPointData =
+                      Debug.log "newCurrentPointData" <|
+                          { position = model.drawData.currentPointData.position
+                          , points = []
+                          }
+
+                  newDrawData =
+                      { drawData
+                          | allPointData =
+                              model.drawData.allPointData
+                                  ++ [ model.drawData.currentPointData ]
+                          , currentPointData = newCurrentPointData
+                      }
+              in
+                  ( { model | draw = True, drawData = newDrawData }, Cmd.none )
+
+    TouchUp event ->
+      case event.points of
+          [] ->
+              ( model, Cmd.none )
+
+          point :: [] ->
+              ( { model
+                  | draw = False
+                }
+              , Cmd.none
+              )
+
+          point :: tl ->
+              ( { model | draw = False }, Cmd.none )
+
+    TouchMove event ->
+      case event.points of
+          [] ->
+              ( model, Cmd.none )
+
+          point :: [] ->
+              let
+                  ( x, y ) =
+                      Point.toFloats point
+
+                  newPoint =
+                      Point.fromFloats
+                          ( x - model.drawData.currentPointData.position.x
+                          , y - model.drawData.currentPointData.position.y
+                          )
+
+                  newPoints =
+                      model.drawData.currentPointData.points ++ [ newPoint ]
+
+                  pointData =
+                      model.drawData.currentPointData
+
+                  newPointData =
+                      { pointData | points = newPoints }
+
+                  lineDrawOps =
+                      List.concat
+                          (List.map (\pointData -> pointDataToLineOperations pointData)
+                              (pointData :: model.drawData.allPointData)
+                          )
+
+                  newDrawOps = concatDrawOps lineDrawOps
+              in
+                  ( { model
+                      | drawData =
+                          { currentPointData = newPointData
+                          , drawOps = newDrawOps
+                          , allPointData = model.drawData.allPointData
+                          }
+                    }
+                  , Cmd.none
+                  )
+
+          point :: tl ->
+              ( { model | draw = False }, Cmd.none )
 
     EraseClicked point ->
       case model.mode of
@@ -230,21 +249,12 @@ update msg model =
           ( { model | mode = (EraseMode canvas) }
           , Cmd.none
           )
-        --
-        -- Draw canvas drawOps ->
-        --   ( { model | mode = (EraseMode canvas drawOps) }
-        --   , Cmd.none
-        --   )
 
         EraseMode canvas ->
           ( { model | mode = (DrawMode canvas) }
           , Cmd.none
           )
 
-        -- Erase canvas drawOps ->
-        --   ( { model | mode = (DrawMode canvas drawOps) }
-        --   , Cmd.none
-        --   )
 
 pointDataToLineOperations : PointData -> List DrawOp
 pointDataToLineOperations pointData =
@@ -385,21 +395,23 @@ presentIfReady model =
       p [] [ text "Loading image..." ]
 
     DrawMode canvas ->
-      canvas
-        |> drawCanvas model.drawData.drawOps
-        |> Canvas.toHtml
-          [ Events.onMouseDown MouseDown
-          , Events.onMouseUp MouseUp
-          , Events.onMouseMove MouseMove
-          ]
-
-    -- Draw canvas drawOps ->
-    --   canvas
-    --     |> drawCanvas drawOps
-    --     |> Canvas.toHtml
-    --       [ Events.onMouseUp MouseUp
-    --       , Events.onMouseMove MouseMove
-    --       ]
+      let
+        touchOptions =
+          { stopPropagation = True
+          , preventDefault = True
+          }
+      in
+        canvas
+          |> drawCanvas model.drawData.drawOps
+          |> Canvas.toHtml
+            [ Events.onMouseDown MouseDown
+            , Events.onMouseUp MouseUp
+            , Events.onMouseMove MouseMove
+            , Events.onMultiTouchStart touchOptions TouchDown
+            , Events.onMultiTouchMove touchOptions TouchMove
+            , Events.onMultiTouchEnd touchOptions TouchUp
+            , Events.onMultiTouchCancel touchOptions TouchUp
+            ]
 
     EraseMode canvas  ->
       canvas
@@ -410,15 +422,6 @@ presentIfReady model =
           , Events.onMouseUp MouseUp
           , Events.onMouseMove MouseMove
           ]
-
-    -- Erase canvas drawOps ->
-    --   canvas
-    --     |> drawCanvas drawOps
-    --     |> Canvas.toHtml
-    --       [ class "eraser"
-    --       , Events.onMouseUp MouseUp
-    --       , Events.onMouseMove MouseMove
-    --       ]
 
 
 drawCanvas : List DrawOp -> Canvas -> Canvas
