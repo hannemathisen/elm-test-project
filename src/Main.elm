@@ -127,15 +127,8 @@ update msg model =
 
             newDrawData =
               { drawData | drawOps = newDrawOps}
-
           in
-
-            ( { model
-                | mode = Erase
-                , drawData = newDrawData
-              }
-            , Cmd.none
-            )
+            ( { model | drawData = newDrawData }, Cmd.none )
 
     TouchDown event ->
       case event.points of
@@ -184,7 +177,9 @@ update msg model =
               ( model, Cmd.none )
 
           point :: [] ->
-              let
+            case model.mode of
+              Draw ->
+                let
                   ( x, y ) =
                       Point.toFloats point
 
@@ -210,7 +205,7 @@ update msg model =
                           )
 
                   newDrawOps = concatDrawOps lineDrawOps
-              in
+                in
                   ( { model
                       | drawData =
                           { currentPointData = newPointData
@@ -220,6 +215,26 @@ update msg model =
                     }
                   , Cmd.none
                   )
+
+              Erase ->
+                let
+                  drawData = model.drawData
+
+                  -- ( x, y ) =
+                  --     Point.toFloats point
+                  --
+                  -- newPoint =
+                  --     Point.fromFloats
+                  --         ( x - model.drawData.currentPointData.position.x
+                  --         , y - model.drawData.currentPointData.position.y
+                  --         )
+
+                  newDrawOps = erase point drawData.drawOps
+
+                  newDrawData =
+                    { drawData | drawOps = newDrawOps}
+                in
+                  ( { model | drawData = newDrawData }, Cmd.none )
 
           point :: tl ->
               ( { model | draw = False }, Cmd.none )

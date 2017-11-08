@@ -5,8 +5,8 @@ var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 304, column: 3},
-					end: {line: 316, column: 35}
+					start: {line: 319, column: 3},
+					end: {line: 331, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -50,8 +50,8 @@ var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 321, column: 3},
-					end: {line: 333, column: 35}
+					start: {line: 336, column: 3},
+					end: {line: 348, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -89,8 +89,8 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Main',
 					{
-						start: {line: 282, column: 3},
-						end: {line: 298, column: 37}
+						start: {line: 297, column: 3},
+						end: {line: 313, column: 37}
 					},
 					_p4)('Empty list');
 			} else {
@@ -295,7 +295,7 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{mode: _hannemathisen$elm_test_project$Types$Erase, drawData: newDrawData}),
+							{drawData: newDrawData}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
@@ -362,40 +362,57 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				} else {
 					if (_p15._1.ctor === '[]') {
-						var pointData = model.drawData.currentPointData;
-						var lineDrawOps = _elm_lang$core$List$concat(
-							A2(
-								_elm_lang$core$List$map,
-								function (pointData) {
-									return _hannemathisen$elm_test_project$Main$pointDataToLineOperations(pointData);
-								},
-								{ctor: '::', _0: pointData, _1: model.drawData.allPointData}));
-						var newDrawOps = _hannemathisen$elm_test_project$Main$concatDrawOps(lineDrawOps);
-						var _p16 = _hannemathisen$elm_test_project$Canvas_Point$toFloats(_p15._0);
-						var x = _p16._0;
-						var y = _p16._1;
-						var newPoint = _hannemathisen$elm_test_project$Canvas_Point$fromFloats(
-							{ctor: '_Tuple2', _0: x - model.drawData.currentPointData.position.x, _1: y - model.drawData.currentPointData.position.y});
-						var newPoints = A2(
-							_elm_lang$core$Basics_ops['++'],
-							model.drawData.currentPointData.points,
-							{
-								ctor: '::',
-								_0: newPoint,
-								_1: {ctor: '[]'}
-							});
-						var newPointData = _elm_lang$core$Native_Utils.update(
-							pointData,
-							{points: newPoints});
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
+						var _p18 = _p15._0;
+						var _p16 = model.mode;
+						if (_p16.ctor === 'Draw') {
+							var pointData = model.drawData.currentPointData;
+							var lineDrawOps = _elm_lang$core$List$concat(
+								A2(
+									_elm_lang$core$List$map,
+									function (pointData) {
+										return _hannemathisen$elm_test_project$Main$pointDataToLineOperations(pointData);
+									},
+									{ctor: '::', _0: pointData, _1: model.drawData.allPointData}));
+							var newDrawOps = _hannemathisen$elm_test_project$Main$concatDrawOps(lineDrawOps);
+							var _p17 = _hannemathisen$elm_test_project$Canvas_Point$toFloats(_p18);
+							var x = _p17._0;
+							var y = _p17._1;
+							var newPoint = _hannemathisen$elm_test_project$Canvas_Point$fromFloats(
+								{ctor: '_Tuple2', _0: x - model.drawData.currentPointData.position.x, _1: y - model.drawData.currentPointData.position.y});
+							var newPoints = A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.drawData.currentPointData.points,
 								{
-									drawData: {currentPointData: newPointData, drawOps: newDrawOps, allPointData: model.drawData.allPointData}
-								}),
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
+									ctor: '::',
+									_0: newPoint,
+									_1: {ctor: '[]'}
+								});
+							var newPointData = _elm_lang$core$Native_Utils.update(
+								pointData,
+								{points: newPoints});
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Native_Utils.update(
+									model,
+									{
+										drawData: {currentPointData: newPointData, drawOps: newDrawOps, allPointData: model.drawData.allPointData}
+									}),
+								_1: _elm_lang$core$Platform_Cmd$none
+							};
+						} else {
+							var drawData = model.drawData;
+							var newDrawOps = A2(_hannemathisen$elm_test_project$Main$erase, _p18, drawData.drawOps);
+							var newDrawData = _elm_lang$core$Native_Utils.update(
+								drawData,
+								{drawOps: newDrawOps});
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Native_Utils.update(
+									model,
+									{drawData: newDrawData}),
+								_1: _elm_lang$core$Platform_Cmd$none
+							};
+						}
 					} else {
 						return {
 							ctor: '_Tuple2',
@@ -407,8 +424,8 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 					}
 				}
 			default:
-				var _p17 = model.mode;
-				if (_p17.ctor === 'Draw') {
+				var _p19 = model.mode;
+				if (_p19.ctor === 'Draw') {
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(

@@ -59,13 +59,22 @@ presentIfReady model =
                       , Events.onMultiTouchCancel touchOptions TouchUp
                       ]
               Erase ->
-                canvas
-                  |> drawCanvas model.drawData.drawOps
-                  |> Canvas.toHtml
-                    [ class "eraser"
-                    , Events.onMouseUp MouseUp
-                    , Events.onMouseMove MouseMove
-                    ]
+                let
+                  touchOptions =
+                    { stopPropagation = True
+                    , preventDefault = True
+                    }
+                in
+                  canvas
+                    |> drawCanvas model.drawData.drawOps
+                    |> Canvas.toHtml
+                      [ class "eraser"
+                      , Events.onMouseUp MouseUp
+                      , Events.onMouseMove MouseMove
+                      , Events.onMultiTouchMove touchOptions TouchMove
+                      , Events.onMultiTouchEnd touchOptions TouchUp
+                      , Events.onMultiTouchCancel touchOptions TouchUp
+                      ]
           False ->
             case model.mode of
               Draw ->
@@ -82,12 +91,19 @@ presentIfReady model =
                       , Events.onMultiTouchStart touchOptions TouchDown
                       ]
               Erase ->
-                canvas
-                  |> drawCanvas model.drawData.drawOps
-                  |> Canvas.toHtml
-                    [ class "eraser"
-                    , Events.onMouseDown MouseDown
-                    ]
+                let
+                  touchOptions =
+                    { stopPropagation = True
+                    , preventDefault = True
+                    }
+                in
+                  canvas
+                    |> drawCanvas model.drawData.drawOps
+                    |> Canvas.toHtml
+                      [ class "eraser"
+                      , Events.onMouseDown MouseDown
+                      , Events.onMultiTouchStart touchOptions TouchDown
+                      ]
 
 
 drawCanvas : List DrawOp -> Canvas -> Canvas

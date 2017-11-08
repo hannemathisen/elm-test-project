@@ -78,6 +78,7 @@ var _hannemathisen$elm_test_project$View$presentIfReady = function (model) {
 					},
 					A2(_hannemathisen$elm_test_project$View$drawCanvas, model.drawData.drawOps, _p5));
 			} else {
+				var touchOptions = {stopPropagation: true, preventDefault: true};
 				return A2(
 					_hannemathisen$elm_test_project$Canvas$toHtml,
 					{
@@ -89,7 +90,19 @@ var _hannemathisen$elm_test_project$View$presentIfReady = function (model) {
 							_1: {
 								ctor: '::',
 								_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Types$MouseMove),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$Types$TouchMove),
+									_1: {
+										ctor: '::',
+										_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$Types$TouchUp),
+										_1: {
+											ctor: '::',
+											_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$Types$TouchUp),
+											_1: {ctor: '[]'}
+										}
+									}
+								}
 							}
 						}
 					},
@@ -112,6 +125,7 @@ var _hannemathisen$elm_test_project$View$presentIfReady = function (model) {
 					},
 					A2(_hannemathisen$elm_test_project$View$drawCanvas, model.drawData.drawOps, _p5));
 			} else {
+				var touchOptions = {stopPropagation: true, preventDefault: true};
 				return A2(
 					_hannemathisen$elm_test_project$Canvas$toHtml,
 					{
@@ -120,7 +134,11 @@ var _hannemathisen$elm_test_project$View$presentIfReady = function (model) {
 						_1: {
 							ctor: '::',
 							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
-							_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$Types$TouchDown),
+								_1: {ctor: '[]'}
+							}
 						}
 					},
 					A2(_hannemathisen$elm_test_project$View$drawCanvas, model.drawData.drawOps, _p5));
