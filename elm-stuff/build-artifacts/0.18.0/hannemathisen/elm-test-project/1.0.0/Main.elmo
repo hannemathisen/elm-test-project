@@ -5,8 +5,8 @@ var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 320, column: 3},
-					end: {line: 332, column: 35}
+					start: {line: 323, column: 3},
+					end: {line: 335, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -50,8 +50,8 @@ var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 337, column: 3},
-					end: {line: 349, column: 35}
+					start: {line: 340, column: 3},
+					end: {line: 352, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -89,8 +89,8 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Main',
 					{
-						start: {line: 298, column: 3},
-						end: {line: 314, column: 37}
+						start: {line: 301, column: 3},
+						end: {line: 317, column: 37}
 					},
 					_p4)('Empty list');
 			} else {
@@ -229,24 +229,34 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'MouseUp':
-				var newCurrentPointData = {
-					position: model.drawData.currentPointData.position,
-					points: {ctor: '[]'}
-				};
-				var drawData = model.drawData;
-				var newDrawData = _elm_lang$core$Native_Utils.update(
-					drawData,
-					{
-						allPointData: {ctor: '::', _0: model.drawData.currentPointData, _1: model.drawData.allPointData},
-						currentPointData: newCurrentPointData
-					});
-				return {
-					ctor: '_Tuple2',
-					_0: _elm_lang$core$Native_Utils.update(
-						model,
-						{draw: false, drawData: newDrawData}),
-					_1: _elm_lang$core$Platform_Cmd$none
-				};
+				if (_elm_lang$core$Native_Utils.eq(model.mode, _hannemathisen$elm_test_project$Types$Draw)) {
+					var newCurrentPointData = {
+						position: model.drawData.currentPointData.position,
+						points: {ctor: '[]'}
+					};
+					var drawData = model.drawData;
+					var newDrawData = _elm_lang$core$Native_Utils.update(
+						drawData,
+						{
+							allPointData: {ctor: '::', _0: model.drawData.currentPointData, _1: model.drawData.allPointData},
+							currentPointData: newCurrentPointData
+						});
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{draw: false, drawData: newDrawData}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				} else {
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{draw: false}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
 			case 'MouseMove':
 				var _p12 = _p8._0;
 				var _p10 = model.mode;

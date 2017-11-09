@@ -60,27 +60,31 @@ update msg model =
       ( { model | draw = True }, Cmd.none )
 
     MouseUp point ->
-      let
-          drawData =
-              model.drawData
+      case model.mode of
+        Draw ->
+          let
+              drawData =
+                  model.drawData
 
-          newCurrentPointData =
-              { position = model.drawData.currentPointData.position
-              , points = []
-              }
+              newCurrentPointData =
+                  { position = model.drawData.currentPointData.position
+                  , points = []
+                  }
 
-          newDrawData =
-              { drawData
-                  | allPointData = model.drawData.currentPointData :: model.drawData.allPointData
-                  , currentPointData = newCurrentPointData
-              }
-      in
-          ( { model
-              | draw = False
-              , drawData = newDrawData
-            }
-          , Cmd.none
-          )
+              newDrawData =
+                  { drawData
+                      | allPointData = model.drawData.currentPointData :: model.drawData.allPointData
+                      , currentPointData = newCurrentPointData
+                  }
+          in
+              ( { model
+                  | draw = False
+                  , drawData = newDrawData
+                }
+              , Cmd.none
+              )
+        Erase ->
+          ( { model | draw = False }, Cmd.none )
 
     MouseMove point ->
       case model.mode of
