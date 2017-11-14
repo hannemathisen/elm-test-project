@@ -5,8 +5,8 @@ var _hannemathisen$elm_test_project$Main$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 363, column: 3},
-					end: {line: 375, column: 35}
+					start: {line: 347, column: 3},
+					end: {line: 359, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -50,8 +50,8 @@ var _hannemathisen$elm_test_project$Main$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 380, column: 3},
-					end: {line: 392, column: 35}
+					start: {line: 364, column: 3},
+					end: {line: 376, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -87,8 +87,8 @@ var _hannemathisen$elm_test_project$Main$splitAndRemove = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Main',
 				{
-					start: {line: 323, column: 3},
-					end: {line: 356, column: 69}
+					start: {line: 307, column: 3},
+					end: {line: 340, column: 69}
 				},
 				_p4)('Empty list');
 		} else {
@@ -170,8 +170,8 @@ var _hannemathisen$elm_test_project$Main$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Main',
 					{
-						start: {line: 307, column: 3},
-						end: {line: 318, column: 57}
+						start: {line: 291, column: 3},
+						end: {line: 302, column: 57}
 					},
 					_p13)('Empty list');
 			} else {
@@ -376,13 +376,42 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 					};
 				}
 			case 'TouchDown':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-			case 'TouchUp':
 				var _p23 = _p17._0.points;
 				if (_p23.ctor === '[]') {
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				} else {
-					if (_p23._1.ctor === '[]') {
+					var newCurrentPointData = A2(
+						_elm_lang$core$Debug$log,
+						'newCurrentPointData',
+						{ctor: '[]'});
+					var drawData = model.drawData;
+					var newDrawData = _elm_lang$core$Native_Utils.update(
+						drawData,
+						{
+							allPointData: A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.drawData.allPointData,
+								{
+									ctor: '::',
+									_0: model.drawData.currentPointData,
+									_1: {ctor: '[]'}
+								}),
+							currentPointData: newCurrentPointData
+						});
+					return {
+						ctor: '_Tuple2',
+						_0: _elm_lang$core$Native_Utils.update(
+							model,
+							{draw: true, drawData: newDrawData}),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}
+			case 'TouchUp':
+				var _p24 = _p17._0.points;
+				if (_p24.ctor === '[]') {
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				} else {
+					if (_p24._1.ctor === '[]') {
 						return {
 							ctor: '_Tuple2',
 							_0: _elm_lang$core$Native_Utils.update(
@@ -401,10 +430,74 @@ var _hannemathisen$elm_test_project$Main$update = F2(
 					}
 				}
 			case 'TouchMove':
-				return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				var _p25 = _p17._0.points;
+				if (_p25.ctor === '[]') {
+					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+				} else {
+					if (_p25._1.ctor === '[]') {
+						var _p27 = _p25._0;
+						var _p26 = model.mode;
+						if (_p26.ctor === 'Draw') {
+							var newPointData = A2(
+								_elm_lang$core$Basics_ops['++'],
+								model.drawData.currentPointData,
+								{
+									ctor: '::',
+									_0: _p27,
+									_1: {ctor: '[]'}
+								});
+							var lineDrawOps = _elm_lang$core$List$concat(
+								A2(
+									_elm_lang$core$List$map,
+									function (newPointData) {
+										return _hannemathisen$elm_test_project$Main$pointDataToLineOperations(newPointData);
+									},
+									{ctor: '::', _0: newPointData, _1: model.drawData.allPointData}));
+							var newDrawOps = _hannemathisen$elm_test_project$Main$concatDrawOps(lineDrawOps);
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Native_Utils.update(
+									model,
+									{
+										drawData: {currentPointData: newPointData, drawOps: newDrawOps, allPointData: model.drawData.allPointData}
+									}),
+								_1: _elm_lang$core$Platform_Cmd$none
+							};
+						} else {
+							var drawData = model.drawData;
+							var newPoints = A2(_hannemathisen$elm_test_project$Main$erase, _p27, drawData.allPointData);
+							var lineDrawOps = _elm_lang$core$List$concat(
+								A2(
+									_elm_lang$core$List$map,
+									function (newPoints) {
+										return _hannemathisen$elm_test_project$Main$pointDataToLineOperations(newPoints);
+									},
+									newPoints));
+							var newDrawOps = _hannemathisen$elm_test_project$Main$concatDrawOps(lineDrawOps);
+							var newDrawData = _elm_lang$core$Native_Utils.update(
+								drawData,
+								{allPointData: newPoints, drawOps: newDrawOps});
+							return {
+								ctor: '_Tuple2',
+								_0: _elm_lang$core$Native_Utils.update(
+									model,
+									{drawData: newDrawData}),
+								_1: _elm_lang$core$Platform_Cmd$none
+							};
+						}
+					} else {
+						return {
+							ctor: '_Tuple2',
+							_0: _elm_lang$core$Native_Utils.update(
+								model,
+								{draw: false}),
+							_1: _elm_lang$core$Platform_Cmd$none
+						};
+					}
+				}
 			default:
-				var _p24 = model.mode;
-				if (_p24.ctor === 'Draw') {
+				var _p28 = model.mode;
+				if (_p28.ctor === 'Draw') {
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
