@@ -25,8 +25,8 @@ type alias PointData =
 
 
 type alias DrawData =
-  { currentPointData : List Point -- PointData
-  , allPointData : List (List Point) -- List PointData
+  { currentPointData : List Point 
+  , allPointData : List (List Point)
   , drawOps : List DrawOp
   }
 
@@ -34,9 +34,6 @@ type alias DrawData =
 initDrawData : DrawData
 initDrawData =
   { currentPointData = []
-    -- { position = { x = 0.0, y = 0.0 }
-    -- , points = []
-    -- }
   , allPointData = []
   , drawOps = []
   }
