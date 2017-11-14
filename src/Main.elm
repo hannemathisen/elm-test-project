@@ -66,10 +66,10 @@ update msg model =
               drawData =
                   model.drawData
 
-              newCurrentPointData =
-                  { position = model.drawData.currentPointData.position
-                  , points = []
-                  }
+              newCurrentPointData = []
+                  -- { position = model.drawData.currentPointData.position
+                  -- , points = []
+                  -- }
 
               newDrawData =
                   { drawData
@@ -92,19 +92,13 @@ update msg model =
           case model.draw of
             True ->
               let
-                newPoints =
-                  model.drawData.currentPointData.points ++ [ point ]
-
-                pointData =
-                  model.drawData.currentPointData
-
                 newPointData =
-                  { pointData | points = newPoints }
+                  model.drawData.currentPointData ++ [ point ]
 
                 lineDrawOps =
                   List.concat
-                    (List.map (\pointData -> pointDataToLineOperations pointData)
-                      (pointData :: model.drawData.allPointData)
+                    (List.map (\newPointData -> pointDataToLineOperations newPointData)
+                      (newPointData :: model.drawData.allPointData)
                     )
 
                 newDrawOps =
@@ -127,38 +121,49 @@ update msg model =
           let
             drawData = model.drawData
 
-            newDrawOps = erase point drawData.drawOps
+            newPoints = erase point drawData.allPointData
+
+            lineDrawOps =
+              List.concat
+                (List.map (\newPoints -> pointDataToLineOperations newPoints)
+                  newPoints
+                )
+
+            newDrawOps =
+              concatDrawOps lineDrawOps
 
             newDrawData =
-              { drawData | drawOps = newDrawOps}
+              { drawData | allPointData = newPoints, drawOps = newDrawOps }
+
           in
             ( { model | drawData = newDrawData }, Cmd.none )
 
     TouchDown event ->
-      case event.points of
-          [] ->
-              ( model, Cmd.none )
-
-          point :: tl ->
-              let
-                  drawData =
-                      model.drawData
-
-                  newCurrentPointData =
-                      Debug.log "newCurrentPointData" <|
-                          { position = model.drawData.currentPointData.position
-                          , points = []
-                          }
-
-                  newDrawData =
-                      { drawData
-                          | allPointData =
-                              model.drawData.allPointData
-                                  ++ [ model.drawData.currentPointData ]
-                          , currentPointData = newCurrentPointData
-                      }
-              in
-                  ( { model | draw = True, drawData = newDrawData }, Cmd.none )
+      ( model, Cmd.none )
+      -- case event.points of
+      --     [] ->
+      --         ( model, Cmd.none )
+      --
+      --     point :: tl ->
+      --         let
+      --             drawData =
+      --                 model.drawData
+      --
+      --             newCurrentPointData =
+      --                 Debug.log "newCurrentPointData" <|
+      --                     { position = model.drawData.currentPointData.position
+      --                     , points = []
+      --                     }
+      --
+      --             newDrawData =
+      --                 { drawData
+      --                     | allPointData =
+      --                         model.drawData.allPointData
+      --                             ++ [ model.drawData.currentPointData ]
+      --                     , currentPointData = newCurrentPointData
+      --                 }
+      --         in
+      --             ( { model | draw = True, drawData = newDrawData }, Cmd.none )
 
     TouchUp event ->
       case event.points of
@@ -176,72 +181,73 @@ update msg model =
               ( { model | draw = False }, Cmd.none )
 
     TouchMove event ->
-      case event.points of
-          [] ->
-              ( model, Cmd.none )
-
-          point :: [] ->
-            case model.mode of
-              Draw ->
-                let
-                  ( x, y ) =
-                      Point.toFloats point
-
-                  newPoint =
-                      Point.fromFloats
-                          ( x - model.drawData.currentPointData.position.x
-                          , y - model.drawData.currentPointData.position.y
-                          )
-
-                  newPoints =
-                      model.drawData.currentPointData.points ++ [ newPoint ]
-
-                  pointData =
-                      model.drawData.currentPointData
-
-                  newPointData =
-                      { pointData | points = newPoints }
-
-                  lineDrawOps =
-                      List.concat
-                          (List.map (\pointData -> pointDataToLineOperations pointData)
-                              (pointData :: model.drawData.allPointData)
-                          )
-
-                  newDrawOps = concatDrawOps lineDrawOps
-                in
-                  ( { model
-                      | drawData =
-                          { currentPointData = newPointData
-                          , drawOps = newDrawOps
-                          , allPointData = model.drawData.allPointData
-                          }
-                    }
-                  , Cmd.none
-                  )
-
-              Erase ->
-                let
-                  drawData = model.drawData
-
-                  -- ( x, y ) =
-                  --     Point.toFloats point
-                  --
-                  -- newPoint =
-                  --     Point.fromFloats
-                  --         ( x - model.drawData.currentPointData.position.x
-                  --         , y - model.drawData.currentPointData.position.y
-                  --         )
-
-                  newDrawOps = erase point drawData.drawOps
-
-                  newDrawData =
-                    { drawData | drawOps = newDrawOps}
-                in
-                  ( { model | drawData = newDrawData }, Cmd.none )
-
-          point :: tl ->
-              ( { model | draw = False }, Cmd.none )
+      ( model, Cmd.none )
+      -- case event.points of
+      --     [] ->
+      --         ( model, Cmd.none )
+      --
+      --     point :: [] ->
+      --       case model.mode of
+      --         Draw ->
+      --           let
+      --             ( x, y ) =
+      --                 Point.toFloats point
+      --
+      --             newPoint =
+      --                 Point.fromFloats
+      --                     ( x - model.drawData.currentPointData.position.x
+      --                     , y - model.drawData.currentPointData.position.y
+      --                     )
+      --
+      --             newPoints =
+      --                 model.drawData.currentPointData.points ++ [ newPoint ]
+      --
+      --             pointData =
+      --                 model.drawData.currentPointData
+      --
+      --             newPointData =
+      --                 { pointData | points = newPoints }
+      --
+      --             lineDrawOps =
+      --                 List.concat
+      --                     (List.map (\pointData -> pointDataToLineOperations pointData)
+      --                         (pointData :: model.drawData.allPointData)
+      --                     )
+      --
+      --             newDrawOps = concatDrawOps lineDrawOps
+      --           in
+      --             ( { model
+      --                 | drawData =
+      --                     { currentPointData = newPointData
+      --                     , drawOps = newDrawOps
+      --                     , allPointData = model.drawData.allPointData
+      --                     }
+      --               }
+      --             , Cmd.none
+      --             )
+      --
+      --         Erase ->
+      --           let
+      --             drawData = model.drawData
+      --
+      --             -- ( x, y ) =
+      --             --     Point.toFloats point
+      --             --
+      --             -- newPoint =
+      --             --     Point.fromFloats
+      --             --         ( x - model.drawData.currentPointData.position.x
+      --             --         , y - model.drawData.currentPointData.position.y
+      --             --         )
+      --
+      --             newDrawOps = erase point drawData.drawOps
+      --
+      --             newDrawData =
+      --               { drawData | drawOps = newDrawOps}
+      --           in
+      --             ( { model | drawData = newDrawData }, Cmd.none )
+      --
+      --     point :: tl ->
+      --         ( { model | draw = False }, Cmd.none )
 
     EraseClicked point ->
       case model.mode of
@@ -256,9 +262,9 @@ update msg model =
           )
 
 
-pointDataToLineOperations : PointData -> List DrawOp
-pointDataToLineOperations pointData =
-  case pointData.points of
+pointDataToLineOperations : List Point -> List DrawOp
+pointDataToLineOperations points =
+  case points of
     [] ->
       []
 
@@ -281,41 +287,74 @@ concatDrawOps drawOps =
     ++ [ Stroke ]
 
 
-erase : Point -> List DrawOp -> List DrawOp
-erase point drawOps =
+erase : Point -> List (List Point) -> List (List Point)
+erase point oldPoints =
   let
     ( x, y ) = Point.toInts point
-
     -- Change based on screen size
-    xPoints = List.range ( x-10 ) ( x+10 )
+    xPoints = List.range ( x-7 ) ( x+7 )
       |> List.map toFloat
-    yPoints = List.range ( y-10 ) ( y+10 )
+    yPoints = List.range ( y-7 ) ( y+7 )
       |> List.map toFloat
 
     points = mapYPoints xPoints yPoints
   in
-    removePoints drawOps points
+    removePoints oldPoints points
 
 
-removePoints : List DrawOp -> List (Float, Float) -> List DrawOp
-removePoints drawOps points =
-  case points of
+removePoints : List (List Point) -> List (Float, Float) -> List (List Point)
+removePoints allPoints erasedPoints =
+  case erasedPoints of
     [] -> Debug.crash "Empty list"
     [x] ->
       let
-        point = Point.fromFloats (x)
+        point = Point.fromFloats x
       in
-        List.Extra.replaceIf (\x -> x == LineTo point) (MoveTo point) drawOps
-
+        splitAndRemove allPoints point
     (x::xs) ->
       let
-        point = Point.fromFloats (x)
+        point = Point.fromFloats x
       in
-        let
-          newDrawOps =
-            List.Extra.replaceIf (\x -> x == LineTo point) (MoveTo point) drawOps
-        in
-          removePoints newDrawOps xs
+        removePoints (splitAndRemove allPoints point) xs
+
+
+splitAndRemove : List (List Point) -> Point -> List (List Point)
+splitAndRemove allPoints point =
+  case allPoints of
+    [] -> Debug.crash "Empty list"
+    [x] ->
+      let
+        index = List.Extra.elemIndex point x
+      in
+        case index of
+          Nothing ->
+            [x]
+          Just i ->
+            let
+              list1 = List.take (i-1) x
+              list2 = List.drop i x
+            in
+              if List.isEmpty list1 then
+                [list2]
+              else
+                [list1, list2]
+    (x::xs) ->
+      let
+        index = List.Extra.elemIndex point x
+      in
+        case index of
+          Nothing ->
+            List.append [x] (splitAndRemove xs point)
+          Just i ->
+            let
+              list1 = List.take (i-1) x
+              list2 = List.drop i x
+            in
+              if List.isEmpty list1 then
+                List.append [list2] (splitAndRemove xs point)
+              else
+                List.append [list1, list2] (splitAndRemove xs point)
+
 
 
 

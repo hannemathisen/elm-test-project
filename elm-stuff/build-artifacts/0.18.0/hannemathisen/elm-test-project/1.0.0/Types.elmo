@@ -1,8 +1,5 @@
 var _hannemathisen$elm_test_project$Types$initDrawData = {
-	currentPointData: {
-		position: {x: 0.0, y: 0.0},
-		points: {ctor: '[]'}
-	},
+	currentPointData: {ctor: '[]'},
 	allPointData: {ctor: '[]'},
 	drawOps: {ctor: '[]'}
 };

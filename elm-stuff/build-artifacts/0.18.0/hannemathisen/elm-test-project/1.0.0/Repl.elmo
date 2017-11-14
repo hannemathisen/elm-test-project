@@ -1,0 +1,5 @@
+var _hannemathisen$elm_test_project$Repl$t_s_o_l = {ctor: '_Tuple0'};
+var _hannemathisen$elm_test_project$Repl$greet = function (name) {
+	return A2(_elm_lang$core$Basics_ops['++'], 'Hello, ', name);
+};
+var _hannemathisen$elm_test_project$Repl$d_e_l_t_r_o_n_3_0_3_0 = _hannemathisen$elm_test_project$Repl$greet('World');
