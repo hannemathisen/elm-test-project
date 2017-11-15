@@ -13,12 +13,16 @@ view : Model -> Html Msg
 view model =
   div []
     [ div [] [ presentIfReady model ]
-    , case model.mode of
-      Draw ->
-        div [] [ button [ class "btn", onClick EraseClicked ] [ text "Erase is off"] ]
-      Erase ->
-        div [] [ button [ class "btn", onClick EraseClicked ] [ text "Erase is on"] ]
-
+    , div []
+      [ button
+        [ class "btn", onClick EraseClicked ]
+        [ case model.mode of
+          Draw ->
+             text "Erase is off"
+          Erase ->
+            text "Erase is on"
+        ]
+      ]
     ]
 
 
@@ -28,80 +32,38 @@ presentIfReady model =
     Loading ->
       p [] [ text "Loading image..." ]
 
-
--- FIKS TOUCHOPTIONS HER og prøv og gjøre koden litt bedre kanskjeee
     GotCanvas canvas ->
       let
         touchOptions =
           { stopPropagation = True
           , preventDefault = True
           }
+
+        events =
+          case model.draw of
+            True ->
+              [ Events.onMouseUp MouseUp
+              , Events.onMouseMove MouseMove
+              , Events.onMultiTouchMove touchOptions TouchMove
+              , Events.onMultiTouchEnd touchOptions TouchUp
+              , Events.onMultiTouchCancel touchOptions TouchUp
+              ]
+
+            False ->
+              [ Events.onMouseDown MouseDown
+              , Events.onMultiTouchStart touchOptions TouchDown
+              ]
+
+        allEvents =
+          if model.mode == Erase then
+            events ++ [ class "add-eraser" ]
+          else
+            events
+
       in
-        case model.draw of
-          True ->
-            case model.mode of
-              Draw ->
-                let
-                  touchOptions =
-                    { stopPropagation = True
-                    , preventDefault = True
-                    }
-                in
-                  canvas
-                    |> drawCanvas model.drawData.drawOps
-                    |> Canvas.toHtml
-                      [ Events.onMouseUp MouseUp
-                      , Events.onMouseMove MouseMove
-                      , Events.onMultiTouchMove touchOptions TouchMove
-                      , Events.onMultiTouchEnd touchOptions TouchUp
-                      , Events.onMultiTouchCancel touchOptions TouchUp
-                      ]
-              Erase ->
-                let
-                  touchOptions =
-                    { stopPropagation = True
-                    , preventDefault = True
-                    }
-                in
-                  canvas
-                    |> drawCanvas model.drawData.drawOps
-                    |> Canvas.toHtml
-                      [ class "add-eraser"
-                      , Events.onMouseUp MouseUp
-                      , Events.onMouseMove MouseMove
-                      , Events.onMultiTouchMove touchOptions TouchMove
-                      , Events.onMultiTouchEnd touchOptions TouchUp
-                      , Events.onMultiTouchCancel touchOptions TouchUp
-                      ]
-          False ->
-            case model.mode of
-              Draw ->
-                let
-                  touchOptions =
-                    { stopPropagation = True
-                    , preventDefault = True
-                    }
-                in
-                  canvas
-                    |> drawCanvas model.drawData.drawOps
-                    |> Canvas.toHtml
-                      [ Events.onMouseDown MouseDown
-                      , Events.onMultiTouchStart touchOptions TouchDown
-                      ]
-              Erase ->
-                let
-                  touchOptions =
-                    { stopPropagation = True
-                    , preventDefault = True
-                    }
-                in
-                  canvas
-                    |> drawCanvas model.drawData.drawOps
-                    |> Canvas.toHtml
-                      [ class "add-eraser"
-                      , Events.onMouseDown MouseDown
-                      , Events.onMultiTouchStart touchOptions TouchDown
-                      ]
+        canvas
+          |> drawCanvas model.drawData.drawOps
+          |> Canvas.toHtml allEvents
 
 
 drawCanvas : List DrawOp -> Canvas -> Canvas

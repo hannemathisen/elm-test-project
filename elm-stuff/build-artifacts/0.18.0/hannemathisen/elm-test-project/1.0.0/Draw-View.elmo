@@ -46,104 +46,55 @@ var _hannemathisen$elm_test_project$Draw_View$presentIfReady = function (model) 
 				_1: {ctor: '[]'}
 			});
 	} else {
-		var _p5 = _p1._0;
 		var touchOptions = {stopPropagation: true, preventDefault: true};
-		var _p2 = model.draw;
-		if (_p2 === true) {
-			var _p3 = model.mode;
-			if (_p3.ctor === 'Draw') {
-				var touchOptions = {stopPropagation: true, preventDefault: true};
-				return A2(
-					_hannemathisen$elm_test_project$Canvas$toHtml,
-					{
+		var events = function () {
+			var _p2 = model.draw;
+			if (_p2 === true) {
+				return {
+					ctor: '::',
+					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Draw_Types$MouseUp),
+					_1: {
 						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Draw_Types$MouseUp),
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Draw_Types$MouseMove),
 						_1: {
 							ctor: '::',
-							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Draw_Types$MouseMove),
+							_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchMove),
 							_1: {
 								ctor: '::',
-								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchMove),
+								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
 								_1: {
 									ctor: '::',
-									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
-									_1: {
-										ctor: '::',
-										_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
-										_1: {ctor: '[]'}
-									}
+									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
+									_1: {ctor: '[]'}
 								}
 							}
 						}
-					},
-					A2(_hannemathisen$elm_test_project$Draw_View$drawCanvas, model.drawData.drawOps, _p5));
+					}
+				};
 			} else {
-				var touchOptions = {stopPropagation: true, preventDefault: true};
-				return A2(
-					_hannemathisen$elm_test_project$Canvas$toHtml,
-					{
+				return {
+					ctor: '::',
+					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Draw_Types$MouseDown),
+					_1: {
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('add-eraser'),
-						_1: {
-							ctor: '::',
-							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Draw_Types$MouseUp),
-							_1: {
-								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Draw_Types$MouseMove),
-								_1: {
-									ctor: '::',
-									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchMove),
-									_1: {
-										ctor: '::',
-										_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
-										_1: {
-											ctor: '::',
-											_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
-											_1: {ctor: '[]'}
-										}
-									}
-								}
-							}
-						}
-					},
-					A2(_hannemathisen$elm_test_project$Draw_View$drawCanvas, model.drawData.drawOps, _p5));
+						_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchDown),
+						_1: {ctor: '[]'}
+					}
+				};
 			}
-		} else {
-			var _p4 = model.mode;
-			if (_p4.ctor === 'Draw') {
-				var touchOptions = {stopPropagation: true, preventDefault: true};
-				return A2(
-					_hannemathisen$elm_test_project$Canvas$toHtml,
-					{
-						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Draw_Types$MouseDown),
-						_1: {
-							ctor: '::',
-							_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchDown),
-							_1: {ctor: '[]'}
-						}
-					},
-					A2(_hannemathisen$elm_test_project$Draw_View$drawCanvas, model.drawData.drawOps, _p5));
-			} else {
-				var touchOptions = {stopPropagation: true, preventDefault: true};
-				return A2(
-					_hannemathisen$elm_test_project$Canvas$toHtml,
-					{
-						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('add-eraser'),
-						_1: {
-							ctor: '::',
-							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Draw_Types$MouseDown),
-							_1: {
-								ctor: '::',
-								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchDown),
-								_1: {ctor: '[]'}
-							}
-						}
-					},
-					A2(_hannemathisen$elm_test_project$Draw_View$drawCanvas, model.drawData.drawOps, _p5));
-			}
-		}
+		}();
+		var allEvents = _elm_lang$core$Native_Utils.eq(model.mode, _hannemathisen$elm_test_project$Draw_Types$Erase) ? A2(
+			_elm_lang$core$Basics_ops['++'],
+			events,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('add-eraser'),
+				_1: {ctor: '[]'}
+			}) : events;
+		return A2(
+			_hannemathisen$elm_test_project$Canvas$toHtml,
+			allEvents,
+			A2(_hannemathisen$elm_test_project$Draw_View$drawCanvas, model.drawData.drawOps, _p1._0));
 	}
 };
 var _hannemathisen$elm_test_project$Draw_View$view = function (model) {
@@ -162,58 +113,36 @@ var _hannemathisen$elm_test_project$Draw_View$view = function (model) {
 				}),
 			_1: {
 				ctor: '::',
-				_0: function () {
-					var _p6 = model.mode;
-					if (_p6.ctor === 'Draw') {
-						return A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: A2(
+							_elm_lang$html$Html$button,
 							{
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$Draw_Types$EraseClicked),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Erase is off'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							});
-					} else {
-						return A2(
-							_elm_lang$html$Html$div,
-							{ctor: '[]'},
+								_0: _elm_lang$html$Html_Attributes$class('btn'),
+								_1: {
+									ctor: '::',
+									_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$Draw_Types$EraseClicked),
+									_1: {ctor: '[]'}
+								}
+							},
 							{
 								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$button,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$class('btn'),
-										_1: {
-											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$Draw_Types$EraseClicked),
-											_1: {ctor: '[]'}
-										}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('Erase is on'),
-										_1: {ctor: '[]'}
-									}),
+								_0: function () {
+									var _p3 = model.mode;
+									if (_p3.ctor === 'Draw') {
+										return _elm_lang$html$Html$text('Erase is off');
+									} else {
+										return _elm_lang$html$Html$text('Erase is on');
+									}
+								}(),
 								_1: {ctor: '[]'}
-							});
-					}
-				}(),
+							}),
+						_1: {ctor: '[]'}
+					}),
 				_1: {ctor: '[]'}
 			}
 		});
