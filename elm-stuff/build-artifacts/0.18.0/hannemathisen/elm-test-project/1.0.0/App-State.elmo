@@ -9,6 +9,8 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 			case 'ImageLoaded':
 				var _p1 = _elm_lang$core$Result$toMaybe(_p0._0);
 				if (_p1.ctor === 'Just') {
+					var _p2 = _p1._0;
+					var newZoomModel = model.zoom;
 					var newDrawModel = model.draw;
 					return {
 						ctor: '_Tuple2',
@@ -18,7 +20,12 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 								draw: _elm_lang$core$Native_Utils.update(
 									newDrawModel,
 									{
-										image: _hannemathisen$elm_test_project$Draw_Types$GotCanvas(_p1._0)
+										image: _hannemathisen$elm_test_project$Draw_Types$GotCanvas(_p2)
+									}),
+								zoom: _elm_lang$core$Native_Utils.update(
+									newZoomModel,
+									{
+										image: _hannemathisen$elm_test_project$Zoom_Types$GotCanvas(_p2)
 									})
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
@@ -34,10 +41,10 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 						{globalMode: _p0._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
-				var _p2 = A2(_hannemathisen$elm_test_project$Draw_State$update, _p0._0, model.draw);
-				var drawModel = _p2._0;
-				var drawCmd = _p2._1;
+			case 'DrawMsg':
+				var _p3 = A2(_hannemathisen$elm_test_project$Draw_State$update, _p0._0, model.draw);
+				var drawModel = _p3._0;
+				var drawCmd = _p3._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -45,12 +52,26 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 						{draw: drawModel}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _hannemathisen$elm_test_project$App_Types$DrawMsg, drawCmd)
 				};
+			default:
+				var _p4 = A2(_hannemathisen$elm_test_project$Zoom_State$update, _p0._0, model.zoom);
+				var zoomModel = _p4._0;
+				var zoomCmd = _p4._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{zoom: zoomModel}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _hannemathisen$elm_test_project$App_Types$ZoomMsg, zoomCmd)
+				};
 		}
 	});
 var _hannemathisen$elm_test_project$App_State$init = function () {
-	var _p3 = _hannemathisen$elm_test_project$Draw_State$init;
-	var drawModel = _p3._0;
-	var drawCmd = _p3._1;
-	var model = {draw: drawModel, globalMode: _hannemathisen$elm_test_project$App_Types$Main};
+	var _p5 = _hannemathisen$elm_test_project$Zoom_State$init;
+	var zoomModel = _p5._0;
+	var zoomCmd = _p5._1;
+	var _p6 = _hannemathisen$elm_test_project$Draw_State$init;
+	var drawModel = _p6._0;
+	var drawCmd = _p6._1;
+	var model = {draw: drawModel, zoom: zoomModel, globalMode: _hannemathisen$elm_test_project$App_Types$Main};
 	return {ctor: '_Tuple2', _0: model, _1: _hannemathisen$elm_test_project$App_State$loadImage};
 }();

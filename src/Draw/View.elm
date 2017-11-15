@@ -28,6 +28,8 @@ presentIfReady model =
     Loading ->
       p [] [ text "Loading image..." ]
 
+
+-- FIKS TOUCHOPTIONS HER og prøv og gjøre koden litt bedre kanskjeee
     GotCanvas canvas ->
       let
         touchOptions =

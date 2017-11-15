@@ -5,8 +5,8 @@ var _hannemathisen$elm_test_project$Draw_State$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Draw.State',
 				{
-					start: {line: 299, column: 3},
-					end: {line: 311, column: 35}
+					start: {line: 300, column: 3},
+					end: {line: 312, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -50,8 +50,8 @@ var _hannemathisen$elm_test_project$Draw_State$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Draw.State',
 				{
-					start: {line: 316, column: 3},
-					end: {line: 328, column: 35}
+					start: {line: 317, column: 3},
+					end: {line: 329, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -87,8 +87,8 @@ var _hannemathisen$elm_test_project$Draw_State$splitAndRemove = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Draw.State',
 				{
-					start: {line: 261, column: 3},
-					end: {line: 294, column: 69}
+					start: {line: 262, column: 3},
+					end: {line: 295, column: 69}
 				},
 				_p4)('Empty list');
 		} else {
@@ -170,8 +170,8 @@ var _hannemathisen$elm_test_project$Draw_State$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Draw.State',
 					{
-						start: {line: 245, column: 3},
-						end: {line: 256, column: 57}
+						start: {line: 246, column: 3},
+						end: {line: 257, column: 57}
 					},
 					_p13)('Empty list');
 			} else {

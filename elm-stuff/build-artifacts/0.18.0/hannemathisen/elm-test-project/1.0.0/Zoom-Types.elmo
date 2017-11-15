@@ -1,0 +1,8 @@
+var _hannemathisen$elm_test_project$Zoom_Types$Model = function (a) {
+	return {image: a};
+};
+var _hannemathisen$elm_test_project$Zoom_Types$NoOp = {ctor: 'NoOp'};
+var _hannemathisen$elm_test_project$Zoom_Types$GotCanvas = function (a) {
+	return {ctor: 'GotCanvas', _0: a};
+};
+var _hannemathisen$elm_test_project$Zoom_Types$Loading = {ctor: 'Loading'};

@@ -1,0 +1,67 @@
+var _hannemathisen$elm_test_project$Zoom_View$drawCanvas = function (canvas) {
+	var drawOpsWithBorder = {
+		ctor: '::',
+		_0: _hannemathisen$elm_test_project$Canvas$BeginPath,
+		_1: {
+			ctor: '::',
+			_0: _hannemathisen$elm_test_project$Canvas$StrokeStyle(
+				A3(_elm_lang$core$Color$rgb, 255, 0, 0)),
+			_1: {
+				ctor: '::',
+				_0: _hannemathisen$elm_test_project$Canvas$LineWidth(2.0),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_hannemathisen$elm_test_project$Canvas$Rect,
+						_hannemathisen$elm_test_project$Canvas_Point$fromInts(
+							{ctor: '_Tuple2', _0: 0, _1: 0}),
+						A2(_hannemathisen$elm_test_project$Canvas$Size, 800, 600)),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas$Stroke,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	};
+	var _p0 = _hannemathisen$elm_test_project$Canvas$getSize(canvas);
+	var width = _p0.width;
+	var height = _p0.height;
+	return A2(_hannemathisen$elm_test_project$Canvas$batch, drawOpsWithBorder, canvas);
+};
+var _hannemathisen$elm_test_project$Zoom_View$presentIfReady = function (model) {
+	var _p1 = model.image;
+	if (_p1.ctor === 'Loading') {
+		return A2(
+			_elm_lang$html$Html$p,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Loading image...'),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return A2(
+			_hannemathisen$elm_test_project$Canvas$toHtml,
+			{ctor: '[]'},
+			_hannemathisen$elm_test_project$Zoom_View$drawCanvas(_p1._0));
+	}
+};
+var _hannemathisen$elm_test_project$Zoom_View$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _hannemathisen$elm_test_project$Zoom_View$presentIfReady(model),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};

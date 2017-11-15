@@ -4,6 +4,8 @@ import App.Types exposing (..)
 import Canvas exposing (Error, DrawOp(..), Canvas)
 import Draw.State
 import Draw.Types
+import Zoom.State
+import Zoom.Types
 import Task
 
 
@@ -12,8 +14,11 @@ init =
   let
     ( drawModel, drawCmd ) =
         Draw.State.init
+    ( zoomModel, zoomCmd ) =
+        Zoom.State.init
     model =
       { draw = drawModel
+      , zoom = zoomModel
       , globalMode = Main
       }
   in
@@ -35,8 +40,12 @@ update msg model =
         Just canvas ->
           let
             newDrawModel = model.draw
+            newZoomModel = model.zoom
           in
-            ( { model | draw = { newDrawModel | image = Draw.Types.GotCanvas canvas } }
+            ( { model
+                | draw = { newDrawModel | image = Draw.Types.GotCanvas canvas }
+                , zoom = { newZoomModel | image = Zoom.Types.GotCanvas canvas }
+              }
             , Cmd.none
             )
         Nothing ->
@@ -54,4 +63,13 @@ update msg model =
       in
         ( { model | draw = drawModel}
         , Cmd.map DrawMsg drawCmd
+        )
+
+    ZoomMsg zoomMsg ->
+      let
+        ( zoomModel, zoomCmd) =
+          Zoom.State.update zoomMsg model.zoom
+      in
+        ( { model | zoom = zoomModel}
+        , Cmd.map ZoomMsg zoomCmd
         )

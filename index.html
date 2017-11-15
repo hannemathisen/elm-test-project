@@ -10163,15 +10163,26 @@ var _hannemathisen$elm_test_project$Draw_Types$GotCanvas = function (a) {
 	return {ctor: 'GotCanvas', _0: a};
 };
 var _hannemathisen$elm_test_project$Draw_Types$Loading = {ctor: 'Loading'};
-var _hannemathisen$elm_test_project$App_Types$Model = F2(
-	function (a, b) {
-		return {globalMode: a, draw: b};
+var _hannemathisen$elm_test_project$Zoom_Types$Model = function (a) {
+	return {image: a};
+};
+var _hannemathisen$elm_test_project$Zoom_Types$NoOp = {ctor: 'NoOp'};
+var _hannemathisen$elm_test_project$Zoom_Types$GotCanvas = function (a) {
+	return {ctor: 'GotCanvas', _0: a};
+};
+var _hannemathisen$elm_test_project$Zoom_Types$Loading = {ctor: 'Loading'};
+var _hannemathisen$elm_test_project$App_Types$Model = F3(
+	function (a, b, c) {
+		return {globalMode: a, draw: b, zoom: c};
 	});
 var _hannemathisen$elm_test_project$App_Types$Main = {ctor: 'Main'};
 var _hannemathisen$elm_test_project$App_Types$Zoom = {ctor: 'Zoom'};
 var _hannemathisen$elm_test_project$App_Types$Draw = {ctor: 'Draw'};
 var _hannemathisen$elm_test_project$App_Types$ImageLoaded = function (a) {
 	return {ctor: 'ImageLoaded', _0: a};
+};
+var _hannemathisen$elm_test_project$App_Types$ZoomMsg = function (a) {
+	return {ctor: 'ZoomMsg', _0: a};
 };
 var _hannemathisen$elm_test_project$App_Types$DrawMsg = function (a) {
 	return {ctor: 'DrawMsg', _0: a};
@@ -11520,8 +11531,8 @@ var _hannemathisen$elm_test_project$Draw_State$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Draw.State',
 				{
-					start: {line: 299, column: 3},
-					end: {line: 311, column: 35}
+					start: {line: 300, column: 3},
+					end: {line: 312, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -11565,8 +11576,8 @@ var _hannemathisen$elm_test_project$Draw_State$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Draw.State',
 				{
-					start: {line: 316, column: 3},
-					end: {line: 328, column: 35}
+					start: {line: 317, column: 3},
+					end: {line: 329, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -11602,8 +11613,8 @@ var _hannemathisen$elm_test_project$Draw_State$splitAndRemove = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Draw.State',
 				{
-					start: {line: 261, column: 3},
-					end: {line: 294, column: 69}
+					start: {line: 262, column: 3},
+					end: {line: 295, column: 69}
 				},
 				_p4)('Empty list');
 		} else {
@@ -11685,8 +11696,8 @@ var _hannemathisen$elm_test_project$Draw_State$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Draw.State',
 					{
-						start: {line: 245, column: 3},
-						end: {line: 256, column: 57}
+						start: {line: 246, column: 3},
+						end: {line: 257, column: 57}
 					},
 					_p13)('Empty list');
 			} else {
@@ -12009,6 +12020,14 @@ var _hannemathisen$elm_test_project$Draw_State$init = function () {
 	var model = {mode: _hannemathisen$elm_test_project$Draw_Types$Draw, drawData: _hannemathisen$elm_test_project$Draw_Types$initDrawData, draw: false, image: _hannemathisen$elm_test_project$Draw_Types$Loading};
 	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 }();
+var _hannemathisen$elm_test_project$Zoom_State$update = F2(
+	function (msg, model) {
+		return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+	});
+var _hannemathisen$elm_test_project$Zoom_State$init = function () {
+	var model = {image: _hannemathisen$elm_test_project$Zoom_Types$Loading};
+	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
+}();
 var _hannemathisen$elm_test_project$App_State$loadImage = A2(
 	_elm_lang$core$Task$attempt,
 	_hannemathisen$elm_test_project$App_Types$ImageLoaded,
@@ -12020,6 +12039,8 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 			case 'ImageLoaded':
 				var _p1 = _elm_lang$core$Result$toMaybe(_p0._0);
 				if (_p1.ctor === 'Just') {
+					var _p2 = _p1._0;
+					var newZoomModel = model.zoom;
 					var newDrawModel = model.draw;
 					return {
 						ctor: '_Tuple2',
@@ -12029,7 +12050,12 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 								draw: _elm_lang$core$Native_Utils.update(
 									newDrawModel,
 									{
-										image: _hannemathisen$elm_test_project$Draw_Types$GotCanvas(_p1._0)
+										image: _hannemathisen$elm_test_project$Draw_Types$GotCanvas(_p2)
+									}),
+								zoom: _elm_lang$core$Native_Utils.update(
+									newZoomModel,
+									{
+										image: _hannemathisen$elm_test_project$Zoom_Types$GotCanvas(_p2)
 									})
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none
@@ -12045,10 +12071,10 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 						{globalMode: _p0._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			default:
-				var _p2 = A2(_hannemathisen$elm_test_project$Draw_State$update, _p0._0, model.draw);
-				var drawModel = _p2._0;
-				var drawCmd = _p2._1;
+			case 'DrawMsg':
+				var _p3 = A2(_hannemathisen$elm_test_project$Draw_State$update, _p0._0, model.draw);
+				var drawModel = _p3._0;
+				var drawCmd = _p3._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -12056,13 +12082,27 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 						{draw: drawModel}),
 					_1: A2(_elm_lang$core$Platform_Cmd$map, _hannemathisen$elm_test_project$App_Types$DrawMsg, drawCmd)
 				};
+			default:
+				var _p4 = A2(_hannemathisen$elm_test_project$Zoom_State$update, _p0._0, model.zoom);
+				var zoomModel = _p4._0;
+				var zoomCmd = _p4._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{zoom: zoomModel}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _hannemathisen$elm_test_project$App_Types$ZoomMsg, zoomCmd)
+				};
 		}
 	});
 var _hannemathisen$elm_test_project$App_State$init = function () {
-	var _p3 = _hannemathisen$elm_test_project$Draw_State$init;
-	var drawModel = _p3._0;
-	var drawCmd = _p3._1;
-	var model = {draw: drawModel, globalMode: _hannemathisen$elm_test_project$App_Types$Main};
+	var _p5 = _hannemathisen$elm_test_project$Zoom_State$init;
+	var zoomModel = _p5._0;
+	var zoomCmd = _p5._1;
+	var _p6 = _hannemathisen$elm_test_project$Draw_State$init;
+	var drawModel = _p6._0;
+	var drawCmd = _p6._1;
+	var model = {draw: drawModel, zoom: zoomModel, globalMode: _hannemathisen$elm_test_project$App_Types$Main};
 	return {ctor: '_Tuple2', _0: model, _1: _hannemathisen$elm_test_project$App_State$loadImage};
 }();
 var _hannemathisen$elm_test_project$Draw_View$drawCanvas = F2(
@@ -12285,6 +12325,73 @@ var _hannemathisen$elm_test_project$Draw_View$view = function (model) {
 			}
 		});
 };
+var _hannemathisen$elm_test_project$Zoom_View$drawCanvas = function (canvas) {
+	var drawOpsWithBorder = {
+		ctor: '::',
+		_0: _hannemathisen$elm_test_project$Canvas$BeginPath,
+		_1: {
+			ctor: '::',
+			_0: _hannemathisen$elm_test_project$Canvas$StrokeStyle(
+				A3(_elm_lang$core$Color$rgb, 255, 0, 0)),
+			_1: {
+				ctor: '::',
+				_0: _hannemathisen$elm_test_project$Canvas$LineWidth(2.0),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_hannemathisen$elm_test_project$Canvas$Rect,
+						_hannemathisen$elm_test_project$Canvas_Point$fromInts(
+							{ctor: '_Tuple2', _0: 0, _1: 0}),
+						A2(_hannemathisen$elm_test_project$Canvas$Size, 800, 600)),
+					_1: {
+						ctor: '::',
+						_0: _hannemathisen$elm_test_project$Canvas$Stroke,
+						_1: {ctor: '[]'}
+					}
+				}
+			}
+		}
+	};
+	var _p0 = _hannemathisen$elm_test_project$Canvas$getSize(canvas);
+	var width = _p0.width;
+	var height = _p0.height;
+	return A2(_hannemathisen$elm_test_project$Canvas$batch, drawOpsWithBorder, canvas);
+};
+var _hannemathisen$elm_test_project$Zoom_View$presentIfReady = function (model) {
+	var _p1 = model.image;
+	if (_p1.ctor === 'Loading') {
+		return A2(
+			_elm_lang$html$Html$p,
+			{ctor: '[]'},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Loading image...'),
+				_1: {ctor: '[]'}
+			});
+	} else {
+		return A2(
+			_hannemathisen$elm_test_project$Canvas$toHtml,
+			{ctor: '[]'},
+			_hannemathisen$elm_test_project$Zoom_View$drawCanvas(_p1._0));
+	}
+};
+var _hannemathisen$elm_test_project$Zoom_View$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: _hannemathisen$elm_test_project$Zoom_View$presentIfReady(model),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
 var _hannemathisen$elm_test_project$App_View$viewHeader = function (model) {
 	return A2(
 		_elm_lang$html$Html$header,
@@ -12396,7 +12503,17 @@ var _hannemathisen$elm_test_project$App_View$root = function (model) {
 								case 'Main':
 									return _hannemathisen$elm_test_project$App_View$viewModeMenu;
 								case 'Zoom':
-									return _hannemathisen$elm_test_project$App_View$viewModeMenu;
+									return A2(
+										_elm_lang$html$Html$div,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$map,
+												_hannemathisen$elm_test_project$App_Types$ZoomMsg,
+												_hannemathisen$elm_test_project$Zoom_View$view(model.zoom)),
+											_1: {ctor: '[]'}
+										});
 								default:
 									return A2(
 										_elm_lang$html$Html$div,

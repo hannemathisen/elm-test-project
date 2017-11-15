@@ -5,6 +5,7 @@ import Html.Events exposing (onClick)
 import Html.Attributes exposing (..)
 import App.Types exposing (..)
 import Draw.View
+import Zoom.View
 
 
 root : Model -> Html Msg
@@ -16,7 +17,7 @@ root model =
         Main ->
           viewModeMenu
         Zoom ->
-          viewModeMenu
+          div [] [ Html.map ZoomMsg (Zoom.View.view model.zoom) ]
         Draw ->
           div [] [ Html.map DrawMsg (Draw.View.view model.draw) ]
       ]
@@ -25,35 +26,6 @@ root model =
 
 viewModeMenu : Html Msg
 viewModeMenu =
-  -- div []
-  --     [ h4
-  --         [ class "center-align " ]
-  --         [ span [] [ text "C" ]
-  --         , span [] [ text "h" ]
-  --         , span [] [ text "o" ]
-  --         , span [] [ text "o" ]
-  --         , span [] [ text "s" ]
-  --         , span [] [ text "e" ]
-  --         , span [] [ text " " ]
-  --         , span [] [ text "g" ]
-  --         , span [] [ text "a" ]
-  --         , span [] [ text "m" ]
-  --         , span [] [ text "e" ]
-  --         , span [] [ text " " ]
-  --         , span [] [ text "m" ]
-  --         , span [] [ text "o" ]
-  --         , span [] [ text "d" ]
-  --         , span [] [ text "e" ]
-  --         , span [] [ text "!" ]
-  --         ]
-  --     , hr [] []
-  --     , div [ class "row" ] []
-  --     , div [ class "row" ] []
-  --     , div [ class "card hoverable main-button-color add-pointer", onClick (ChangeMode Draw) ]
-  --         [ div [ class "card-content white-text" ] [ div [ class "card-title" ] [ p [ class "center-align" ] [ text "Draw" ] ] ] ]
-  --     , div [ class "card hoverable main-button-color add-pointer", onClick (ChangeMode Zoom) ]
-  --         [ div [ class "card-content white-text" ] [ div [ class "card-title" ] [ p [ class "center-align" ] [ text "Zoom" ] ] ] ]
-  --     ]
   div []
     [ button [ class "btn", onClick (ChangeMode Draw) ] [ text "Draw" ]
     , button [ class "btn", onClick (ChangeMode Zoom) ] [ text "Zoom" ]

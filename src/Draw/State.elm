@@ -10,12 +10,13 @@ import Color exposing (Color)
 
 init : ( Model, Cmd Msg )
 init =
-  let model =
-    { mode = Draw
-    , drawData = initDrawData
-    , draw = False
-    , image = Loading
-    }
+  let
+    model =
+      { mode = Draw
+      , drawData = initDrawData
+      , draw = False
+      , image = Loading
+      }
   in
     ( model, Cmd.none )
 
