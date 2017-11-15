@@ -1,4 +1,4 @@
-module State exposing (..)
+module Draw.State exposing (..)
 
 import Types exposing (..)
 import Canvas exposing (Size, Error, DrawOp(..), DrawImageParams(..), Canvas)

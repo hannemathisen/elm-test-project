@@ -1,4 +1,4 @@
-module View exposing (..)
+module Draw.View exposing (..)
 
 import Types exposing (..)
 import Html exposing (..)

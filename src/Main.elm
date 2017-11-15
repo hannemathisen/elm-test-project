@@ -1,16 +1,16 @@
 module Main exposing (..)
 
 import Types exposing (..)
-import State exposing (..)
-import View exposing (..)
+import Draw.State exposing (..)
+import Draw.View exposing (..)
 import Html exposing (..)
 
 
 main =
   Html.program
     { init = init
-    , view = view
-    , update = update
+    , view = Draw.View.view
+    , update = Draw.State.update
     , subscriptions = always Sub.none
     }
 
