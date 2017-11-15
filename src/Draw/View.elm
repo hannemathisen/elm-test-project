@@ -1,8 +1,9 @@
 module Draw.View exposing (..)
 
-import Types exposing (..)
+import Draw.Types exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
+import Html.Events exposing (onClick)
 import Canvas.Events as Events
 import Canvas.Point as Point
 import Canvas exposing (Size, Error, DrawOp(..), DrawImageParams(..), Canvas)
@@ -10,20 +11,15 @@ import Color exposing (Color)
 
 view : Model -> Html Msg
 view model =
-  case model.mode of
-    Draw ->
-      div
-        []
-        [ div [] [ presentIfReady model ]
-        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is off"] ]
-        ]
+  div []
+    [ div [] [ presentIfReady model ]
+    , case model.mode of
+      Draw ->
+        div [] [ button [ class "btn", onClick EraseClicked ] [ text "Erase is off"] ]
+      Erase ->
+        div [] [ button [ class "btn", onClick EraseClicked ] [ text "Erase is on"] ]
 
-    Erase ->
-      div
-        []
-        [ div [] [ presentIfReady model ]
-        , div [] [ button [ class "btn", Events.onClick EraseClicked ] [ text "Erase is on"] ]
-        ]
+    ]
 
 
 presentIfReady : Model -> Html Msg
@@ -68,7 +64,7 @@ presentIfReady model =
                   canvas
                     |> drawCanvas model.drawData.drawOps
                     |> Canvas.toHtml
-                      [ class "eraser"
+                      [ class "add-eraser"
                       , Events.onMouseUp MouseUp
                       , Events.onMouseMove MouseMove
                       , Events.onMultiTouchMove touchOptions TouchMove
@@ -100,7 +96,7 @@ presentIfReady model =
                   canvas
                     |> drawCanvas model.drawData.drawOps
                     |> Canvas.toHtml
-                      [ class "eraser"
+                      [ class "add-eraser"
                       , Events.onMouseDown MouseDown
                       , Events.onMultiTouchStart touchOptions TouchDown
                       ]

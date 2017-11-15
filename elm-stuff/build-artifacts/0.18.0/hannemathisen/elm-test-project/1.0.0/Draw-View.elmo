@@ -57,19 +57,19 @@ var _hannemathisen$elm_test_project$Draw_View$presentIfReady = function (model) 
 					_hannemathisen$elm_test_project$Canvas$toHtml,
 					{
 						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Types$MouseUp),
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Draw_Types$MouseUp),
 						_1: {
 							ctor: '::',
-							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Types$MouseMove),
+							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Draw_Types$MouseMove),
 							_1: {
 								ctor: '::',
-								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$Types$TouchMove),
+								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchMove),
 								_1: {
 									ctor: '::',
-									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$Types$TouchUp),
+									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
 									_1: {
 										ctor: '::',
-										_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$Types$TouchUp),
+										_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
 										_1: {ctor: '[]'}
 									}
 								}
@@ -83,22 +83,22 @@ var _hannemathisen$elm_test_project$Draw_View$presentIfReady = function (model) 
 					_hannemathisen$elm_test_project$Canvas$toHtml,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('eraser'),
+						_0: _elm_lang$html$Html_Attributes$class('add-eraser'),
 						_1: {
 							ctor: '::',
-							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Types$MouseUp),
+							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Draw_Types$MouseUp),
 							_1: {
 								ctor: '::',
-								_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Types$MouseMove),
+								_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Draw_Types$MouseMove),
 								_1: {
 									ctor: '::',
-									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$Types$TouchMove),
+									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchMove),
 									_1: {
 										ctor: '::',
-										_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$Types$TouchUp),
+										_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
 										_1: {
 											ctor: '::',
-											_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$Types$TouchUp),
+											_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
 											_1: {ctor: '[]'}
 										}
 									}
@@ -116,10 +116,10 @@ var _hannemathisen$elm_test_project$Draw_View$presentIfReady = function (model) 
 					_hannemathisen$elm_test_project$Canvas$toHtml,
 					{
 						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Draw_Types$MouseDown),
 						_1: {
 							ctor: '::',
-							_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$Types$TouchDown),
+							_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchDown),
 							_1: {ctor: '[]'}
 						}
 					},
@@ -130,13 +130,13 @@ var _hannemathisen$elm_test_project$Draw_View$presentIfReady = function (model) 
 					_hannemathisen$elm_test_project$Canvas$toHtml,
 					{
 						ctor: '::',
-						_0: _elm_lang$html$Html_Attributes$class('eraser'),
+						_0: _elm_lang$html$Html_Attributes$class('add-eraser'),
 						_1: {
 							ctor: '::',
-							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Types$MouseDown),
+							_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Draw_Types$MouseDown),
 							_1: {
 								ctor: '::',
-								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$Types$TouchDown),
+								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchDown),
 								_1: {ctor: '[]'}
 							}
 						}
@@ -147,90 +147,74 @@ var _hannemathisen$elm_test_project$Draw_View$presentIfReady = function (model) 
 	}
 };
 var _hannemathisen$elm_test_project$Draw_View$view = function (model) {
-	var _p6 = model.mode;
-	if (_p6.ctor === 'Draw') {
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
-				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Draw_View$presentIfReady(model),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$div,
+				{ctor: '[]'},
+				{
 					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('btn'),
-									_1: {
-										ctor: '::',
-										_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
-										_1: {ctor: '[]'}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Erase is off'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
+					_0: _hannemathisen$elm_test_project$Draw_View$presentIfReady(model),
 					_1: {ctor: '[]'}
-				}
-			});
-	} else {
-		return A2(
-			_elm_lang$html$Html$div,
-			{ctor: '[]'},
-			{
+				}),
+			_1: {
 				ctor: '::',
-				_0: A2(
-					_elm_lang$html$Html$div,
-					{ctor: '[]'},
-					{
-						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Draw_View$presentIfReady(model),
-						_1: {ctor: '[]'}
-					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$div,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: A2(
-								_elm_lang$html$Html$button,
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html_Attributes$class('btn'),
-									_1: {
+				_0: function () {
+					var _p6 = model.mode;
+					if (_p6.ctor === 'Draw') {
+						return A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
 										ctor: '::',
-										_0: _hannemathisen$elm_test_project$Canvas_Events$onClick(_hannemathisen$elm_test_project$Types$EraseClicked),
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$Draw_Types$EraseClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Erase is off'),
 										_1: {ctor: '[]'}
-									}
-								},
-								{
-									ctor: '::',
-									_0: _elm_lang$html$Html$text('Erase is on'),
-									_1: {ctor: '[]'}
-								}),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
-			});
-	}
+									}),
+								_1: {ctor: '[]'}
+							});
+					} else {
+						return A2(
+							_elm_lang$html$Html$div,
+							{ctor: '[]'},
+							{
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$Draw_Types$EraseClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Erase is on'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							});
+					}
+				}(),
+				_1: {ctor: '[]'}
+			}
+		});
 };

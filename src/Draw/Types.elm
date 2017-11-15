@@ -1,4 +1,4 @@
-module Types exposing (..)
+module Draw.Types exposing (..)
 
 import Canvas.Point exposing (Point)
 import Canvas exposing (Error, DrawOp(..), Canvas)
@@ -25,7 +25,7 @@ type alias PointData =
 
 
 type alias DrawData =
-  { currentPointData : List Point 
+  { currentPointData : List Point
   , allPointData : List (List Point)
   , drawOps : List DrawOp
   }
@@ -40,14 +40,13 @@ initDrawData =
 
 
 type Msg
-  = ImageLoaded (Result Error Canvas)
-  | MouseDown Point
+  = MouseDown Point
   | MouseUp Point
   | MouseMove Point
   | TouchDown { targetTouches : List Touch, points : List Point }
   | TouchUp { targetTouches : List Touch, points : List Point }
   | TouchMove { targetTouches : List Touch, points : List Point }
-  | EraseClicked Point
+  | EraseClicked
 
 
 type Image

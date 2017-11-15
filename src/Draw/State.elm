@@ -1,32 +1,28 @@
 module Draw.State exposing (..)
 
-import Types exposing (..)
+import Draw.Types exposing (..)
 import Canvas exposing (Size, Error, DrawOp(..), DrawImageParams(..), Canvas)
 import Canvas.Point exposing (Point)
 import Canvas.Point as Point
 import List.Extra exposing (..)
 import Color exposing (Color)
-import Task
+
+
+init : ( Model, Cmd Msg )
+init =
+  let model =
+    { mode = Draw
+    , drawData = initDrawData
+    , draw = False
+    , image = Loading
+    }
+  in
+    ( model, Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
-
-    ImageLoaded result ->
-      case Result.toMaybe result of
-        Just canvas ->
-          ( { model
-                | mode = Draw
-                , image = GotCanvas canvas
-            }
-          , Cmd.none
-          )
-        Nothing ->
-          ( { model | image = Loading }
-          , loadImage
-          )
-
     MouseDown point ->
       ( { model | draw = True }, Cmd.none )
 
@@ -192,7 +188,7 @@ update msg model =
           point :: tl ->
               ( { model | draw = False }, Cmd.none )
 
-    EraseClicked point ->
+    EraseClicked ->
       case model.mode of
         Draw ->
           ( { model | mode = Erase }
@@ -330,10 +326,3 @@ mapYPoints xList yList =
         List.append
           mappedList
             (mapYPoints xList ys )
-
-
-loadImage : Cmd Msg
-loadImage =
-  Task.attempt
-    ImageLoaded
-    (Canvas.loadImage "white.png")

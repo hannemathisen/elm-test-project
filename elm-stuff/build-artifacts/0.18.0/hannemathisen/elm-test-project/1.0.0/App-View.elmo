@@ -1,0 +1,132 @@
+var _hannemathisen$elm_test_project$App_View$viewHeader = function (model) {
+	return A2(
+		_elm_lang$html$Html$header,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$nav,
+				{ctor: '[]'},
+				{
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: function () {
+								var _p0 = model.globalMode;
+								if (_p0.ctor === 'Main') {
+									return _elm_lang$html$Html$text('MIIG test');
+								} else {
+									return A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('btn'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(
+													_hannemathisen$elm_test_project$App_Types$ChangeMode(_hannemathisen$elm_test_project$App_Types$Main)),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Back to Menu'),
+											_1: {ctor: '[]'}
+										});
+								}
+							}(),
+							_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		});
+};
+var _hannemathisen$elm_test_project$App_View$viewModeMenu = A2(
+	_elm_lang$html$Html$div,
+	{ctor: '[]'},
+	{
+		ctor: '::',
+		_0: A2(
+			_elm_lang$html$Html$button,
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html_Attributes$class('btn'),
+				_1: {
+					ctor: '::',
+					_0: _elm_lang$html$Html_Events$onClick(
+						_hannemathisen$elm_test_project$App_Types$ChangeMode(_hannemathisen$elm_test_project$App_Types$Draw)),
+					_1: {ctor: '[]'}
+				}
+			},
+			{
+				ctor: '::',
+				_0: _elm_lang$html$Html$text('Draw'),
+				_1: {ctor: '[]'}
+			}),
+		_1: {
+			ctor: '::',
+			_0: A2(
+				_elm_lang$html$Html$button,
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html_Attributes$class('btn'),
+					_1: {
+						ctor: '::',
+						_0: _elm_lang$html$Html_Events$onClick(
+							_hannemathisen$elm_test_project$App_Types$ChangeMode(_hannemathisen$elm_test_project$App_Types$Zoom)),
+						_1: {ctor: '[]'}
+					}
+				},
+				{
+					ctor: '::',
+					_0: _elm_lang$html$Html$text('Zoom'),
+					_1: {ctor: '[]'}
+				}),
+			_1: {ctor: '[]'}
+		}
+	});
+var _hannemathisen$elm_test_project$App_View$root = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		{ctor: '[]'},
+		{
+			ctor: '::',
+			_0: _hannemathisen$elm_test_project$App_View$viewHeader(model),
+			_1: {
+				ctor: '::',
+				_0: A2(
+					_elm_lang$html$Html$div,
+					{ctor: '[]'},
+					{
+						ctor: '::',
+						_0: function () {
+							var _p1 = model.globalMode;
+							switch (_p1.ctor) {
+								case 'Main':
+									return _hannemathisen$elm_test_project$App_View$viewModeMenu;
+								case 'Zoom':
+									return _hannemathisen$elm_test_project$App_View$viewModeMenu;
+								default:
+									return A2(
+										_elm_lang$html$Html$div,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: A2(
+												_elm_lang$html$Html$map,
+												_hannemathisen$elm_test_project$App_Types$DrawMsg,
+												_hannemathisen$elm_test_project$Draw_View$view(model.draw)),
+											_1: {ctor: '[]'}
+										});
+							}
+						}(),
+						_1: {ctor: '[]'}
+					}),
+				_1: {ctor: '[]'}
+			}
+		});
+};

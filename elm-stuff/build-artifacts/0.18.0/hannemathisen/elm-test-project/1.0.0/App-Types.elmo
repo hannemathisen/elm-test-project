@@ -1,0 +1,16 @@
+var _hannemathisen$elm_test_project$App_Types$Model = F2(
+	function (a, b) {
+		return {globalMode: a, draw: b};
+	});
+var _hannemathisen$elm_test_project$App_Types$Main = {ctor: 'Main'};
+var _hannemathisen$elm_test_project$App_Types$Zoom = {ctor: 'Zoom'};
+var _hannemathisen$elm_test_project$App_Types$Draw = {ctor: 'Draw'};
+var _hannemathisen$elm_test_project$App_Types$ImageLoaded = function (a) {
+	return {ctor: 'ImageLoaded', _0: a};
+};
+var _hannemathisen$elm_test_project$App_Types$DrawMsg = function (a) {
+	return {ctor: 'DrawMsg', _0: a};
+};
+var _hannemathisen$elm_test_project$App_Types$ChangeMode = function (a) {
+	return {ctor: 'ChangeMode', _0: a};
+};

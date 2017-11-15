@@ -1,47 +1,6 @@
-var _hannemathisen$elm_test_project$Types$initDrawData = {
-	currentPointData: {ctor: '[]'},
-	allPointData: {ctor: '[]'},
-	drawOps: {ctor: '[]'}
+var _hannemathisen$elm_test_project$Types$Model = function (a) {
+	return {name: a};
 };
-var _hannemathisen$elm_test_project$Types$Model = F4(
-	function (a, b, c, d) {
-		return {mode: a, drawData: b, draw: c, image: d};
-	});
-var _hannemathisen$elm_test_project$Types$PointData = F2(
-	function (a, b) {
-		return {position: a, points: b};
-	});
-var _hannemathisen$elm_test_project$Types$DrawData = F3(
-	function (a, b, c) {
-		return {currentPointData: a, allPointData: b, drawOps: c};
-	});
-var _hannemathisen$elm_test_project$Types$Erase = {ctor: 'Erase'};
-var _hannemathisen$elm_test_project$Types$Draw = {ctor: 'Draw'};
-var _hannemathisen$elm_test_project$Types$EraseClicked = function (a) {
-	return {ctor: 'EraseClicked', _0: a};
+var _hannemathisen$elm_test_project$Types$DrawClicked = function (a) {
+	return {ctor: 'DrawClicked', _0: a};
 };
-var _hannemathisen$elm_test_project$Types$TouchMove = function (a) {
-	return {ctor: 'TouchMove', _0: a};
-};
-var _hannemathisen$elm_test_project$Types$TouchUp = function (a) {
-	return {ctor: 'TouchUp', _0: a};
-};
-var _hannemathisen$elm_test_project$Types$TouchDown = function (a) {
-	return {ctor: 'TouchDown', _0: a};
-};
-var _hannemathisen$elm_test_project$Types$MouseMove = function (a) {
-	return {ctor: 'MouseMove', _0: a};
-};
-var _hannemathisen$elm_test_project$Types$MouseUp = function (a) {
-	return {ctor: 'MouseUp', _0: a};
-};
-var _hannemathisen$elm_test_project$Types$MouseDown = function (a) {
-	return {ctor: 'MouseDown', _0: a};
-};
-var _hannemathisen$elm_test_project$Types$ImageLoaded = function (a) {
-	return {ctor: 'ImageLoaded', _0: a};
-};
-var _hannemathisen$elm_test_project$Types$GotCanvas = function (a) {
-	return {ctor: 'GotCanvas', _0: a};
-};
-var _hannemathisen$elm_test_project$Types$Loading = {ctor: 'Loading'};

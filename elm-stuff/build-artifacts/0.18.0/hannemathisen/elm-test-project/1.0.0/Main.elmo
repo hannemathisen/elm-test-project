@@ -1,11 +1,7 @@
-var _hannemathisen$elm_test_project$Main$init = function () {
-	var model = {mode: _hannemathisen$elm_test_project$Types$Draw, drawData: _hannemathisen$elm_test_project$Types$initDrawData, draw: false, image: _hannemathisen$elm_test_project$Types$Loading};
-	return {ctor: '_Tuple2', _0: model, _1: _hannemathisen$elm_test_project$Draw_State$loadImage};
-}();
 var _hannemathisen$elm_test_project$Main$main = _elm_lang$html$Html$program(
 	{
-		init: _hannemathisen$elm_test_project$Main$init,
-		view: _hannemathisen$elm_test_project$Draw_View$view,
-		update: _hannemathisen$elm_test_project$Draw_State$update,
+		init: _hannemathisen$elm_test_project$App_State$init,
+		view: _hannemathisen$elm_test_project$App_View$root,
+		update: _hannemathisen$elm_test_project$App_State$update,
 		subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
 	})();
