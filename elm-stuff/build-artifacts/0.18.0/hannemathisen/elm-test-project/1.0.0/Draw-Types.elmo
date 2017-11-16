@@ -17,6 +17,7 @@ var _hannemathisen$elm_test_project$Draw_Types$DrawData = F3(
 	});
 var _hannemathisen$elm_test_project$Draw_Types$Erase = {ctor: 'Erase'};
 var _hannemathisen$elm_test_project$Draw_Types$Draw = {ctor: 'Draw'};
+var _hannemathisen$elm_test_project$Draw_Types$ClearClicked = {ctor: 'ClearClicked'};
 var _hannemathisen$elm_test_project$Draw_Types$EraseClicked = {ctor: 'EraseClicked'};
 var _hannemathisen$elm_test_project$Draw_Types$TouchMove = function (a) {
 	return {ctor: 'TouchMove', _0: a};

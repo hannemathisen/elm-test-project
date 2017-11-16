@@ -189,6 +189,24 @@ update msg model =
           point :: tl ->
               ( { model | draw = False }, Cmd.none )
 
+    ClearClicked ->
+      let
+        newPointData = []
+        newDrawOps = []
+        drawData = model.drawData
+        newDrawData =
+          { drawData
+            | allPointData = newPointData
+            , drawOps = newDrawOps
+          }
+      in
+        ( { model
+            | drawData = newDrawData
+            , mode = Draw
+          }
+          , Cmd.none
+        )
+
     EraseClicked ->
       case model.mode of
         Draw ->

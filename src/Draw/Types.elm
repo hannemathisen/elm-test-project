@@ -47,6 +47,7 @@ type Msg
   | TouchUp { targetTouches : List Touch, points : List Point }
   | TouchMove { targetTouches : List Touch, points : List Point }
   | EraseClicked
+  | ClearClicked
 
 
 type Image

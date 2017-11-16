@@ -5,8 +5,8 @@ var _hannemathisen$elm_test_project$Draw_State$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Draw.State',
 				{
-					start: {line: 300, column: 3},
-					end: {line: 312, column: 35}
+					start: {line: 318, column: 3},
+					end: {line: 330, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -50,8 +50,8 @@ var _hannemathisen$elm_test_project$Draw_State$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Draw.State',
 				{
-					start: {line: 317, column: 3},
-					end: {line: 329, column: 35}
+					start: {line: 335, column: 3},
+					end: {line: 347, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -87,8 +87,8 @@ var _hannemathisen$elm_test_project$Draw_State$splitAndRemove = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'Draw.State',
 				{
-					start: {line: 262, column: 3},
-					end: {line: 295, column: 69}
+					start: {line: 280, column: 3},
+					end: {line: 313, column: 69}
 				},
 				_p4)('Empty list');
 		} else {
@@ -170,8 +170,8 @@ var _hannemathisen$elm_test_project$Draw_State$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'Draw.State',
 					{
-						start: {line: 246, column: 3},
-						end: {line: 257, column: 57}
+						start: {line: 264, column: 3},
+						end: {line: 275, column: 57}
 					},
 					_p13)('Empty list');
 			} else {
@@ -469,6 +469,20 @@ var _hannemathisen$elm_test_project$Draw_State$update = F2(
 						};
 					}
 				}
+			case 'ClearClicked':
+				var drawData = model.drawData;
+				var newDrawOps = {ctor: '[]'};
+				var newPointData = {ctor: '[]'};
+				var newDrawData = _elm_lang$core$Native_Utils.update(
+					drawData,
+					{allPointData: newPointData, drawOps: newDrawOps});
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{drawData: newDrawData, mode: _hannemathisen$elm_test_project$Draw_Types$Draw}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
 			default:
 				var _p27 = model.mode;
 				if (_p27.ctor === 'Draw') {

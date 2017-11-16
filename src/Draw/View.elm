@@ -22,7 +22,13 @@ view model =
           Erase ->
             text "Erase is on"
         ]
+      , button
+        [ class "btn" ]
+        [ text "Undo" ]
       ]
+      , button
+        [ class "btn", onClick ClearClicked ]
+        [ text "Clear" ]
     ]
 
 
