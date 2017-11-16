@@ -23,11 +23,12 @@ type alias PointData =
   , points : List Point
   }
 
+type alias Points = List Point
 
 type alias DrawData =
-  { currentPoints : List Point
-  , drawnPoints : List (List Point)
-  , erasedPoints : List (List Point)
+  { currentPoints : Points
+  , drawnPoints : List Points
+  , previousDrawnPoints : List (List Points)
   , drawOps : List DrawOp
   }
 
@@ -36,7 +37,7 @@ initDrawData : DrawData
 initDrawData =
   { currentPoints = []
   , drawnPoints = []
-  , erasedPoints = []
+  , previousDrawnPoints = []
   , drawOps = []
   }
 

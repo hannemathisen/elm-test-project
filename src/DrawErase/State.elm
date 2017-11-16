@@ -25,7 +25,25 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
     MouseDown point ->
-      ( { model | draw = True }, Cmd.none )
+      case model.mode of
+        Erase ->
+          let
+            drawData =
+                model.drawData
+
+            newDrawData =
+                { drawData
+                  | previousDrawnPoints =
+                      model.drawData.drawnPoints :: model.drawData.previousDrawnPoints }
+          in
+            ( { model
+                | draw = True
+                , drawData = newDrawData
+              }
+            , Cmd.none
+            )
+        Draw ->
+          ( { model | draw = True }, Cmd.none )
 
     MouseUp point ->
       case model.mode of
@@ -40,6 +58,7 @@ update msg model =
                   { drawData
                       | drawnPoints = model.drawData.currentPoints :: model.drawData.drawnPoints
                       , currentPoints = newcurrentPoints
+                      , previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
                   }
           in
               ( { model
@@ -50,6 +69,7 @@ update msg model =
               )
         Erase ->
           ( { model | draw = False }, Cmd.none )
+
 
     MouseMove point ->
       case model.mode of
@@ -100,7 +120,10 @@ update msg model =
               concatDrawOps lineDrawOps
 
             newDrawData =
-              { drawData | drawnPoints = newPoints, drawOps = newDrawOps }
+              { drawData
+                | drawnPoints = newPoints
+                , drawOps = newDrawOps
+              }
 
           in
             ( { model | drawData = newDrawData }, Cmd.none )
@@ -197,7 +220,34 @@ update msg model =
       ( { model | drawData = initDrawData }, Cmd.none )
 
     UndoClicked ->
-      ( model, Cmd.none)
+      case model.drawData.previousDrawnPoints of
+        [] ->
+          ( model, Cmd.none)
+
+        x :: xs ->
+          let
+            drawData = model.drawData
+
+            lineDrawOps =
+              List.concat
+                (List.map (\x -> pointsToLineOperations x)
+                  x
+                )
+
+            newDrawOps =
+              concatDrawOps lineDrawOps
+
+            newDrawData =
+              { drawData
+                | drawnPoints = x
+                , previousDrawnPoints = xs
+                , drawOps = newDrawOps
+              }
+
+          in
+            ( { model | drawData = newDrawData }
+            , Cmd.none
+            )
 
     EraseClicked ->
       case model.mode of

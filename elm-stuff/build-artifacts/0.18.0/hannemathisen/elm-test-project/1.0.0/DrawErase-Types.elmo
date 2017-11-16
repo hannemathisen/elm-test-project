@@ -1,7 +1,7 @@
 var _hannemathisen$elm_test_project$DrawErase_Types$initDrawData = {
 	currentPoints: {ctor: '[]'},
 	drawnPoints: {ctor: '[]'},
-	erasedPoints: {ctor: '[]'},
+	previousDrawnPoints: {ctor: '[]'},
 	drawOps: {ctor: '[]'}
 };
 var _hannemathisen$elm_test_project$DrawErase_Types$Model = F4(
@@ -14,7 +14,7 @@ var _hannemathisen$elm_test_project$DrawErase_Types$PointData = F2(
 	});
 var _hannemathisen$elm_test_project$DrawErase_Types$DrawData = F4(
 	function (a, b, c, d) {
-		return {currentPoints: a, drawnPoints: b, erasedPoints: c, drawOps: d};
+		return {currentPoints: a, drawnPoints: b, previousDrawnPoints: c, drawOps: d};
 	});
 var _hannemathisen$elm_test_project$DrawErase_Types$Erase = {ctor: 'Erase'};
 var _hannemathisen$elm_test_project$DrawErase_Types$Draw = {ctor: 'Draw'};
