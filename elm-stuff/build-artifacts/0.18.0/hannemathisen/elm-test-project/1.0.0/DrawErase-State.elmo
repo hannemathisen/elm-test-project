@@ -5,8 +5,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DrawErase.State',
 				{
-					start: {line: 325, column: 3},
-					end: {line: 337, column: 35}
+					start: {line: 310, column: 3},
+					end: {line: 322, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -50,8 +50,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DrawErase.State',
 				{
-					start: {line: 342, column: 3},
-					end: {line: 354, column: 35}
+					start: {line: 327, column: 3},
+					end: {line: 339, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -87,8 +87,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$splitAndRemove = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DrawErase.State',
 				{
-					start: {line: 287, column: 3},
-					end: {line: 320, column: 69}
+					start: {line: 272, column: 3},
+					end: {line: 305, column: 69}
 				},
 				_p4)('Empty list');
 		} else {
@@ -170,8 +170,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'DrawErase.State',
 					{
-						start: {line: 271, column: 3},
-						end: {line: 282, column: 59}
+						start: {line: 256, column: 3},
+						end: {line: 267, column: 59}
 					},
 					_p13)('Empty list');
 			} else {
@@ -474,17 +474,11 @@ var _hannemathisen$elm_test_project$DrawErase_State$update = F2(
 					}
 				}
 			case 'ClearClicked':
-				var drawData = model.drawData;
-				var newDrawOps = {ctor: '[]'};
-				var newPoints = {ctor: '[]'};
-				var newDrawData = _elm_lang$core$Native_Utils.update(
-					drawData,
-					{drawnPoints: newPoints, drawOps: newDrawOps});
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{drawData: newDrawData, mode: _hannemathisen$elm_test_project$DrawErase_Types$Draw}),
+						{drawData: _hannemathisen$elm_test_project$DrawErase_Types$initDrawData}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'UndoClicked':

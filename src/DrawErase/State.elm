@@ -194,22 +194,7 @@ update msg model =
               ( { model | draw = False }, Cmd.none )
 
     ClearClicked ->
-      let
-        newPoints = []
-        newDrawOps = []
-        drawData = model.drawData
-        newDrawData =
-          { drawData
-            | drawnPoints = newPoints
-            , drawOps = newDrawOps
-          }
-      in
-        ( { model
-            | drawData = newDrawData
-            , mode = Draw
-          }
-          , Cmd.none
-        )
+      ( { model | drawData = initDrawData }, Cmd.none )
 
     UndoClicked ->
       ( model, Cmd.none)

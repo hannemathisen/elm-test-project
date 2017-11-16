@@ -148,22 +148,34 @@ update msg model =
 
 
     ClearClicked ->
-      let
-        newPoints = []
-        newDrawOps = []
-        drawData = model.drawData
-        newDrawData =
-          { drawData
-            | drawnPoints = newPoints
-            , drawOps = newDrawOps
-          }
-      in
-        ( { model | drawData = newDrawData }
-          , Cmd.none
-        )
+      ( { model | drawData = initDrawData }, Cmd.none )
+
 
     UndoClicked ->
-      ( model, Cmd.none)
+      case model.drawData.drawnPoints of
+        [] ->
+          ( model, Cmd.none )
+
+        x :: xs ->
+          let
+            lineDrawOps =
+              List.concat
+                (List.map (\points -> pointsToLineOperations points)
+                  (xs)
+                )
+
+            newDrawOps = concatDrawOps lineDrawOps
+
+          in
+            ( { model
+                | drawData =
+                    { currentPoints = []
+                    , drawOps = newDrawOps
+                    , drawnPoints = xs
+                    }
+              }
+            , Cmd.none            
+            )
 
 
 
