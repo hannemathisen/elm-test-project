@@ -2,8 +2,10 @@ module App.State exposing (..)
 
 import App.Types exposing (..)
 import Canvas exposing (Error, DrawOp(..), Canvas)
-import Draw.State
-import Draw.Types
+import DrawErase.State
+import DrawErase.Types
+import DrawOld.State
+import DrawOld.Types
 import Zoom.State
 import Zoom.Types
 import Task
@@ -12,12 +14,15 @@ import Task
 init : ( Model, Cmd Msg)
 init =
   let
-    ( drawModel, drawCmd ) =
-        Draw.State.init
+    ( drawEraseModel, drawEraseCmd ) =
+        DrawErase.State.init
+    ( drawOldModel, drawOldCmd ) =
+        DrawOld.State.init
     ( zoomModel, zoomCmd ) =
         Zoom.State.init
     model =
-      { draw = drawModel
+      { drawErase = drawEraseModel
+      , drawOld = drawOldModel
       , zoom = zoomModel
       , globalMode = Main
       }
@@ -39,11 +44,13 @@ update msg model =
       case Result.toMaybe result of
         Just canvas ->
           let
-            newDrawModel = model.draw
+            newDrawEraseModel = model.drawErase
+            newDrawOldModel = model.drawOld
             newZoomModel = model.zoom
           in
             ( { model
-                | draw = { newDrawModel | image = Draw.Types.GotCanvas canvas }
+                | drawErase = { newDrawEraseModel | image = DrawErase.Types.GotCanvas canvas }
+                , drawOld = { newDrawOldModel | image = DrawOld.Types.GotCanvas canvas }
                 , zoom = { newZoomModel | image = Zoom.Types.GotCanvas canvas }
               }
             , Cmd.none
@@ -56,13 +63,22 @@ update msg model =
     ChangeMode mode ->
       ( { model | globalMode = mode }, Cmd.none )
 
-    DrawMsg drawMsg ->
+    DrawEraseMsg drawMsg ->
       let
         ( drawModel, drawCmd) =
-          Draw.State.update drawMsg model.draw
+          DrawErase.State.update drawMsg model.drawErase
       in
-        ( { model | draw = drawModel}
-        , Cmd.map DrawMsg drawCmd
+        ( { model | drawErase = drawModel}
+        , Cmd.map DrawEraseMsg drawCmd
+        )
+
+    DrawOldMsg drawMsg ->
+      let
+        ( drawModel, drawCmd) =
+          DrawOld.State.update drawMsg model.drawOld
+      in
+        ( { model | drawOld = drawModel}
+        , Cmd.map DrawOldMsg drawCmd
         )
 
     ZoomMsg zoomMsg ->

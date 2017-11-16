@@ -1,4 +1,4 @@
-module Draw.Types exposing (..)
+module DrawOld.Types exposing (..)
 
 import Canvas.Point exposing (Point)
 import Canvas exposing (Error, DrawOp(..), Canvas)
@@ -6,16 +6,10 @@ import Canvas.Events exposing (Touch)
 
 
 type alias Model =
-  { mode : Mode
-  , drawData : DrawData
+  { drawData : DrawData
   , draw : Bool
   , image : Image
   }
-
-
-type Mode
-  = Draw
-  | Erase
 
 
 type alias PointData =
@@ -25,16 +19,16 @@ type alias PointData =
 
 
 type alias DrawData =
-  { currentPointData : List Point
-  , allPointData : List (List Point)
+  { currentPoints : List Point
+  , drawnPoints : List (List Point)
   , drawOps : List DrawOp
   }
 
 
 initDrawData : DrawData
 initDrawData =
-  { currentPointData = []
-  , allPointData = []
+  { currentPoints = []
+  , drawnPoints = []
   , drawOps = []
   }
 
@@ -46,8 +40,8 @@ type Msg
   | TouchDown { targetTouches : List Touch, points : List Point }
   | TouchUp { targetTouches : List Touch, points : List Point }
   | TouchMove { targetTouches : List Touch, points : List Point }
-  | EraseClicked
   | ClearClicked
+  | UndoClicked
 
 
 type Image

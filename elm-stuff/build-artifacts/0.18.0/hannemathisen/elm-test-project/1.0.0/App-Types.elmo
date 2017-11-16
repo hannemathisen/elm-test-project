@@ -1,18 +1,22 @@
-var _hannemathisen$elm_test_project$App_Types$Model = F3(
-	function (a, b, c) {
-		return {globalMode: a, draw: b, zoom: c};
+var _hannemathisen$elm_test_project$App_Types$Model = F4(
+	function (a, b, c, d) {
+		return {globalMode: a, drawErase: b, drawOld: c, zoom: d};
 	});
 var _hannemathisen$elm_test_project$App_Types$Main = {ctor: 'Main'};
 var _hannemathisen$elm_test_project$App_Types$Zoom = {ctor: 'Zoom'};
-var _hannemathisen$elm_test_project$App_Types$Draw = {ctor: 'Draw'};
+var _hannemathisen$elm_test_project$App_Types$DrawOld = {ctor: 'DrawOld'};
+var _hannemathisen$elm_test_project$App_Types$DrawErase = {ctor: 'DrawErase'};
 var _hannemathisen$elm_test_project$App_Types$ImageLoaded = function (a) {
 	return {ctor: 'ImageLoaded', _0: a};
 };
 var _hannemathisen$elm_test_project$App_Types$ZoomMsg = function (a) {
 	return {ctor: 'ZoomMsg', _0: a};
 };
-var _hannemathisen$elm_test_project$App_Types$DrawMsg = function (a) {
-	return {ctor: 'DrawMsg', _0: a};
+var _hannemathisen$elm_test_project$App_Types$DrawOldMsg = function (a) {
+	return {ctor: 'DrawOldMsg', _0: a};
+};
+var _hannemathisen$elm_test_project$App_Types$DrawEraseMsg = function (a) {
+	return {ctor: 'DrawEraseMsg', _0: a};
 };
 var _hannemathisen$elm_test_project$App_Types$ChangeMode = function (a) {
 	return {ctor: 'ChangeMode', _0: a};

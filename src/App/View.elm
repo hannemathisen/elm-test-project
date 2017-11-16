@@ -4,7 +4,8 @@ import Html exposing (..)
 import Html.Events exposing (onClick)
 import Html.Attributes exposing (..)
 import App.Types exposing (..)
-import Draw.View
+import DrawErase.View
+import DrawOld.View
 import Zoom.View
 
 
@@ -17,9 +18,12 @@ root model =
         Main ->
           viewModeMenu
         Zoom ->
-          div [] [ Html.map ZoomMsg (Zoom.View.view model.zoom) ]
-        Draw ->
-          div [] [ Html.map DrawMsg (Draw.View.view model.draw) ]
+          div []
+            [ Html.map ZoomMsg (Zoom.View.view model.zoom) ]
+        DrawErase ->
+          div [] [ Html.map DrawEraseMsg (DrawErase.View.view model.drawErase) ]
+        DrawOld ->
+          div [] [ Html.map DrawOldMsg (DrawOld.View.view model.drawOld)  ]
       ]
     ]
 
@@ -27,7 +31,8 @@ root model =
 viewModeMenu : Html Msg
 viewModeMenu =
   div []
-    [ button [ class "btn", onClick (ChangeMode Draw) ] [ text "Draw" ]
+    [ button [ class "btn", onClick (ChangeMode DrawErase) ] [ text "Draw 1" ]
+    , button [ class "btn", onClick (ChangeMode DrawOld) ] [ text "Draw 2"]
     , button [ class "btn", onClick (ChangeMode Zoom) ] [ text "Zoom" ]
     ]
 

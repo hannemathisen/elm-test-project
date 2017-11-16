@@ -1,9 +1,9 @@
-var _hannemathisen$elm_test_project$Draw_State$mapXPoints = F2(
+var _hannemathisen$elm_test_project$DrawErase_State$mapXPoints = F2(
 	function (xList, yList) {
 		var _p0 = xList;
 		if (_p0.ctor === '[]') {
 			return _elm_lang$core$Native_Utils.crashCase(
-				'Draw.State',
+				'DrawErase.State',
 				{
 					start: {line: 325, column: 3},
 					end: {line: 337, column: 35}
@@ -39,16 +39,16 @@ var _hannemathisen$elm_test_project$Draw_State$mapXPoints = F2(
 				return A2(
 					_elm_lang$core$List$append,
 					mappedList,
-					A2(_hannemathisen$elm_test_project$Draw_State$mapXPoints, _p0._1, yList));
+					A2(_hannemathisen$elm_test_project$DrawErase_State$mapXPoints, _p0._1, yList));
 			}
 		}
 	});
-var _hannemathisen$elm_test_project$Draw_State$mapYPoints = F2(
+var _hannemathisen$elm_test_project$DrawErase_State$mapYPoints = F2(
 	function (xList, yList) {
 		var _p2 = yList;
 		if (_p2.ctor === '[]') {
 			return _elm_lang$core$Native_Utils.crashCase(
-				'Draw.State',
+				'DrawErase.State',
 				{
 					start: {line: 342, column: 3},
 					end: {line: 354, column: 35}
@@ -57,7 +57,7 @@ var _hannemathisen$elm_test_project$Draw_State$mapYPoints = F2(
 		} else {
 			if (_p2._1.ctor === '[]') {
 				return A2(
-					_hannemathisen$elm_test_project$Draw_State$mapXPoints,
+					_hannemathisen$elm_test_project$DrawErase_State$mapXPoints,
 					xList,
 					{
 						ctor: '::',
@@ -66,7 +66,7 @@ var _hannemathisen$elm_test_project$Draw_State$mapYPoints = F2(
 					});
 			} else {
 				var mappedList = A2(
-					_hannemathisen$elm_test_project$Draw_State$mapXPoints,
+					_hannemathisen$elm_test_project$DrawErase_State$mapXPoints,
 					xList,
 					{
 						ctor: '::',
@@ -76,16 +76,16 @@ var _hannemathisen$elm_test_project$Draw_State$mapYPoints = F2(
 				return A2(
 					_elm_lang$core$List$append,
 					mappedList,
-					A2(_hannemathisen$elm_test_project$Draw_State$mapYPoints, xList, _p2._1));
+					A2(_hannemathisen$elm_test_project$DrawErase_State$mapYPoints, xList, _p2._1));
 			}
 		}
 	});
-var _hannemathisen$elm_test_project$Draw_State$splitAndRemove = F2(
+var _hannemathisen$elm_test_project$DrawErase_State$splitAndRemove = F2(
 	function (drawnPoints, point) {
 		var _p4 = drawnPoints;
 		if (_p4.ctor === '[]') {
 			return _elm_lang$core$Native_Utils.crashCase(
-				'Draw.State',
+				'DrawErase.State',
 				{
 					start: {line: 287, column: 3},
 					end: {line: 320, column: 69}
@@ -133,7 +133,7 @@ var _hannemathisen$elm_test_project$Draw_State$splitAndRemove = F2(
 							_0: _p11,
 							_1: {ctor: '[]'}
 						},
-						A2(_hannemathisen$elm_test_project$Draw_State$splitAndRemove, _p12, point));
+						A2(_hannemathisen$elm_test_project$DrawErase_State$splitAndRemove, _p12, point));
 				} else {
 					var _p10 = _p9._0;
 					var list2 = A2(_elm_lang$core$List$drop, _p10, _p11);
@@ -145,7 +145,7 @@ var _hannemathisen$elm_test_project$Draw_State$splitAndRemove = F2(
 							_0: list2,
 							_1: {ctor: '[]'}
 						},
-						A2(_hannemathisen$elm_test_project$Draw_State$splitAndRemove, _p12, point)) : A2(
+						A2(_hannemathisen$elm_test_project$DrawErase_State$splitAndRemove, _p12, point)) : A2(
 						_elm_lang$core$List$append,
 						{
 							ctor: '::',
@@ -156,19 +156,19 @@ var _hannemathisen$elm_test_project$Draw_State$splitAndRemove = F2(
 								_1: {ctor: '[]'}
 							}
 						},
-						A2(_hannemathisen$elm_test_project$Draw_State$splitAndRemove, _p12, point));
+						A2(_hannemathisen$elm_test_project$DrawErase_State$splitAndRemove, _p12, point));
 				}
 			}
 		}
 	});
-var _hannemathisen$elm_test_project$Draw_State$removePoints = F2(
+var _hannemathisen$elm_test_project$DrawErase_State$removePoints = F2(
 	function (drawnPoints, pointsToErase) {
 		removePoints:
 		while (true) {
 			var _p13 = pointsToErase;
 			if (_p13.ctor === '[]') {
 				return _elm_lang$core$Native_Utils.crashCase(
-					'Draw.State',
+					'DrawErase.State',
 					{
 						start: {line: 271, column: 3},
 						end: {line: 282, column: 59}
@@ -177,10 +177,10 @@ var _hannemathisen$elm_test_project$Draw_State$removePoints = F2(
 			} else {
 				if (_p13._1.ctor === '[]') {
 					var point = _hannemathisen$elm_test_project$Canvas_Point$fromFloats(_p13._0);
-					return A2(_hannemathisen$elm_test_project$Draw_State$splitAndRemove, drawnPoints, point);
+					return A2(_hannemathisen$elm_test_project$DrawErase_State$splitAndRemove, drawnPoints, point);
 				} else {
 					var point = _hannemathisen$elm_test_project$Canvas_Point$fromFloats(_p13._0);
-					var _v6 = A2(_hannemathisen$elm_test_project$Draw_State$splitAndRemove, drawnPoints, point),
+					var _v6 = A2(_hannemathisen$elm_test_project$DrawErase_State$splitAndRemove, drawnPoints, point),
 						_v7 = _p13._1;
 					drawnPoints = _v6;
 					pointsToErase = _v7;
@@ -189,7 +189,7 @@ var _hannemathisen$elm_test_project$Draw_State$removePoints = F2(
 			}
 		}
 	});
-var _hannemathisen$elm_test_project$Draw_State$erase = F2(
+var _hannemathisen$elm_test_project$DrawErase_State$erase = F2(
 	function (point, drawnPoints) {
 		var _p15 = _hannemathisen$elm_test_project$Canvas_Point$toInts(point);
 		var x = _p15._0;
@@ -202,10 +202,10 @@ var _hannemathisen$elm_test_project$Draw_State$erase = F2(
 			_elm_lang$core$List$map,
 			_elm_lang$core$Basics$toFloat,
 			A2(_elm_lang$core$List$range, y - 7, y + 7));
-		var points = A2(_hannemathisen$elm_test_project$Draw_State$mapYPoints, xPoints, yPoints);
-		return A2(_hannemathisen$elm_test_project$Draw_State$removePoints, drawnPoints, points);
+		var points = A2(_hannemathisen$elm_test_project$DrawErase_State$mapYPoints, xPoints, yPoints);
+		return A2(_hannemathisen$elm_test_project$DrawErase_State$removePoints, drawnPoints, points);
 	});
-var _hannemathisen$elm_test_project$Draw_State$concatDrawOps = function (drawOps) {
+var _hannemathisen$elm_test_project$DrawErase_State$concatDrawOps = function (drawOps) {
 	return A2(
 		_elm_lang$core$Basics_ops['++'],
 		{
@@ -234,7 +234,7 @@ var _hannemathisen$elm_test_project$Draw_State$concatDrawOps = function (drawOps
 				_1: {ctor: '[]'}
 			}));
 };
-var _hannemathisen$elm_test_project$Draw_State$pointsToLineOperations = function (points) {
+var _hannemathisen$elm_test_project$DrawErase_State$pointsToLineOperations = function (points) {
 	var _p16 = points;
 	if (_p16.ctor === '[]') {
 		return {ctor: '[]'};
@@ -254,7 +254,7 @@ var _hannemathisen$elm_test_project$Draw_State$pointsToLineOperations = function
 				_p16._1));
 	}
 };
-var _hannemathisen$elm_test_project$Draw_State$update = F2(
+var _hannemathisen$elm_test_project$DrawErase_State$update = F2(
 	function (msg, model) {
 		var _p17 = msg;
 		switch (_p17.ctor) {
@@ -312,10 +312,10 @@ var _hannemathisen$elm_test_project$Draw_State$update = F2(
 							A2(
 								_elm_lang$core$List$map,
 								function (newPoints) {
-									return _hannemathisen$elm_test_project$Draw_State$pointsToLineOperations(newPoints);
+									return _hannemathisen$elm_test_project$DrawErase_State$pointsToLineOperations(newPoints);
 								},
 								{ctor: '::', _0: newPoints, _1: model.drawData.drawnPoints}));
-						var newDrawOps = _hannemathisen$elm_test_project$Draw_State$concatDrawOps(lineDrawOps);
+						var newDrawOps = _hannemathisen$elm_test_project$DrawErase_State$concatDrawOps(lineDrawOps);
 						var newDrawData = _elm_lang$core$Native_Utils.update(
 							drawData,
 							{currentPoints: newPoints, drawOps: newDrawOps});
@@ -331,15 +331,15 @@ var _hannemathisen$elm_test_project$Draw_State$update = F2(
 					}
 				} else {
 					var drawData = model.drawData;
-					var newPoints = A2(_hannemathisen$elm_test_project$Draw_State$erase, _p21, drawData.drawnPoints);
+					var newPoints = A2(_hannemathisen$elm_test_project$DrawErase_State$erase, _p21, drawData.drawnPoints);
 					var lineDrawOps = _elm_lang$core$List$concat(
 						A2(
 							_elm_lang$core$List$map,
 							function (newPoints) {
-								return _hannemathisen$elm_test_project$Draw_State$pointsToLineOperations(newPoints);
+								return _hannemathisen$elm_test_project$DrawErase_State$pointsToLineOperations(newPoints);
 							},
 							newPoints));
-					var newDrawOps = _hannemathisen$elm_test_project$Draw_State$concatDrawOps(lineDrawOps);
+					var newDrawOps = _hannemathisen$elm_test_project$DrawErase_State$concatDrawOps(lineDrawOps);
 					var newDrawData = _elm_lang$core$Native_Utils.update(
 						drawData,
 						{drawnPoints: newPoints, drawOps: newDrawOps});
@@ -427,10 +427,10 @@ var _hannemathisen$elm_test_project$Draw_State$update = F2(
 								A2(
 									_elm_lang$core$List$map,
 									function (newPoints) {
-										return _hannemathisen$elm_test_project$Draw_State$pointsToLineOperations(newPoints);
+										return _hannemathisen$elm_test_project$DrawErase_State$pointsToLineOperations(newPoints);
 									},
 									{ctor: '::', _0: newPoints, _1: model.drawData.drawnPoints}));
-							var newDrawOps = _hannemathisen$elm_test_project$Draw_State$concatDrawOps(lineDrawOps);
+							var newDrawOps = _hannemathisen$elm_test_project$DrawErase_State$concatDrawOps(lineDrawOps);
 							var newDrawData = _elm_lang$core$Native_Utils.update(
 								drawData,
 								{currentPoints: newPoints, drawOps: newDrawOps});
@@ -443,15 +443,15 @@ var _hannemathisen$elm_test_project$Draw_State$update = F2(
 							};
 						} else {
 							var drawData = model.drawData;
-							var newPoints = A2(_hannemathisen$elm_test_project$Draw_State$erase, _p26, drawData.drawnPoints);
+							var newPoints = A2(_hannemathisen$elm_test_project$DrawErase_State$erase, _p26, drawData.drawnPoints);
 							var lineDrawOps = _elm_lang$core$List$concat(
 								A2(
 									_elm_lang$core$List$map,
 									function (newPoints) {
-										return _hannemathisen$elm_test_project$Draw_State$pointsToLineOperations(newPoints);
+										return _hannemathisen$elm_test_project$DrawErase_State$pointsToLineOperations(newPoints);
 									},
 									newPoints));
-							var newDrawOps = _hannemathisen$elm_test_project$Draw_State$concatDrawOps(lineDrawOps);
+							var newDrawOps = _hannemathisen$elm_test_project$DrawErase_State$concatDrawOps(lineDrawOps);
 							var newDrawData = _elm_lang$core$Native_Utils.update(
 								drawData,
 								{drawnPoints: newPoints, drawOps: newDrawOps});
@@ -484,7 +484,7 @@ var _hannemathisen$elm_test_project$Draw_State$update = F2(
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{drawData: newDrawData, mode: _hannemathisen$elm_test_project$Draw_Types$Draw}),
+						{drawData: newDrawData, mode: _hannemathisen$elm_test_project$DrawErase_Types$Draw}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			case 'UndoClicked':
@@ -496,7 +496,7 @@ var _hannemathisen$elm_test_project$Draw_State$update = F2(
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{mode: _hannemathisen$elm_test_project$Draw_Types$Erase}),
+							{mode: _hannemathisen$elm_test_project$DrawErase_Types$Erase}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				} else {
@@ -504,13 +504,13 @@ var _hannemathisen$elm_test_project$Draw_State$update = F2(
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{mode: _hannemathisen$elm_test_project$Draw_Types$Draw}),
+							{mode: _hannemathisen$elm_test_project$DrawErase_Types$Draw}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
 		}
 	});
-var _hannemathisen$elm_test_project$Draw_State$init = function () {
-	var model = {mode: _hannemathisen$elm_test_project$Draw_Types$Draw, drawData: _hannemathisen$elm_test_project$Draw_Types$initDrawData, draw: false, image: _hannemathisen$elm_test_project$Draw_Types$Loading};
+var _hannemathisen$elm_test_project$DrawErase_State$init = function () {
+	var model = {mode: _hannemathisen$elm_test_project$DrawErase_Types$Draw, drawData: _hannemathisen$elm_test_project$DrawErase_Types$initDrawData, draw: false, image: _hannemathisen$elm_test_project$DrawErase_Types$Loading};
 	return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 }();

@@ -11,16 +11,22 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 				if (_p1.ctor === 'Just') {
 					var _p2 = _p1._0;
 					var newZoomModel = model.zoom;
-					var newDrawModel = model.draw;
+					var newDrawOldModel = model.drawOld;
+					var newDrawEraseModel = model.drawErase;
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
 							{
-								draw: _elm_lang$core$Native_Utils.update(
-									newDrawModel,
+								drawErase: _elm_lang$core$Native_Utils.update(
+									newDrawEraseModel,
 									{
-										image: _hannemathisen$elm_test_project$Draw_Types$GotCanvas(_p2)
+										image: _hannemathisen$elm_test_project$DrawErase_Types$GotCanvas(_p2)
+									}),
+								drawOld: _elm_lang$core$Native_Utils.update(
+									newDrawOldModel,
+									{
+										image: _hannemathisen$elm_test_project$DrawOld_Types$GotCanvas(_p2)
 									}),
 								zoom: _elm_lang$core$Native_Utils.update(
 									newZoomModel,
@@ -41,21 +47,32 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 						{globalMode: _p0._0}),
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
-			case 'DrawMsg':
-				var _p3 = A2(_hannemathisen$elm_test_project$Draw_State$update, _p0._0, model.draw);
+			case 'DrawEraseMsg':
+				var _p3 = A2(_hannemathisen$elm_test_project$DrawErase_State$update, _p0._0, model.drawErase);
 				var drawModel = _p3._0;
 				var drawCmd = _p3._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
 						model,
-						{draw: drawModel}),
-					_1: A2(_elm_lang$core$Platform_Cmd$map, _hannemathisen$elm_test_project$App_Types$DrawMsg, drawCmd)
+						{drawErase: drawModel}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _hannemathisen$elm_test_project$App_Types$DrawEraseMsg, drawCmd)
+				};
+			case 'DrawOldMsg':
+				var _p4 = A2(_hannemathisen$elm_test_project$DrawOld_State$update, _p0._0, model.drawOld);
+				var drawModel = _p4._0;
+				var drawCmd = _p4._1;
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{drawOld: drawModel}),
+					_1: A2(_elm_lang$core$Platform_Cmd$map, _hannemathisen$elm_test_project$App_Types$DrawOldMsg, drawCmd)
 				};
 			default:
-				var _p4 = A2(_hannemathisen$elm_test_project$Zoom_State$update, _p0._0, model.zoom);
-				var zoomModel = _p4._0;
-				var zoomCmd = _p4._1;
+				var _p5 = A2(_hannemathisen$elm_test_project$Zoom_State$update, _p0._0, model.zoom);
+				var zoomModel = _p5._0;
+				var zoomCmd = _p5._1;
 				return {
 					ctor: '_Tuple2',
 					_0: _elm_lang$core$Native_Utils.update(
@@ -66,12 +83,15 @@ var _hannemathisen$elm_test_project$App_State$update = F2(
 		}
 	});
 var _hannemathisen$elm_test_project$App_State$init = function () {
-	var _p5 = _hannemathisen$elm_test_project$Zoom_State$init;
-	var zoomModel = _p5._0;
-	var zoomCmd = _p5._1;
-	var _p6 = _hannemathisen$elm_test_project$Draw_State$init;
-	var drawModel = _p6._0;
-	var drawCmd = _p6._1;
-	var model = {draw: drawModel, zoom: zoomModel, globalMode: _hannemathisen$elm_test_project$App_Types$Main};
+	var _p6 = _hannemathisen$elm_test_project$Zoom_State$init;
+	var zoomModel = _p6._0;
+	var zoomCmd = _p6._1;
+	var _p7 = _hannemathisen$elm_test_project$DrawOld_State$init;
+	var drawOldModel = _p7._0;
+	var drawOldCmd = _p7._1;
+	var _p8 = _hannemathisen$elm_test_project$DrawErase_State$init;
+	var drawEraseModel = _p8._0;
+	var drawEraseCmd = _p8._1;
+	var model = {drawErase: drawEraseModel, drawOld: drawOldModel, zoom: zoomModel, globalMode: _hannemathisen$elm_test_project$App_Types$Main};
 	return {ctor: '_Tuple2', _0: model, _1: _hannemathisen$elm_test_project$App_State$loadImage};
 }();

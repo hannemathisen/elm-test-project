@@ -1,0 +1,45 @@
+var _hannemathisen$elm_test_project$DrawErase_Types$initDrawData = {
+	currentPoints: {ctor: '[]'},
+	drawnPoints: {ctor: '[]'},
+	erasedPoints: {ctor: '[]'},
+	drawOps: {ctor: '[]'}
+};
+var _hannemathisen$elm_test_project$DrawErase_Types$Model = F4(
+	function (a, b, c, d) {
+		return {mode: a, drawData: b, draw: c, image: d};
+	});
+var _hannemathisen$elm_test_project$DrawErase_Types$PointData = F2(
+	function (a, b) {
+		return {position: a, points: b};
+	});
+var _hannemathisen$elm_test_project$DrawErase_Types$DrawData = F4(
+	function (a, b, c, d) {
+		return {currentPoints: a, drawnPoints: b, erasedPoints: c, drawOps: d};
+	});
+var _hannemathisen$elm_test_project$DrawErase_Types$Erase = {ctor: 'Erase'};
+var _hannemathisen$elm_test_project$DrawErase_Types$Draw = {ctor: 'Draw'};
+var _hannemathisen$elm_test_project$DrawErase_Types$UndoClicked = {ctor: 'UndoClicked'};
+var _hannemathisen$elm_test_project$DrawErase_Types$ClearClicked = {ctor: 'ClearClicked'};
+var _hannemathisen$elm_test_project$DrawErase_Types$EraseClicked = {ctor: 'EraseClicked'};
+var _hannemathisen$elm_test_project$DrawErase_Types$TouchMove = function (a) {
+	return {ctor: 'TouchMove', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawErase_Types$TouchUp = function (a) {
+	return {ctor: 'TouchUp', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawErase_Types$TouchDown = function (a) {
+	return {ctor: 'TouchDown', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawErase_Types$MouseMove = function (a) {
+	return {ctor: 'MouseMove', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawErase_Types$MouseUp = function (a) {
+	return {ctor: 'MouseUp', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawErase_Types$MouseDown = function (a) {
+	return {ctor: 'MouseDown', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawErase_Types$GotCanvas = function (a) {
+	return {ctor: 'GotCanvas', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawErase_Types$Loading = {ctor: 'Loading'};

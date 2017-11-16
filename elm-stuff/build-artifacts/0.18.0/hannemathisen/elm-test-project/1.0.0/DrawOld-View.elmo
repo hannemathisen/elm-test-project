@@ -1,4 +1,4 @@
-var _hannemathisen$elm_test_project$Draw_View$drawCanvas = F2(
+var _hannemathisen$elm_test_project$DrawOld_View$drawCanvas = F2(
 	function (drawOps, canvas) {
 		var drawOpsWithBorder = A2(
 			_elm_lang$core$List$append,
@@ -34,7 +34,7 @@ var _hannemathisen$elm_test_project$Draw_View$drawCanvas = F2(
 		var height = _p0.height;
 		return A2(_hannemathisen$elm_test_project$Canvas$batch, drawOpsWithBorder, canvas);
 	});
-var _hannemathisen$elm_test_project$Draw_View$presentIfReady = function (model) {
+var _hannemathisen$elm_test_project$DrawOld_View$presentIfReady = function (model) {
 	var _p1 = model.image;
 	if (_p1.ctor === 'Loading') {
 		return A2(
@@ -52,19 +52,19 @@ var _hannemathisen$elm_test_project$Draw_View$presentIfReady = function (model) 
 			if (_p2 === true) {
 				return {
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$Draw_Types$MouseUp),
+					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseUp(_hannemathisen$elm_test_project$DrawOld_Types$MouseUp),
 					_1: {
 						ctor: '::',
-						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$Draw_Types$MouseMove),
+						_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseMove(_hannemathisen$elm_test_project$DrawOld_Types$MouseMove),
 						_1: {
 							ctor: '::',
-							_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchMove),
+							_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchMove, touchOptions, _hannemathisen$elm_test_project$DrawOld_Types$TouchMove),
 							_1: {
 								ctor: '::',
-								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
+								_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchEnd, touchOptions, _hannemathisen$elm_test_project$DrawOld_Types$TouchUp),
 								_1: {
 									ctor: '::',
-									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchUp),
+									_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchCancel, touchOptions, _hannemathisen$elm_test_project$DrawOld_Types$TouchUp),
 									_1: {ctor: '[]'}
 								}
 							}
@@ -74,30 +74,22 @@ var _hannemathisen$elm_test_project$Draw_View$presentIfReady = function (model) 
 			} else {
 				return {
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$Draw_Types$MouseDown),
+					_0: _hannemathisen$elm_test_project$Canvas_Events$onMouseDown(_hannemathisen$elm_test_project$DrawOld_Types$MouseDown),
 					_1: {
 						ctor: '::',
-						_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$Draw_Types$TouchDown),
+						_0: A2(_hannemathisen$elm_test_project$Canvas_Events$onMultiTouchStart, touchOptions, _hannemathisen$elm_test_project$DrawOld_Types$TouchDown),
 						_1: {ctor: '[]'}
 					}
 				};
 			}
 		}();
-		var allEvents = _elm_lang$core$Native_Utils.eq(model.mode, _hannemathisen$elm_test_project$Draw_Types$Erase) ? A2(
-			_elm_lang$core$Basics_ops['++'],
-			events,
-			{
-				ctor: '::',
-				_0: _elm_lang$html$Html_Attributes$class('add-eraser'),
-				_1: {ctor: '[]'}
-			}) : events;
 		return A2(
 			_hannemathisen$elm_test_project$Canvas$toHtml,
-			allEvents,
-			A2(_hannemathisen$elm_test_project$Draw_View$drawCanvas, model.drawData.drawOps, _p1._0));
+			events,
+			A2(_hannemathisen$elm_test_project$DrawOld_View$drawCanvas, model.drawData.drawOps, _p1._0));
 	}
 };
-var _hannemathisen$elm_test_project$Draw_View$view = function (model) {
+var _hannemathisen$elm_test_project$DrawOld_View$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		{ctor: '[]'},
@@ -108,7 +100,7 @@ var _hannemathisen$elm_test_project$Draw_View$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$Draw_View$presentIfReady(model),
+					_0: _hannemathisen$elm_test_project$DrawOld_View$presentIfReady(model),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -125,20 +117,13 @@ var _hannemathisen$elm_test_project$Draw_View$view = function (model) {
 								_0: _elm_lang$html$Html_Attributes$class('btn'),
 								_1: {
 									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$Draw_Types$EraseClicked),
+									_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawOld_Types$UndoClicked),
 									_1: {ctor: '[]'}
 								}
 							},
 							{
 								ctor: '::',
-								_0: function () {
-									var _p3 = model.mode;
-									if (_p3.ctor === 'Draw') {
-										return _elm_lang$html$Html$text('Erase is off');
-									} else {
-										return _elm_lang$html$Html$text('Erase is on');
-									}
-								}(),
+								_0: _elm_lang$html$Html$text('Undo'),
 								_1: {ctor: '[]'}
 							}),
 						_1: {
@@ -150,38 +135,19 @@ var _hannemathisen$elm_test_project$Draw_View$view = function (model) {
 									_0: _elm_lang$html$Html_Attributes$class('btn'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$Draw_Types$UndoClicked),
+										_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawOld_Types$ClearClicked),
 										_1: {ctor: '[]'}
 									}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Undo'),
+									_0: _elm_lang$html$Html$text('Clear'),
 									_1: {ctor: '[]'}
 								}),
 							_1: {ctor: '[]'}
 						}
 					}),
-				_1: {
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$button,
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html_Attributes$class('btn'),
-							_1: {
-								ctor: '::',
-								_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$Draw_Types$ClearClicked),
-								_1: {ctor: '[]'}
-							}
-						},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('Clear'),
-							_1: {ctor: '[]'}
-						}),
-					_1: {ctor: '[]'}
-				}
+				_1: {ctor: '[]'}
 			}
 		});
 };

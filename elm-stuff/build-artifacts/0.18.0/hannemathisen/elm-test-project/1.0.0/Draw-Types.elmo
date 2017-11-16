@@ -1,6 +1,7 @@
 var _hannemathisen$elm_test_project$Draw_Types$initDrawData = {
-	currentPointData: {ctor: '[]'},
-	allPointData: {ctor: '[]'},
+	currentPoints: {ctor: '[]'},
+	drawnPoints: {ctor: '[]'},
+	erasedPoints: {ctor: '[]'},
 	drawOps: {ctor: '[]'}
 };
 var _hannemathisen$elm_test_project$Draw_Types$Model = F4(
@@ -11,12 +12,13 @@ var _hannemathisen$elm_test_project$Draw_Types$PointData = F2(
 	function (a, b) {
 		return {position: a, points: b};
 	});
-var _hannemathisen$elm_test_project$Draw_Types$DrawData = F3(
-	function (a, b, c) {
-		return {currentPointData: a, allPointData: b, drawOps: c};
+var _hannemathisen$elm_test_project$Draw_Types$DrawData = F4(
+	function (a, b, c, d) {
+		return {currentPoints: a, drawnPoints: b, erasedPoints: c, drawOps: d};
 	});
 var _hannemathisen$elm_test_project$Draw_Types$Erase = {ctor: 'Erase'};
 var _hannemathisen$elm_test_project$Draw_Types$Draw = {ctor: 'Draw'};
+var _hannemathisen$elm_test_project$Draw_Types$UndoClicked = {ctor: 'UndoClicked'};
 var _hannemathisen$elm_test_project$Draw_Types$ClearClicked = {ctor: 'ClearClicked'};
 var _hannemathisen$elm_test_project$Draw_Types$EraseClicked = {ctor: 'EraseClicked'};
 var _hannemathisen$elm_test_project$Draw_Types$TouchMove = function (a) {

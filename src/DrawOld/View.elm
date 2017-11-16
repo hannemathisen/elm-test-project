@@ -1,6 +1,6 @@
-module Draw.View exposing (..)
+module DrawOld.View exposing (..)
 
-import Draw.Types exposing (..)
+import DrawOld.Types exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
@@ -15,20 +15,12 @@ view model =
     [ div [] [ presentIfReady model ]
     , div []
       [ button
-        [ class "btn", onClick EraseClicked ]
-        [ case model.mode of
-          Draw ->
-             text "Erase is off"
-          Erase ->
-            text "Erase is on"
-        ]
-      , button
-        [ class "btn" ]
+        [ class "btn", onClick UndoClicked ]
         [ text "Undo" ]
-      ]
       , button
         [ class "btn", onClick ClearClicked ]
         [ text "Clear" ]
+      ]
     ]
 
 
@@ -60,16 +52,10 @@ presentIfReady model =
               , Events.onMultiTouchStart touchOptions TouchDown
               ]
 
-        allEvents =
-          if model.mode == Erase then
-            events ++ [ class "add-eraser" ]
-          else
-            events
-
       in
         canvas
           |> drawCanvas model.drawData.drawOps
-          |> Canvas.toHtml allEvents
+          |> Canvas.toHtml events
 
 
 drawCanvas : List DrawOp -> Canvas -> Canvas

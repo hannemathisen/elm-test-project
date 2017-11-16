@@ -1,0 +1,41 @@
+var _hannemathisen$elm_test_project$DrawOld_Types$initDrawData = {
+	currentPoints: {ctor: '[]'},
+	drawnPoints: {ctor: '[]'},
+	drawOps: {ctor: '[]'}
+};
+var _hannemathisen$elm_test_project$DrawOld_Types$Model = F3(
+	function (a, b, c) {
+		return {drawData: a, draw: b, image: c};
+	});
+var _hannemathisen$elm_test_project$DrawOld_Types$PointData = F2(
+	function (a, b) {
+		return {position: a, points: b};
+	});
+var _hannemathisen$elm_test_project$DrawOld_Types$DrawData = F3(
+	function (a, b, c) {
+		return {currentPoints: a, drawnPoints: b, drawOps: c};
+	});
+var _hannemathisen$elm_test_project$DrawOld_Types$UndoClicked = {ctor: 'UndoClicked'};
+var _hannemathisen$elm_test_project$DrawOld_Types$ClearClicked = {ctor: 'ClearClicked'};
+var _hannemathisen$elm_test_project$DrawOld_Types$TouchMove = function (a) {
+	return {ctor: 'TouchMove', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawOld_Types$TouchUp = function (a) {
+	return {ctor: 'TouchUp', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawOld_Types$TouchDown = function (a) {
+	return {ctor: 'TouchDown', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawOld_Types$MouseMove = function (a) {
+	return {ctor: 'MouseMove', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawOld_Types$MouseUp = function (a) {
+	return {ctor: 'MouseUp', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawOld_Types$MouseDown = function (a) {
+	return {ctor: 'MouseDown', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawOld_Types$GotCanvas = function (a) {
+	return {ctor: 'GotCanvas', _0: a};
+};
+var _hannemathisen$elm_test_project$DrawOld_Types$Loading = {ctor: 'Loading'};
