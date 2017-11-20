@@ -107,7 +107,7 @@ update msg model =
           [] ->
               ( model, Cmd.none )
 
-          point :: [] ->
+          [point] ->
               ( { model | draw = False }, Cmd.none )
 
           point :: tl ->
@@ -118,7 +118,7 @@ update msg model =
           [] ->
               ( model, Cmd.none )
 
-          point :: [] ->
+          [point] ->
             let
               newPoints =
                   model.drawData.currentPoints ++ [ point ]
@@ -174,7 +174,7 @@ update msg model =
                     , drawnPoints = xs
                     }
               }
-            , Cmd.none            
+            , Cmd.none
             )
 
 

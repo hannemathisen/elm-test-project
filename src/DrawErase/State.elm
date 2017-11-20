@@ -133,24 +133,21 @@ update msg model =
       case event.points of
           [] ->
               ( model, Cmd.none )
-          -- point :: tl ->
+
+        -- kanskje bare for [point] ?
           _ ->
             case model.mode of
               Draw ->
                 ( { model | draw = True}, Cmd.none)
               Erase ->
                 let
-                    drawData =
-                        model.drawData
+                  drawData =
+                      model.drawData
 
-                    newcurrentPoints =
-                        Debug.log "newcurrentPoints" <|
-                          []
-
-                    newDrawData =
-                        { drawData
-                            | previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
-                        }
+                  newDrawData =
+                    { drawData
+                        | previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
+                    }
                 in
                     ( { model | draw = True, drawData = newDrawData }, Cmd.none )
 
