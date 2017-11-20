@@ -128,36 +128,61 @@ update msg model =
           in
             ( { model | drawData = newDrawData }, Cmd.none )
 
+
     TouchDown event ->
       case event.points of
           [] ->
               ( model, Cmd.none )
-          point :: tl ->
-              let
-                  drawData =
-                      model.drawData
+          -- point :: tl ->
+          _ ->
+            case model.mode of
+              Draw ->
+                ( { model | draw = True}, Cmd.none)
+              Erase ->
+                let
+                    drawData =
+                        model.drawData
 
-                  newcurrentPoints =
-                      Debug.log "newcurrentPoints" <|
-                        []
+                    newcurrentPoints =
+                        Debug.log "newcurrentPoints" <|
+                          []
 
-                  newDrawData =
-                      { drawData
-                          | drawnPoints =
-                              model.drawData.drawnPoints
-                                  ++ [ model.drawData.currentPoints ]
-                          , currentPoints = newcurrentPoints
-                      }
-              in
-                  ( { model | draw = True, drawData = newDrawData }, Cmd.none )
+                    newDrawData =
+                        { drawData
+                            | previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
+                        }
+                in
+                    ( { model | draw = True, drawData = newDrawData }, Cmd.none )
 
     TouchUp event ->
       case event.points of
           [] ->
               ( model, Cmd.none )
 
-          point :: [] ->
-              ( { model | draw = False }, Cmd.none )
+          [point] ->
+              case model.mode of
+                Draw ->
+                  let
+                    drawData =
+                        model.drawData
+
+                    newcurrentPoints = []
+
+                    newDrawData =
+                        { drawData
+                            | drawnPoints = model.drawData.currentPoints :: model.drawData.drawnPoints
+                            , currentPoints = newcurrentPoints
+                            , previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
+                        }
+                  in
+                    ( { model
+                        | draw = False
+                        , drawData = newDrawData
+                      }
+                    , Cmd.none
+                    )
+                Erase ->
+                  ( { model | draw = False }, Cmd.none )
 
           point :: tl ->
               ( { model | draw = False }, Cmd.none )
@@ -167,7 +192,7 @@ update msg model =
           [] ->
               ( model, Cmd.none )
 
-          point :: [] ->
+          [point] ->
             case model.mode of
               Draw ->
                 let
@@ -209,20 +234,32 @@ update msg model =
                   newDrawOps = concatDrawOps lineDrawOps
 
                   newDrawData =
-                    { drawData | drawnPoints = newPoints, drawOps = newDrawOps }
+                    { drawData
+                        | drawnPoints = newPoints
+                        , drawOps = newDrawOps
+                    }
                 in
-                  ( { model | drawData = newDrawData }, Cmd.none )
+                  ( { model | drawData = newDrawData }
+                  , Cmd.none
+                  )
 
           point :: tl ->
               ( { model | draw = False }, Cmd.none )
 
     ClearClicked ->
-      ( { model | drawData = initDrawData }, Cmd.none )
+      ( { model
+            | drawData = initDrawData
+            , mode = Draw
+        }
+      , Cmd.none
+      )
 
     UndoClicked ->
       case model.drawData.previousDrawnPoints of
         [] ->
-          ( model, Cmd.none)
+          ( { model | mode = Draw }
+          , Cmd.none
+          )
 
         x :: xs ->
           let
