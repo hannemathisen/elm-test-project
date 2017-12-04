@@ -32,7 +32,7 @@ update msg model =
           in
             case x of
               Nothing ->
-                ( { model | draw = True }, Cmd.none )
+                ( { model | draw = False }, Cmd.none )
               Just a ->
                 if model.drawData.drawnPoints == a then
                   ( { model | draw = True}, Cmd.none )
@@ -185,7 +185,7 @@ update msg model =
                 in
                   case x of
                     Nothing ->
-                      ( { model | draw = True }, Cmd.none )
+                      ( { model | draw = False }, Cmd.none )
                     Just a ->
                       if model.drawData.drawnPoints == a then
                         ( { model | draw = True}, Cmd.none )
