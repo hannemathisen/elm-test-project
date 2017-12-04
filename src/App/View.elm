@@ -33,7 +33,7 @@ viewModeMenu =
   div []
     [ button [ class "btn", onClick (ChangeMode DrawErase) ] [ text "Draw 1" ]
     , button [ class "btn", onClick (ChangeMode DrawOld) ] [ text "Draw 2"]
-    , button [ class "btn", onClick (ChangeMode Zoom) ] [ text "Zoom" ]
+    -- , button [ class "btn", onClick (ChangeMode Zoom) ] [ text "Zoom" ]
     ]
 
 

@@ -28,20 +28,31 @@ update msg model =
       case model.mode of
         Erase ->
           let
-            drawData =
-                model.drawData
-
-            newDrawData =
-                { drawData
-                  | previousDrawnPoints =
-                      model.drawData.drawnPoints :: model.drawData.previousDrawnPoints }
+            x = List.head model.drawData.previousDrawnPoints
           in
-            ( { model
-                | draw = True
-                , drawData = newDrawData
-              }
-            , Cmd.none
-            )
+            case x of
+              Nothing ->
+                ( { model | draw = True }, Cmd.none )
+              Just a ->
+                if model.drawData.drawnPoints == a then
+                  ( { model | draw = True}, Cmd.none )
+                else
+                  let
+                    drawData =
+                        model.drawData
+
+                    newDrawData =
+                        { drawData
+                          | previousDrawnPoints =
+                              model.drawData.drawnPoints :: model.drawData.previousDrawnPoints }
+                  in
+                    ( { model
+                        | draw = True
+                        , drawData = newDrawData
+                      }
+                    , Cmd.none
+                    )
+
         Draw ->
           ( { model | draw = True }, Cmd.none )
 
@@ -49,24 +60,53 @@ update msg model =
       case model.mode of
         Draw ->
           let
-              drawData =
-                  model.drawData
-
-              newcurrentPoints = []
-
-              newDrawData =
-                  { drawData
-                      | drawnPoints = model.drawData.currentPoints :: model.drawData.drawnPoints
-                      , currentPoints = newcurrentPoints
-                      , previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
-                  }
+            x = List.head model.drawData.previousDrawnPoints
           in
-              ( { model
-                  | draw = False
-                  , drawData = newDrawData
-                }
-              , Cmd.none
-              )
+            case x of
+              Nothing ->
+                let
+                  drawData =
+                      model.drawData
+
+                  newcurrentPoints = []
+
+                  newDrawData =
+                      { drawData
+                        | drawnPoints = model.drawData.currentPoints :: model.drawData.drawnPoints
+                        , currentPoints = newcurrentPoints
+                        , previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
+                      }
+                in
+                  ( { model
+                      | draw = False
+                      , drawData = newDrawData
+                    }
+                  , Cmd.none
+                  )
+              Just a ->
+                if model.drawData.drawnPoints == a then
+                  ( { model | draw = False}, Cmd.none )
+                else
+                  let
+                    drawData =
+                        model.drawData
+
+                    newcurrentPoints = []
+
+                    newDrawData =
+                        { drawData
+                          | drawnPoints = model.drawData.currentPoints :: model.drawData.drawnPoints
+                          , currentPoints = newcurrentPoints
+                          , previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
+                        }
+                  in
+                    ( { model
+                        | draw = False
+                        , drawData = newDrawData
+                      }
+                    , Cmd.none
+                    )
+
         Erase ->
           ( { model | draw = False }, Cmd.none )
 
@@ -141,15 +181,30 @@ update msg model =
                 ( { model | draw = True}, Cmd.none)
               Erase ->
                 let
-                  drawData =
-                      model.drawData
-
-                  newDrawData =
-                    { drawData
-                        | previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
-                    }
+                  x = List.head model.drawData.previousDrawnPoints
                 in
-                    ( { model | draw = True, drawData = newDrawData }, Cmd.none )
+                  case x of
+                    Nothing ->
+                      ( { model | draw = True }, Cmd.none )
+                    Just a ->
+                      if model.drawData.drawnPoints == a then
+                        ( { model | draw = True}, Cmd.none )
+                      else
+                        let
+                          drawData =
+                              model.drawData
+
+                          newDrawData =
+                              { drawData
+                                | previousDrawnPoints =
+                                    model.drawData.drawnPoints :: model.drawData.previousDrawnPoints }
+                        in
+                          ( { model
+                              | draw = True
+                              , drawData = newDrawData
+                            }
+                          , Cmd.none
+                          )
 
     TouchUp event ->
       case event.points of
@@ -160,24 +215,53 @@ update msg model =
               case model.mode of
                 Draw ->
                   let
-                    drawData =
-                        model.drawData
-
-                    newcurrentPoints = []
-
-                    newDrawData =
-                        { drawData
-                            | drawnPoints = model.drawData.currentPoints :: model.drawData.drawnPoints
-                            , currentPoints = newcurrentPoints
-                            , previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
-                        }
+                    x = List.head model.drawData.previousDrawnPoints
                   in
-                    ( { model
-                        | draw = False
-                        , drawData = newDrawData
-                      }
-                    , Cmd.none
-                    )
+                    case x of
+                      Nothing ->
+                        let
+                          drawData =
+                              model.drawData
+
+                          newcurrentPoints = []
+
+                          newDrawData =
+                              { drawData
+                                | drawnPoints = model.drawData.currentPoints :: model.drawData.drawnPoints
+                                , currentPoints = newcurrentPoints
+                                , previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
+                              }
+                        in
+                          ( { model
+                              | draw = False
+                              , drawData = newDrawData
+                            }
+                          , Cmd.none
+                          )
+                      Just a ->
+                        if model.drawData.drawnPoints == a then
+                          ( { model | draw = False}, Cmd.none )
+                        else
+                          let
+                            drawData =
+                                model.drawData
+
+                            newcurrentPoints = []
+
+                            newDrawData =
+                                { drawData
+                                  | drawnPoints = model.drawData.currentPoints :: model.drawData.drawnPoints
+                                  , currentPoints = newcurrentPoints
+                                  , previousDrawnPoints = model.drawData.drawnPoints :: model.drawData.previousDrawnPoints
+                                }
+                          in
+                            ( { model
+                                | draw = False
+                                , drawData = newDrawData
+                              }
+                            , Cmd.none
+                          )
+
                 Erase ->
                   ( { model | draw = False }, Cmd.none )
 
