@@ -113,68 +113,46 @@ var _hannemathisen$elm_test_project$DrawOld_State$update = F2(
 				if (_p3.ctor === '[]') {
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				} else {
-					var newcurrentPoints = A2(
-						_elm_lang$core$Debug$log,
-						'newcurrentPoints',
-						{ctor: '[]'});
-					var drawData = model.drawData;
-					var newDrawData = _elm_lang$core$Native_Utils.update(
-						drawData,
-						{
-							drawnPoints: A2(
-								_elm_lang$core$Basics_ops['++'],
-								model.drawData.drawnPoints,
-								{
-									ctor: '::',
-									_0: model.drawData.currentPoints,
-									_1: {ctor: '[]'}
-								}),
-							currentPoints: newcurrentPoints
-						});
 					return {
 						ctor: '_Tuple2',
 						_0: _elm_lang$core$Native_Utils.update(
 							model,
-							{draw: true, drawData: newDrawData}),
+							{draw: true}),
 						_1: _elm_lang$core$Platform_Cmd$none
 					};
 				}
 			case 'TouchUp':
+				var newCurrentPoints = A2(
+					_elm_lang$core$Debug$log,
+					'newCurrentPoints',
+					{ctor: '[]'});
+				var drawData = model.drawData;
+				var newDrawData = _elm_lang$core$Native_Utils.update(
+					drawData,
+					{
+						drawnPoints: {ctor: '::', _0: model.drawData.currentPoints, _1: model.drawData.drawnPoints},
+						currentPoints: newCurrentPoints
+					});
+				return {
+					ctor: '_Tuple2',
+					_0: _elm_lang$core$Native_Utils.update(
+						model,
+						{draw: false, drawData: newDrawData}),
+					_1: _elm_lang$core$Platform_Cmd$none
+				};
+			case 'TouchMove':
 				var _p4 = _p1._0.points;
 				if (_p4.ctor === '[]') {
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				} else {
 					if (_p4._1.ctor === '[]') {
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
-								{draw: false}),
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					} else {
-						return {
-							ctor: '_Tuple2',
-							_0: _elm_lang$core$Native_Utils.update(
-								model,
-								{draw: false}),
-							_1: _elm_lang$core$Platform_Cmd$none
-						};
-					}
-				}
-			case 'TouchMove':
-				var _p5 = _p1._0.points;
-				if (_p5.ctor === '[]') {
-					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
-				} else {
-					if (_p5._1.ctor === '[]') {
 						var drawData = model.drawData;
 						var newPoints = A2(
 							_elm_lang$core$Basics_ops['++'],
 							model.drawData.currentPoints,
 							{
 								ctor: '::',
-								_0: _p5._0,
+								_0: _p4._0,
 								_1: {ctor: '[]'}
 							});
 						var lineDrawOps = _elm_lang$core$List$concat(
@@ -214,18 +192,18 @@ var _hannemathisen$elm_test_project$DrawOld_State$update = F2(
 					_1: _elm_lang$core$Platform_Cmd$none
 				};
 			default:
-				var _p6 = model.drawData.drawnPoints;
-				if (_p6.ctor === '[]') {
+				var _p5 = model.drawData.drawnPoints;
+				if (_p5.ctor === '[]') {
 					return {ctor: '_Tuple2', _0: model, _1: _elm_lang$core$Platform_Cmd$none};
 				} else {
-					var _p7 = _p6._1;
+					var _p6 = _p5._1;
 					var lineDrawOps = _elm_lang$core$List$concat(
 						A2(
 							_elm_lang$core$List$map,
 							function (points) {
 								return _hannemathisen$elm_test_project$DrawOld_State$pointsToLineOperations(points);
 							},
-							_p7));
+							_p6));
 					var newDrawOps = _hannemathisen$elm_test_project$DrawOld_State$concatDrawOps(lineDrawOps);
 					return {
 						ctor: '_Tuple2',
@@ -235,7 +213,7 @@ var _hannemathisen$elm_test_project$DrawOld_State$update = F2(
 								drawData: {
 									currentPoints: {ctor: '[]'},
 									drawOps: newDrawOps,
-									drawnPoints: _p7
+									drawnPoints: _p6
 								}
 							}),
 						_1: _elm_lang$core$Platform_Cmd$none

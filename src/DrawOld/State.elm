@@ -84,34 +84,52 @@ update msg model =
           [] ->
               ( model, Cmd.none )
           point :: tl ->
-              let
-                  drawData =
-                      model.drawData
-
-                  newcurrentPoints =
-                      Debug.log "newcurrentPoints" <|
-                        []
-
-                  newDrawData =
-                      { drawData
-                          | drawnPoints =
-                              model.drawData.drawnPoints
-                                  ++ [ model.drawData.currentPoints ]
-                          , currentPoints = newcurrentPoints
-                      }
-              in
-                  ( { model | draw = True, drawData = newDrawData }, Cmd.none )
+             ( { model | draw = True }, Cmd.none )
+            --   let
+            --       drawData =
+            --           model.drawData
+            --
+            --       newcurrentPoints =
+            --           Debug.log "newcurrentPoints" <|
+            --             []
+            --
+            --       newDrawData =
+            --           { drawData
+            --               | drawnPoints =
+            --                   model.drawData.drawnPoints
+            --                       ++ [ model.drawData.currentPoints ]
+            --               , currentPoints = newcurrentPoints
+            --           }
+            --   in
+            --       ( { model | draw = True, drawData = newDrawData }, Cmd.none )
 
     TouchUp event ->
-      case event.points of
-          [] ->
-              ( model, Cmd.none )
+      let
+        drawData = model.drawData
 
-          [point] ->
-              ( { model | draw = False }, Cmd.none )
+        newCurrentPoints =
+          Debug.log "newCurrentPoints" <|
+            []
 
-          point :: tl ->
-              ( { model | draw = False }, Cmd.none )
+        newDrawData =
+          { drawData
+              | drawnPoints = model.drawData.currentPoints :: model.drawData.drawnPoints
+              , currentPoints = newCurrentPoints
+          }
+      in
+        ( { model | draw = False, drawData = newDrawData }, Cmd.none )
+
+
+      -- case event.points of
+      --     [] ->
+      --         ( model, Cmd.none )
+      --
+      --     [point] ->
+      --         ( { model | draw = False }, Cmd.none )
+      --
+      --     point :: tl ->
+      --         ( { model | draw = False }, Cmd.none )
+
 
     TouchMove event ->
       case event.points of
