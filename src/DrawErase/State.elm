@@ -325,7 +325,31 @@ update msg model =
                   )
 
           point :: tl ->
-              ( { model | draw = False }, Cmd.none )
+            -- if model.mode == Erase then
+            --   let
+            --     drawData = model.drawData
+            --
+            --     newPoints = erase point drawData.drawnPoints
+            --
+            --     lineDrawOps =
+            --       List.concat
+            --         (List.map (\newPoints -> pointsToLineOperations newPoints)
+            --           newPoints
+            --         )
+            --
+            --     newDrawOps = concatDrawOps lineDrawOps
+            --
+            --     newDrawData =
+            --       { drawData
+            --           | drawnPoints = newPoints
+            --           , drawOps = newDrawOps
+            --       }
+            --   in
+            --     ( { model | drawData = newDrawData }
+            --     , Cmd.none
+            --     )
+            -- else
+            ( { model | draw = False }, Cmd.none )
 
     ClearClicked ->
       ( { model

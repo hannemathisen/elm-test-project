@@ -34,7 +34,7 @@ loadImage : Cmd Msg
 loadImage =
   Task.attempt
     ImageLoaded
-    (Canvas.loadImage "white.png")
+    (Canvas.loadImage "testpicture.png")
 
 
 update : Msg -> Model -> ( Model, Cmd Msg)

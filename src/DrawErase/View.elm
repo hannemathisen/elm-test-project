@@ -85,7 +85,7 @@ drawCanvas drawOps canvas =
               [ BeginPath
               , StrokeStyle (Color.rgb 255 0 0)
               , LineWidth 2.0
-              , Rect (Point.fromInts ( 0, 0 )) (Size 800 600)
+              , Rect (Point.fromInts ( 0, 0 )) (Size width height)
               , Stroke
               ]
   in

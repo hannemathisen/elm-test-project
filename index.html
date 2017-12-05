@@ -11579,8 +11579,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DrawErase.State',
 				{
-					start: {line: 478, column: 3},
-					end: {line: 490, column: 35}
+					start: {line: 502, column: 3},
+					end: {line: 514, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -11624,8 +11624,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DrawErase.State',
 				{
-					start: {line: 495, column: 3},
-					end: {line: 507, column: 35}
+					start: {line: 519, column: 3},
+					end: {line: 531, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -11661,8 +11661,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$splitAndRemove = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DrawErase.State',
 				{
-					start: {line: 440, column: 3},
-					end: {line: 473, column: 69}
+					start: {line: 464, column: 3},
+					end: {line: 497, column: 69}
 				},
 				_p4)('Empty list');
 		} else {
@@ -11744,8 +11744,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'DrawErase.State',
 					{
-						start: {line: 424, column: 3},
-						end: {line: 435, column: 59}
+						start: {line: 448, column: 3},
+						end: {line: 459, column: 59}
 					},
 					_p13)('Empty list');
 			} else {
@@ -12493,7 +12493,7 @@ var _hannemathisen$elm_test_project$Zoom_State$init = function () {
 var _hannemathisen$elm_test_project$App_State$loadImage = A2(
 	_elm_lang$core$Task$attempt,
 	_hannemathisen$elm_test_project$App_Types$ImageLoaded,
-	_hannemathisen$elm_test_project$Canvas$loadImage('white.png'));
+	_hannemathisen$elm_test_project$Canvas$loadImage('testpicture.png'));
 var _hannemathisen$elm_test_project$App_State$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
@@ -12589,6 +12589,9 @@ var _hannemathisen$elm_test_project$App_State$init = function () {
 }();
 var _hannemathisen$elm_test_project$DrawErase_View$drawCanvas = F2(
 	function (drawOps, canvas) {
+		var _p0 = _hannemathisen$elm_test_project$Canvas$getSize(canvas);
+		var width = _p0.width;
+		var height = _p0.height;
 		var drawOpsWithBorder = A2(
 			_elm_lang$core$List$append,
 			drawOps,
@@ -12608,7 +12611,7 @@ var _hannemathisen$elm_test_project$DrawErase_View$drawCanvas = F2(
 								_hannemathisen$elm_test_project$Canvas$Rect,
 								_hannemathisen$elm_test_project$Canvas_Point$fromInts(
 									{ctor: '_Tuple2', _0: 0, _1: 0}),
-								A2(_hannemathisen$elm_test_project$Canvas$Size, 800, 600)),
+								A2(_hannemathisen$elm_test_project$Canvas$Size, width, height)),
 							_1: {
 								ctor: '::',
 								_0: _hannemathisen$elm_test_project$Canvas$Stroke,
@@ -12618,9 +12621,6 @@ var _hannemathisen$elm_test_project$DrawErase_View$drawCanvas = F2(
 					}
 				}
 			});
-		var _p0 = _hannemathisen$elm_test_project$Canvas$getSize(canvas);
-		var width = _p0.width;
-		var height = _p0.height;
 		return A2(_hannemathisen$elm_test_project$Canvas$batch, drawOpsWithBorder, canvas);
 	});
 var _hannemathisen$elm_test_project$DrawErase_View$presentIfReady = function (model) {
@@ -12776,6 +12776,9 @@ var _hannemathisen$elm_test_project$DrawErase_View$view = function (model) {
 };
 var _hannemathisen$elm_test_project$DrawOld_View$drawCanvas = F2(
 	function (drawOps, canvas) {
+		var _p0 = _hannemathisen$elm_test_project$Canvas$getSize(canvas);
+		var width = _p0.width;
+		var height = _p0.height;
 		var drawOpsWithBorder = A2(
 			_elm_lang$core$List$append,
 			drawOps,
@@ -12795,7 +12798,7 @@ var _hannemathisen$elm_test_project$DrawOld_View$drawCanvas = F2(
 								_hannemathisen$elm_test_project$Canvas$Rect,
 								_hannemathisen$elm_test_project$Canvas_Point$fromInts(
 									{ctor: '_Tuple2', _0: 0, _1: 0}),
-								A2(_hannemathisen$elm_test_project$Canvas$Size, 800, 600)),
+								A2(_hannemathisen$elm_test_project$Canvas$Size, width, height)),
 							_1: {
 								ctor: '::',
 								_0: _hannemathisen$elm_test_project$Canvas$Stroke,
@@ -12805,9 +12808,6 @@ var _hannemathisen$elm_test_project$DrawOld_View$drawCanvas = F2(
 					}
 				}
 			});
-		var _p0 = _hannemathisen$elm_test_project$Canvas$getSize(canvas);
-		var width = _p0.width;
-		var height = _p0.height;
 		return A2(_hannemathisen$elm_test_project$Canvas$batch, drawOpsWithBorder, canvas);
 	});
 var _hannemathisen$elm_test_project$DrawOld_View$presentIfReady = function (model) {

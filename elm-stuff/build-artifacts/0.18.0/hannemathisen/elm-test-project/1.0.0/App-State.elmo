@@ -1,7 +1,7 @@
 var _hannemathisen$elm_test_project$App_State$loadImage = A2(
 	_elm_lang$core$Task$attempt,
 	_hannemathisen$elm_test_project$App_Types$ImageLoaded,
-	_hannemathisen$elm_test_project$Canvas$loadImage('white.png'));
+	_hannemathisen$elm_test_project$Canvas$loadImage('testpicture.png'));
 var _hannemathisen$elm_test_project$App_State$update = F2(
 	function (msg, model) {
 		var _p0 = msg;

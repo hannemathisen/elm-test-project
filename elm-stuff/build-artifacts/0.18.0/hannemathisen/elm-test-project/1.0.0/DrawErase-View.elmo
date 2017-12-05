@@ -1,5 +1,8 @@
 var _hannemathisen$elm_test_project$DrawErase_View$drawCanvas = F2(
 	function (drawOps, canvas) {
+		var _p0 = _hannemathisen$elm_test_project$Canvas$getSize(canvas);
+		var width = _p0.width;
+		var height = _p0.height;
 		var drawOpsWithBorder = A2(
 			_elm_lang$core$List$append,
 			drawOps,
@@ -19,7 +22,7 @@ var _hannemathisen$elm_test_project$DrawErase_View$drawCanvas = F2(
 								_hannemathisen$elm_test_project$Canvas$Rect,
 								_hannemathisen$elm_test_project$Canvas_Point$fromInts(
 									{ctor: '_Tuple2', _0: 0, _1: 0}),
-								A2(_hannemathisen$elm_test_project$Canvas$Size, 800, 600)),
+								A2(_hannemathisen$elm_test_project$Canvas$Size, width, height)),
 							_1: {
 								ctor: '::',
 								_0: _hannemathisen$elm_test_project$Canvas$Stroke,
@@ -29,9 +32,6 @@ var _hannemathisen$elm_test_project$DrawErase_View$drawCanvas = F2(
 					}
 				}
 			});
-		var _p0 = _hannemathisen$elm_test_project$Canvas$getSize(canvas);
-		var width = _p0.width;
-		var height = _p0.height;
 		return A2(_hannemathisen$elm_test_project$Canvas$batch, drawOpsWithBorder, canvas);
 	});
 var _hannemathisen$elm_test_project$DrawErase_View$presentIfReady = function (model) {

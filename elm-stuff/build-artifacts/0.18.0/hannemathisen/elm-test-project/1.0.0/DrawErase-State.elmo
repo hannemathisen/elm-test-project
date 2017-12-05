@@ -5,8 +5,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$mapXPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DrawErase.State',
 				{
-					start: {line: 478, column: 3},
-					end: {line: 490, column: 35}
+					start: {line: 502, column: 3},
+					end: {line: 514, column: 35}
 				},
 				_p0)('Empty list');
 		} else {
@@ -50,8 +50,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$mapYPoints = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DrawErase.State',
 				{
-					start: {line: 495, column: 3},
-					end: {line: 507, column: 35}
+					start: {line: 519, column: 3},
+					end: {line: 531, column: 35}
 				},
 				_p2)('Empty list');
 		} else {
@@ -87,8 +87,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$splitAndRemove = F2(
 			return _elm_lang$core$Native_Utils.crashCase(
 				'DrawErase.State',
 				{
-					start: {line: 440, column: 3},
-					end: {line: 473, column: 69}
+					start: {line: 464, column: 3},
+					end: {line: 497, column: 69}
 				},
 				_p4)('Empty list');
 		} else {
@@ -170,8 +170,8 @@ var _hannemathisen$elm_test_project$DrawErase_State$removePoints = F2(
 				return _elm_lang$core$Native_Utils.crashCase(
 					'DrawErase.State',
 					{
-						start: {line: 424, column: 3},
-						end: {line: 435, column: 59}
+						start: {line: 448, column: 3},
+						end: {line: 459, column: 59}
 					},
 					_p13)('Empty list');
 			} else {
