@@ -105,7 +105,7 @@ var _hannemathisen$elm_test_project$DrawOld_View$view = function (model) {
 						{ctor: '[]'},
 						{
 							ctor: '::',
-							_0: _elm_lang$html$Html$text('Try to draw the outline of the orange circle as precise as you can.'),
+							_0: _elm_lang$html$Html$text('Try to draw the outline of the circle, or just play around.'),
 							_1: {ctor: '[]'}
 						}),
 					_1: {ctor: '[]'}

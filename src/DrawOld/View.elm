@@ -13,7 +13,7 @@ view : Model -> Html Msg
 view model =
   div []
     [ div []
-      [ p [] [ text "Try to draw the outline of the orange circle as precise as you can." ] ]
+      [ p [] [ text "Try to draw the outline of the circle, or just play around." ] ]
     , div [] [ presentIfReady model ]
     , div []
       [ button
