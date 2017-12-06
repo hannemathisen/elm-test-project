@@ -31,9 +31,17 @@ root model =
 viewModeMenu : Html Msg
 viewModeMenu =
   div []
-    [ button [ class "btn", onClick (ChangeMode DrawErase) ] [ text "Draw 1" ]
-    , button [ class "btn", onClick (ChangeMode DrawOld) ] [ text "Draw 2"]
-    -- , button [ class "btn", onClick (ChangeMode Zoom) ] [ text "Zoom" ]
+    [ div []
+      [ button [ class "btn", onClick (ChangeMode DrawErase) ] [ text "Draw 1" ]
+      , button [ class "btn", onClick (ChangeMode DrawOld) ] [ text "Draw 2"]
+      -- , button [ class "btn", onClick (ChangeMode Zoom) ] [ text "Zoom" ]
+      ]
+    , div []
+      [ p []
+        [ text "After you have tried both drawing functions, please answer this "
+        , a [ href "https://goo.gl/forms/ixHuDnDevcuBH2LB3" ] [ text "survey." ]
+        ]
+      ]
     ]
 
 
