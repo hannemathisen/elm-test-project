@@ -12697,7 +12697,14 @@ var _hannemathisen$elm_test_project$DrawErase_View$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$DrawErase_View$presentIfReady(model),
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Try to draw the outline of the orange circle as precise as you can.'),
+							_1: {ctor: '[]'}
+						}),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -12707,30 +12714,15 @@ var _hannemathisen$elm_test_project$DrawErase_View$view = function (model) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('btn'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawErase_Types$EraseClicked),
-									_1: {ctor: '[]'}
-								}
-							},
-							{
-								ctor: '::',
-								_0: function () {
-									var _p3 = model.mode;
-									if (_p3.ctor === 'Draw') {
-										return _elm_lang$html$Html$text('Erase is off');
-									} else {
-										return _elm_lang$html$Html$text('Erase is on');
-									}
-								}(),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
+						_0: _hannemathisen$elm_test_project$DrawErase_View$presentIfReady(model),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
 							ctor: '::',
 							_0: A2(
 								_elm_lang$html$Html$button,
@@ -12739,13 +12731,20 @@ var _hannemathisen$elm_test_project$DrawErase_View$view = function (model) {
 									_0: _elm_lang$html$Html_Attributes$class('btn'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawErase_Types$UndoClicked),
+										_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawErase_Types$EraseClicked),
 										_1: {ctor: '[]'}
 									}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Undo'),
+									_0: function () {
+										var _p3 = model.mode;
+										if (_p3.ctor === 'Draw') {
+											return _elm_lang$html$Html$text('Erase is off');
+										} else {
+											return _elm_lang$html$Html$text('Erase is on');
+										}
+									}(),
 									_1: {ctor: '[]'}
 								}),
 							_1: {
@@ -12757,20 +12756,39 @@ var _hannemathisen$elm_test_project$DrawErase_View$view = function (model) {
 										_0: _elm_lang$html$Html_Attributes$class('btn'),
 										_1: {
 											ctor: '::',
-											_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawErase_Types$ClearClicked),
+											_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawErase_Types$UndoClicked),
 											_1: {ctor: '[]'}
 										}
 									},
 									{
 										ctor: '::',
-										_0: _elm_lang$html$Html$text('Clear'),
+										_0: _elm_lang$html$Html$text('Undo'),
 										_1: {ctor: '[]'}
 									}),
-								_1: {ctor: '[]'}
+								_1: {
+									ctor: '::',
+									_0: A2(
+										_elm_lang$html$Html$button,
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html_Attributes$class('btn'),
+											_1: {
+												ctor: '::',
+												_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawErase_Types$ClearClicked),
+												_1: {ctor: '[]'}
+											}
+										},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Clear'),
+											_1: {ctor: '[]'}
+										}),
+									_1: {ctor: '[]'}
+								}
 							}
-						}
-					}),
-				_1: {ctor: '[]'}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };
@@ -12876,7 +12894,14 @@ var _hannemathisen$elm_test_project$DrawOld_View$view = function (model) {
 				{ctor: '[]'},
 				{
 					ctor: '::',
-					_0: _hannemathisen$elm_test_project$DrawOld_View$presentIfReady(model),
+					_0: A2(
+						_elm_lang$html$Html$p,
+						{ctor: '[]'},
+						{
+							ctor: '::',
+							_0: _elm_lang$html$Html$text('Try to draw the outline of the orange circle as precise as you can.'),
+							_1: {ctor: '[]'}
+						}),
 					_1: {ctor: '[]'}
 				}),
 			_1: {
@@ -12886,23 +12911,15 @@ var _hannemathisen$elm_test_project$DrawOld_View$view = function (model) {
 					{ctor: '[]'},
 					{
 						ctor: '::',
-						_0: A2(
-							_elm_lang$html$Html$button,
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html_Attributes$class('btn'),
-								_1: {
-									ctor: '::',
-									_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawOld_Types$UndoClicked),
-									_1: {ctor: '[]'}
-								}
-							},
-							{
-								ctor: '::',
-								_0: _elm_lang$html$Html$text('Undo'),
-								_1: {ctor: '[]'}
-							}),
-						_1: {
+						_0: _hannemathisen$elm_test_project$DrawOld_View$presentIfReady(model),
+						_1: {ctor: '[]'}
+					}),
+				_1: {
+					ctor: '::',
+					_0: A2(
+						_elm_lang$html$Html$div,
+						{ctor: '[]'},
+						{
 							ctor: '::',
 							_0: A2(
 								_elm_lang$html$Html$button,
@@ -12911,19 +12928,38 @@ var _hannemathisen$elm_test_project$DrawOld_View$view = function (model) {
 									_0: _elm_lang$html$Html_Attributes$class('btn'),
 									_1: {
 										ctor: '::',
-										_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawOld_Types$ClearClicked),
+										_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawOld_Types$UndoClicked),
 										_1: {ctor: '[]'}
 									}
 								},
 								{
 									ctor: '::',
-									_0: _elm_lang$html$Html$text('Clear'),
+									_0: _elm_lang$html$Html$text('Undo'),
 									_1: {ctor: '[]'}
 								}),
-							_1: {ctor: '[]'}
-						}
-					}),
-				_1: {ctor: '[]'}
+							_1: {
+								ctor: '::',
+								_0: A2(
+									_elm_lang$html$Html$button,
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html_Attributes$class('btn'),
+										_1: {
+											ctor: '::',
+											_0: _elm_lang$html$Html_Events$onClick(_hannemathisen$elm_test_project$DrawOld_Types$ClearClicked),
+											_1: {ctor: '[]'}
+										}
+									},
+									{
+										ctor: '::',
+										_0: _elm_lang$html$Html$text('Clear'),
+										_1: {ctor: '[]'}
+									}),
+								_1: {ctor: '[]'}
+							}
+						}),
+					_1: {ctor: '[]'}
+				}
 			}
 		});
 };

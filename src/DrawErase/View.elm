@@ -12,7 +12,9 @@ import Color exposing (Color)
 view : Model -> Html Msg
 view model =
   div []
-    [ div [] [ presentIfReady model ]
+    [ div []
+      [ p [] [ text "Try to draw the outline of the orange circle as precise as you can." ] ]
+    , div [] [ presentIfReady model ]
     , div []
       [ button
         [ class "btn", onClick EraseClicked ]
