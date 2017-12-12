@@ -151,9 +151,9 @@ var _hannemathisen$elm_test_project$DrawErase_View$view = function (model) {
 									_0: function () {
 										var _p3 = model.mode;
 										if (_p3.ctor === 'Draw') {
-											return _elm_lang$html$Html$text('Erase off');
+											return _elm_lang$html$Html$text('Erase');
 										} else {
-											return _elm_lang$html$Html$text('Erase on');
+											return _elm_lang$html$Html$text('Draw');
 										}
 									}(),
 									_1: {ctor: '[]'}

@@ -17,7 +17,14 @@ var _hannemathisen$elm_test_project$App_View$viewHeader = function (model) {
 							_0: function () {
 								var _p0 = model.globalMode;
 								if (_p0.ctor === 'Main') {
-									return _elm_lang$html$Html$text('MIIG test');
+									return A2(
+										_elm_lang$html$Html$p,
+										{ctor: '[]'},
+										{
+											ctor: '::',
+											_0: _elm_lang$html$Html$text('Draw!'),
+											_1: {ctor: '[]'}
+										});
 								} else {
 									return A2(
 										_elm_lang$html$Html$button,
@@ -94,40 +101,7 @@ var _hannemathisen$elm_test_project$App_View$viewModeMenu = A2(
 					_1: {ctor: '[]'}
 				}
 			}),
-		_1: {
-			ctor: '::',
-			_0: A2(
-				_elm_lang$html$Html$div,
-				{ctor: '[]'},
-				{
-					ctor: '::',
-					_0: A2(
-						_elm_lang$html$Html$p,
-						{ctor: '[]'},
-						{
-							ctor: '::',
-							_0: _elm_lang$html$Html$text('After you have tried both drawing functions, please answer this '),
-							_1: {
-								ctor: '::',
-								_0: A2(
-									_elm_lang$html$Html$a,
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html_Attributes$href('https://goo.gl/forms/ixHuDnDevcuBH2LB3'),
-										_1: {ctor: '[]'}
-									},
-									{
-										ctor: '::',
-										_0: _elm_lang$html$Html$text('survey.'),
-										_1: {ctor: '[]'}
-									}),
-								_1: {ctor: '[]'}
-							}
-						}),
-					_1: {ctor: '[]'}
-				}),
-			_1: {ctor: '[]'}
-		}
+		_1: {ctor: '[]'}
 	});
 var _hannemathisen$elm_test_project$App_View$root = function (model) {
 	return A2(

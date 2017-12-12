@@ -5,6 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
 import Canvas.Events as Events
+import Canvas.Point exposing (Point)
 import Canvas.Point as Point
 import Canvas exposing (Size, Error, DrawOp(..), DrawImageParams(..), Canvas)
 import Color exposing (Color)
@@ -20,9 +21,9 @@ view model =
         [ class "btn", onClick EraseClicked ]
         [ case model.mode of
           Draw ->
-             text "Erase off"
+             text "Erase"
           Erase ->
-            text "Erase on"
+            text "Draw"
         ]
       , button
         [ class "btn", onClick UndoClicked ]

@@ -433,9 +433,9 @@ erase point drawnPoints  =
   let
     ( x, y ) = Point.toInts point
     -- Change based on screen size
-    xPoints = List.range ( x-10 ) ( x+10 )
+    xPoints = List.range ( x-0 ) ( x+0 )
       |> List.map toFloat
-    yPoints = List.range ( y-10 ) ( y+10 )
+    yPoints = List.range ( y-0 ) ( y+0 )
       |> List.map toFloat
 
     points = mapYPoints xPoints yPoints

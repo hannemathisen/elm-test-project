@@ -197,11 +197,11 @@ var _hannemathisen$elm_test_project$DrawErase_State$erase = F2(
 		var xPoints = A2(
 			_elm_lang$core$List$map,
 			_elm_lang$core$Basics$toFloat,
-			A2(_elm_lang$core$List$range, x - 10, x + 10));
+			A2(_elm_lang$core$List$range, x - 0, x + 0));
 		var yPoints = A2(
 			_elm_lang$core$List$map,
 			_elm_lang$core$Basics$toFloat,
-			A2(_elm_lang$core$List$range, y - 10, y + 10));
+			A2(_elm_lang$core$List$range, y - 0, y + 0));
 		var points = A2(_hannemathisen$elm_test_project$DrawErase_State$mapYPoints, xPoints, yPoints);
 		return A2(_hannemathisen$elm_test_project$DrawErase_State$removePoints, drawnPoints, points);
 	});

@@ -36,12 +36,12 @@ viewModeMenu =
       , button [ class "btn", onClick (ChangeMode DrawOld) ] [ text "Draw 2"]
       -- , button [ class "btn", onClick (ChangeMode Zoom) ] [ text "Zoom" ]
       ]
-    , div []
-      [ p []
-        [ text "After you have tried both drawing functions, please answer this "
-        , a [ href "https://goo.gl/forms/ixHuDnDevcuBH2LB3" ] [ text "survey." ]
-        ]
-      ]
+    -- , div []
+    --   [ p []
+    --     [ text "After you have tried both drawing functions, please answer this "
+    --     , a [ href "https://goo.gl/forms/ixHuDnDevcuBH2LB3" ] [ text "survey." ]
+    --     ]
+    --   ]
     ]
 
 
@@ -52,7 +52,7 @@ viewHeader model =
             [ div []
               [ case model.globalMode of
                 Main ->
-                  text "MIIG test"
+                  p [] [ text "Draw!" ]
                 _ ->
                   button [ class "btn", onClick (ChangeMode Main) ] [ text "Back to Menu" ]
               ]
